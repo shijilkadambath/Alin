@@ -201,7 +201,7 @@ public final class CropImage {
             allIntents.remove(allIntents.size() - 1);
         }
 
-        // Create a chooser from the main  intent
+        // Create a chooser from the login  intent
         Intent chooserIntent = Intent.createChooser(target, title);
 
         // Add all other intents
@@ -211,7 +211,7 @@ public final class CropImage {
     }
 
     /**
-     * Get the main Camera intent for capturing image using device camera app.
+     * Get the login Camera intent for capturing image using device camera app.
      * If the outputFileUri is null, a default Uri will be created with {@link #getCaptureImageOutputUri(Context)}, so
      * then
      * you will be able to get the pictureUri using {@link #getPickImageResultUri(Context, Intent)}. Otherwise, it is

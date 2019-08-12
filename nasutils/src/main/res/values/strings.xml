@@ -1,13 +1,10 @@
 <resources>
-    <string name="app_name">SMB Application</string>
+    <string name="app_name">ShoeKonnect</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="retry">Retry</string>
     <string name="unknown_error">Unknown Error</string>
     <string name="empty_search_result">No results </string>
-    <string name="submit">Submit</string>
-    <string name="email">Email</string>
     <string name="name">Name</string>
 
     <string name="msg_name">Name : <b>%s</b></string>
@@ -18,4 +15,132 @@
 
     <string name="error_network_server">Server not responding. Try again in a few</string>
     <string name="error_network">Sorry, we couldn\'t connect to internet</string>
+
+
+
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="retry">Retry</string>
+    <string name="home">Home</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="continue_to_your_awesome_ride">Continue to your awesome ride</string>
+    <string name="already_member_login_here">Already member? Login here</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="email_required">Email is required</string>
+    <string name="email_invalid">Email is invalid</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="password_required">Password is required</string>
+    <string name="password_invalid">Password must contain one number, one uppercase letter, and be atleast 6 (max 20) characters long.</string>
+    <string name="password_reset_link_info">Enter your registered mobile</string>
+    <string name="submit">Submit</string>
+    <string name="enter_your_details">Enter your details</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone">Phone</string>
+    <string name="country">Country</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="_continue">Continue</string>
+    <string name="terms">By creating an account you agree to our\nTerms of Service &amp; Privacy Policy</string>
+    <string name="first_name_required">First Name is required</string>
+    <string name="last_name_required">Last Name is required</string>
+    <string name="phone_required">Mobile is required</string>
+    <string name="phone_invalid">Mobile is invalid</string>
+    <string name="reenter_password">Re-enter your password</string>
+    <string name="password_not_matching">Password do not match!</string>
+    <string name="enter_login_btn_welcome">EnterLoginBtnWelcomeTransition</string>
+    <string name="exit_login_btn_welcome">ExitLoginBtnWelcomeTransition</string>
+    <string name="enter_signup_btn_welcome">EnterSignUpBtnWelcomeTransition</string>
+    <string name="exit_signup_btn_welcome">ExitSignUpBtnWelcomeTransition</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="view_and_edit_profile">View and edit profile</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="we_sent_to_you">We sent to you @ %1$s %2$s</string>
+    <string name="resend_otp">Resend OTP?</string>
+    <string name="change_your_number">Change your number</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="enter_your_new_password">Enter your new password.</string>
+    <string name="new_password">New Password</string>
+    <string name="exit_msg">Press again to exit!</string>
+    <string name="help">Help</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="something_went_wrong">Something went wrong!!\nPlease try again later.</string>
+    <string name="ooops">Ooops…</string>
+    <string name="uploading_failed_invalid_file">Uploading failed due to invalid file</string>
+    <string name="enter_your_mobile_to_continue">Enter your mobile to continue</string>
+    <string name="enter_mobile">Enter Mobile</string>
+    <string name="change_number">Change Number</string>
+    <string name="enter_valid_otp">Please enter a valid OTP</string>
+    <string name="hello">Hello !!</string>
+    <string name="hello_user">Hello %1$s !!</string>
+    <string name="alert_to_sign_up">This number is not registered with us. Sign Up to continue</string>
+    <string name="continue_to_home">Continue to Home</string>
+    <string name="account_created_successfully">Your account has been created successfully</string>
+    <string name="save">Save</string>
+    <string name="alert_password_saved">Your password has been saved successfully.</string>
+    <string name="continue_to_login">Continue to Login</string>
+    <string name="book_ride_to_home_short">Ride to Home</string>
+    <string name="book_ride_to_home">Book Ride to Home</string>
+    <string name="book_ride_to_work_short">Ride to Work</string>
+    <string name="book_ride_to_work">Book Ride to Work</string>
+    <string name="legal">Legal</string>
+    <string name="settings">Settings</string>
+    <string name="payments">Payments</string>
+    <string name="your_trips">Your Trips</string>
+    <string name="login_to_continue">Login to Continue</string>
+    <string name="full_name">%1$s %2$s</string>
+    <string name="countrycode_phone">%1$s %2$s</string>
+    <string name="privacy">Privacy</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="add_more_places">Add More Places</string>
+    <string name="alert_sign_out">Are you sure you want to sign out?</string>
+    <string name="notifications">Notifications</string>
+    <string name="delete_my_account">Delete my account</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="alert_delete_account">Are you sure you want to delete your account?</string>
+    <string name="work">WORK</string>
+    <string name="uc_home">HOME</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="uploading_failed">Uploading Failed!! Error during upload: %1$s</string>
+    <string name="uploading_terminated">Uploading has been %1$s</string>
+    <string name="change_mobile">Change Mobile</string>
+    <string name="ok">OK</string>
+    <string name="mobile_number_updated">Your mobile number has been successfully updated!</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_your_old_password_to_verify">Enter your old password to verify</string>
+    <string name="old_password">Old Password</string>
+    <string name="saved_places">Saved Places</string>
+    <string name="other_saved_places">Other saved places</string>
+    <string name="favourites">Favourites</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add</string>
+    <string name="address">Address</string>
+    <string name="nick_name">Nick Name</string>
+    <string name="edit_place">Edit %1$s</string>
+    <string name="save_place">Save Place</string>
+    <string name="ride_to">"Ride to %1$s"</string>
+    <string name="replace_to">Replace %1$s?</string>
+    <string name="enter_nick_name">Enter nick name for your address. Eg: John\'s Home</string>
+    <string name="address_required">Address required</string>
+    <string name="cash">Cash</string>
+    <string name="add_new_card">Add New Card</string>
+    <string name="enter_card_details">Enter card details</string>
+    <string name="card_details_required">Enter valid card details</string>
+    <string name="cash_msg_title">Pay for trips in cash</string>
+    <string name="cash_msg">Your driver\'s phone will show you the amount to pay at the end of the trip</string>
+    <string name="add_home_location">Add Home Location</string>
+    <string name="add_work_location">Add Work Location</string>
+
+    <string name="where_to">Where to?</string>
+    <string name="pickup_location">Pickup location</string>
+    <string name="confirm_address">Confirm Address</string>
+    <string name="request">Request</string>
+    <string name="green_car">Green Car</string>
 </resources>

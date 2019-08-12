@@ -1,4 +1,4 @@
-package com.smb.smbapplication
+package com.bigtime
 
 import org.junit.Test
 

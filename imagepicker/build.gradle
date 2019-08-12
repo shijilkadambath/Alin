@@ -37,6 +37,4 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:'+rootProject.archLifecycleVersion
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:'+rootProject.archLifecycleVersion
 
-
-
 }

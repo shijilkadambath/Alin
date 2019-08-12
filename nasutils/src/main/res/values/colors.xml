@@ -3,4 +3,23 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorAccentLight">#FF9081</color>
+
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+    <color name="transparent">@android:color/transparent</color>
+
+    <color name="primaryText">#FF212121</color>
+    <color name="activeText">#454F63</color>
+    <color name="secondary_text">#FF727272</color>
+    <color name="divider">#FFB6B6B6</color>
+    <color name="divider_light">#FFEFEFEF</color>
+
+    <color name="gray_dark">#FFD7D7D7</color>
+    <color name="gray_light">#FFF5F5F5</color>
+
+    <color name="orange">#F24D58</color>
+
+    <color name="whiteAlpha">#72FFFFFF</color>
+    <color name="greenLight">#D1E2C5</color>
 </resources>

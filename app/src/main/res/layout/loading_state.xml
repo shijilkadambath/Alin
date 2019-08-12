@@ -19,9 +19,9 @@
 
     <data>
 
-        <import type="com.smb.smbapplication.data.api.Resource" />
+        <import type="com.bigtime.data.api.Resource" />
 
-        <import type="com.smb.smbapplication.data.api.Status" />
+        <import type="com.bigtime.data.api.Status" />
 
         <variable
             name="resource"
@@ -29,7 +29,7 @@
 
         <variable
             name="callback"
-            type="com.smb.smbapplication.ui.RetryCallback" />
+            type="com.bigtime.ui.RetryCallback" />
     </data>
 
     <LinearLayout

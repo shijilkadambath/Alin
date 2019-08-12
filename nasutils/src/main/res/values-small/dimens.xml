@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="splash_driver_logo_height">80dp</dimen>
+
+
+    <dimen name="seperator">3dp</dimen>
+    <dimen name="main_padding">15dp</dimen>
+    <dimen name="normal_padding">7.5dp</dimen>
+    <dimen name="edittext_hieght">30dp</dimen>
+    <dimen name="image_medium_size">38dp</dimen>
+    <dimen name="edittext_hieght2">45dp</dimen>
+
+    <dimen name="small_image">10dp</dimen>
+
+    <dimen name="profile_pic">60dp</dimen>
+    <dimen name="profile_pic_regular">55dp</dimen>
+
+    <dimen name="toolbar_icon">16dp</dimen>
+
+    <dimen name="multi_media_message">150dp</dimen>
+
+    <dimen name="wallpaper_height">320dp</dimen>
+    <dimen name="wallpaper_width">240dp</dimen>
+</resources>

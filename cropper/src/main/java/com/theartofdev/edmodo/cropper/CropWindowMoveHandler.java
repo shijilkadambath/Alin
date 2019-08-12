@@ -66,7 +66,7 @@ final class CropWindowMoveHandler {
      * @param edgeMoveType the type of move this handler is executing
      * @param horizontalEdge the primary edge associated with this handle; may be null
      * @param verticalEdge the secondary edge associated with this handle; may be null
-     * @param cropWindowHandler main crop window handle to get and update the crop window edges
+     * @param cropWindowHandler login crop window handle to get and update the crop window edges
      * @param touchX the location of the initial toch possition to measure move distance
      * @param touchY the location of the initial toch possition to measure move distance
      */
