@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion rootProject.COMPILE_SDK_VERSION
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion rootProject.MIN_SDK_VERSION
+        targetSdkVersion rootProject.TARGET_SDK_VERSION
+
+        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:'+rootProject.supportLibVersion
+}
