@@ -18,8 +18,6 @@ import com.bigtime.utils.CommonUtils
  * for NewAgeSMB
  * Email : shijil@newagesmb.com
  *
- *
- * Updated by Ȿ₳Ɲ @ NEWAGESMB on Thursday, April 11, 2019
  */
 
 class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
@@ -48,27 +46,27 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
         countryCode = ForgotPasswordFragmentArgs.fromBundle(arguments!!).countryCode
         phone = ForgotPasswordFragmentArgs.fromBundle(arguments!!).phone
 
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
-        ccp_phone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
-        ccp_phone.registerCarrierNumberEditText(tiet_phone)
+        mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
+        mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
 
-        if (countryCode.isNotEmpty()) ccp_phone.setCountryForPhoneCode(countryCode.replace("+","").toInt())
-        if (phone.isNotEmpty()) tiet_phone.setText(phone)
+        if (countryCode.isNotEmpty()) mBinding.ccpPhone.setCountryForPhoneCode(countryCode.replace("+","").toInt())
+        if (phone.isNotEmpty()) mBinding.tietPhone.setText(phone)
 
-        btn_continue.setOnClickListener {
+        mBinding.btnContinue.setOnClickListener {
 
-            tiet_phone.addTextChangedListener(GenericTextWatcher(tiet_phone))
+            mBinding.tietPhone.addTextChangedListener(GenericTextWatcher(mBinding.tietPhone))
 
-            if (tiet_phone.text.toString().trim().isEmpty()) {
+            if (mBinding.tietPhone.text.toString().trim().isEmpty()) {
                 setErrorOnPhone(getString(R.string.phone_required))
-            } else if (!ccp_phone.isValidFullNumber) {
+            } else if (!mBinding.ccpPhone.isValidFullNumber) {
                 setErrorOnPhone(getString(R.string.phone_invalid))
             } else {
                 mBinding.isLoading = true
-                countryCode = ccp_phone.selectedCountryCodeWithPlus
-                phone = CommonUtils.getUnformattedPhoneNumber(tiet_phone.text.toString().trim())
+                countryCode = mBinding.ccpPhone.selectedCountryCodeWithPlus
+                phone = CommonUtils.getUnformattedPhoneNumber(mBinding.tietPhone.text.toString().trim())
                 val data = HashMap<String, String>()
                 data["country_code"] = countryCode
                 data["phone"] = phone
@@ -91,12 +89,12 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
                 }
 
                 response.data.status -> {
-                    findNavController().navigate(
+                    /*findNavController().navigate(
                         ForgotPasswordFragmentDirections.actionForgotPasswordToOtp(
                             fromWhichPage = RegistrationOtpFragment.FROM_FORGOT_PASSWORD,
                             phone = phone, countryCode = countryCode
                         )
-                    )
+                    )*/
                 }
 
                 else -> {
@@ -124,12 +122,12 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
 
     private fun setErrorOnPhone(message: String = "", invalidate: Boolean = false) {
         if (invalidate) {
-            tv_phone_hint.setTextColor(ContextCompat.getColor(activity!!, R.color.colorAlphaAppTextBlue))
-            tv_phone_error.visibility = View.INVISIBLE
+            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
+            mBinding.tvPhoneError.visibility = View.INVISIBLE
         } else {
-            tv_phone_hint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
-            tv_phone_error.visibility = View.VISIBLE
-            tv_phone_error.text = message
+            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
+            mBinding.tvPhoneError.visibility = View.VISIBLE
+            mBinding.tvPhoneError.text = message
         }
     }
 }

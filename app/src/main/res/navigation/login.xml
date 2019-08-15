@@ -9,15 +9,8 @@
         android:id="@+id/loginFragment"
         android:name="com.bigtime.ui.login.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_choose_product">
+        tools:layout="@layout/fragment_login">
 
-        <argument
-            android:name="countryCode"
-            app:argType="string" />
-
-        <argument
-            android:name="phone"
-            app:argType="string" />
 
         <action
             android:id="@+id/action_login_to_forgotPassword"

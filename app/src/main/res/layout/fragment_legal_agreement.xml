@@ -17,6 +17,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
+            android:id="@+id/v_progress"
             layout="@layout/widget_progress_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

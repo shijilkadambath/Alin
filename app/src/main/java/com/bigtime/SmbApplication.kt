@@ -9,8 +9,11 @@ package com.bigtime
 import android.app.Activity
 import android.app.Application
 import com.bigtime.di.AppInjector
+import com.bigtime.utils.SessionUtils
 import com.bigtime.utils.logger.Log
 import com.bigtime.utils.logger.LogWrapper
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -27,6 +30,11 @@ class SmbApplication : Application(), HasActivityInjector {
 
         AppInjector.init(this)
         Log.setLogNode(LogWrapper()) // Initialise logging
+        SessionUtils.init(this)
+        val config = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true)
+                .build()
+        Fresco.initialize(this, config)
 
 
 

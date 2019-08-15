@@ -18,32 +18,4 @@ import javax.inject.Inject
 class AddProductViewModel
 @Inject constructor( repoRepository: UMSRepository) : ViewModel() {
 
-    private val _login = MutableLiveData<String>()
-
-    val login: LiveData<String>
-        get() = _login
-
-    val repositories: LiveData<Resource<BaseResponse<List<User>>>> = Transformations
-
-
-            .switchMap(_login) { login ->
-                if (login == null) {
-                    AbsentLiveData.create()
-                } else {
-                    repoRepository.loadUsers()
-                }
-            }
-
-
-    fun retry() {
-        _login.value?.let {
-            _login.value = it
-        }
-    }
-
-    fun loadData() {
-        //if (_login.value != login) {
-            _login.value = "test"
-        //}
-    }
 }

@@ -81,4 +81,18 @@ class AppModule {
     fun getBaseUrl(): String {
         return BASE_URL
     }
+
+    @Singleton
+    @Provides
+    fun getTermsOfServiceUrl(): String {
+        return "https://www.google.com"
+        //return BASE_URL
+    }
+
+    @Singleton
+    @Provides
+    fun getPrivacyPolicyUrl(): String {
+        return "https://www.google.com"
+        //return BASE_URL
+    }
 }

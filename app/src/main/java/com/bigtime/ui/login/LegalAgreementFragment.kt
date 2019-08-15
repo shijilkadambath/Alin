@@ -6,7 +6,11 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import com.bigtime.R
 import com.bigtime.databinding.FragmentLegalAgreementBinding
+import com.bigtime.di.AppModule
+import com.bigtime.di.AppModule_GetPrivacyPolicyUrlFactory
+import com.bigtime.di.AppModule_GetTermsOfServiceUrlFactory
 import com.bigtime.ui.BaseFragment
 
 /**
@@ -14,8 +18,6 @@ import com.bigtime.ui.BaseFragment
  * for NewAgeSMB
  * Email : shijil@newagesmb.com
  *
- *
- * Updated by Ȿ₳Ɲ @ NEWAGESMB on Thursday, April 11, 2019
  */
 
 class LegalAgreementFragment : BaseFragment<FragmentLegalAgreementBinding>() {
@@ -36,54 +38,54 @@ class LegalAgreementFragment : BaseFragment<FragmentLegalAgreementBinding>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
 
-        swipe_refresh.setProgressBackgroundColorSchemeResource(R.color.colorAppGreen)
-        swipe_refresh.setColorSchemeColors(ContextCompat.getColor(activity!!, R.color.colorWhite))
-        swipe_refresh.setOnRefreshListener {
-            web_view.reload()
-            progress_bar.visibility = View.VISIBLE
+        mBinding.swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.colorAccent)
+        mBinding.swipeRefresh.setColorSchemeColors(ContextCompat.getColor(activity!!, R.color.white))
+        mBinding.swipeRefresh.setOnRefreshListener {
+            mBinding.webView.reload()
+            mBinding.vProgress.progressBar.visibility = View.VISIBLE
         }
 
         val type = LegalAgreementFragmentArgs.fromBundle(arguments!!).agreementType
 
         when (type) {
             TYPE_TERMS_OF_SERVICE -> {
-                web_view.loadUrl(AppModule_GetTermsOfServiceUrlFactory.create(AppModule()).get())
-                web_view.webChromeClient = object : WebChromeClient() {
+                mBinding.webView.loadUrl(AppModule_GetTermsOfServiceUrlFactory.create(AppModule()).get())
+                mBinding.webView.webChromeClient = object : WebChromeClient() {
                     override fun onProgressChanged(view: WebView?, newProgress: Int) {
                         super.onProgressChanged(view, newProgress)
-                        swipe_refresh.isRefreshing = false
-                        progress_bar.isIndeterminate = false
-                        progress_bar.progress = newProgress
-                        if (newProgress == 100) progress_bar.visibility = View.GONE
+                        mBinding.swipeRefresh.isRefreshing = false
+                        mBinding.vProgress.progressBar.isIndeterminate = false
+                        mBinding.vProgress.progressBar.progress = newProgress
+                        if (newProgress == 100) mBinding.vProgress.progressBar.visibility = View.GONE
                     }
                 }
             }
             TYPE_PRIVACY_POLICY -> {
-                web_view.loadUrl(AppModule_GetPrivacyPolicyUrlFactory.create(AppModule()).get())
-                web_view.webChromeClient = object : WebChromeClient() {
+                mBinding.webView.loadUrl(AppModule_GetPrivacyPolicyUrlFactory.create(AppModule()).get())
+                mBinding.webView.webChromeClient = object : WebChromeClient() {
                     override fun onProgressChanged(view: WebView?, newProgress: Int) {
                         super.onProgressChanged(view, newProgress)
-                        swipe_refresh.isRefreshing = false
-                        progress_bar.isIndeterminate = false
-                        progress_bar.progress = newProgress
-                        if (newProgress == 100) progress_bar.visibility = View.GONE
+                        mBinding.swipeRefresh.isRefreshing = false
+                        mBinding.vProgress.progressBar.isIndeterminate = false
+                        mBinding.vProgress.progressBar.progress = newProgress
+                        if (newProgress == 100) mBinding.vProgress.progressBar.visibility = View.GONE
                     }
                 }
             }
 
             TYPE_ABOUT -> {
-                web_view.loadUrl(AppModule_GetPrivacyPolicyUrlFactory.create(AppModule()).get())
-                web_view.webChromeClient = object : WebChromeClient() {
+                mBinding.webView.loadUrl(AppModule_GetPrivacyPolicyUrlFactory.create(AppModule()).get())
+                mBinding.webView.webChromeClient = object : WebChromeClient() {
                     override fun onProgressChanged(view: WebView?, newProgress: Int) {
                         super.onProgressChanged(view, newProgress)
-                        swipe_refresh.isRefreshing = false
-                        progress_bar.isIndeterminate = false
-                        progress_bar.progress = newProgress
-                        if (newProgress == 100) progress_bar.visibility = View.GONE
+                        mBinding.swipeRefresh.isRefreshing = false
+                        mBinding.vProgress.progressBar.isIndeterminate = false
+                        mBinding.vProgress.progressBar.progress = newProgress
+                        if (newProgress == 100) mBinding.vProgress.progressBar.visibility = View.GONE
                     }
                 }
             }

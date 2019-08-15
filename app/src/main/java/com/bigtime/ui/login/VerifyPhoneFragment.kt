@@ -8,22 +8,13 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bigtime.R
+import com.bigtime.data.api.Status
+import com.bigtime.data.api.StatusCode
 import com.bigtime.databinding.FragmentVerifyPhoneBinding
 import com.bigtime.ui.BaseFragment
 import com.bigtime.utils.CommonUtils
-import com.smb.smbapplication.R
-import com.smb.smbapplication.data.api.Status
-import com.smb.smbapplication.data.api.StatusCode
-import com.smb.smbapplication.databinding.FragmentVerifyPhoneBinding
-import com.smb.smbapplication.ui.BaseFragment
-import com.smb.smbapplication.ui.loginsignup.LoginSignUpViewModel
-import com.smb.smbapplication.utils.CommonUtils
-import com.smb.smbapplication.widget.CustomDialog
-import kotlinx.android.synthetic.main.fragment_verify_phone.*
+import com.bigtime.widget.CustomDialog
 
-/**
- * Created by Ȿ₳Ɲ @ NEWAGESMB on Tuesday, May 21, 2019
- */
 
 class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
@@ -43,36 +34,36 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
         if (savedInstanceState != null) return
 
-        activity!!.window.statusBarColor = ContextCompat.getColor(activity!!, R.color.colorWhite)
+        activity!!.window.statusBarColor = ContextCompat.getColor(activity!!, R.color.white)
 
-        mSignUpViewModel = getViewModel(LoginSignUpViewModel::class.java)
+        mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
 
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
-        ccp_phone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
-        ccp_phone.registerCarrierNumberEditText(tiet_phone)
+        mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
+        mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
 
-        btn_continue.setOnClickListener {
+        mBinding.btnContinue.setOnClickListener {
 
-            tiet_phone.addTextChangedListener(GenericTextWatcher(tiet_phone))
+            mBinding.tietPhone.addTextChangedListener(GenericTextWatcher(mBinding.tietPhone))
 
-            if (tiet_phone.text.toString().trim().isEmpty()) {
+            if (mBinding.tietPhone.text.toString().trim().isEmpty()) {
                 setErrorOnPhone(getString(R.string.phone_required))
-                tiet_phone.requestFocus()
-            } else if (!ccp_phone.isValidFullNumber) {
+                mBinding.tietPhone.requestFocus()
+            } else if (!mBinding.ccpPhone.isValidFullNumber) {
                 setErrorOnPhone(getString(R.string.phone_invalid))
-                tiet_phone.requestFocus()
+                mBinding.tietPhone.requestFocus()
             } else {
 
-                dismissKeyboard(btn_continue.windowToken)
+                dismissKeyboard(mBinding.btnContinue.windowToken)
 
                 mBinding.isLoading = true
-                btn_continue.startLoading()
+                mBinding.btnContinue.startLoading()
                 val data = HashMap<String, String>()
-                data["country_code"] = ccp_phone.selectedCountryCodeWithPlus
-                data["phone"] = CommonUtils.getUnformattedPhoneNumber(tiet_phone.text.toString().trim())
+                data["country_code"] = mBinding.ccpPhone.selectedCountryCodeWithPlus
+                data["phone"] = CommonUtils.getUnformattedPhoneNumber(mBinding.tietPhone.text.toString().trim())
 
                 mSignUpViewModel.verifyPhone(data)
             }
@@ -90,22 +81,22 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
             when {
                 response.data == null -> {
-                    btn_continue.loadingFailed()
+                    mBinding.btnContinue.loadingFailed()
                     showSnackBar(response.message!!)
                 }
 
                 response.data.status -> {
-                    btn_continue.loadingSuccessful()
-                    findNavController().navigate(
+                    mBinding.btnContinue.loadingSuccessful()
+                    /*findNavController().navigate(
                         VerifyPhoneFragmentDirections.actionVerifyPhoneToLogin(
-                            ccp_phone.selectedCountryCodeWithPlus,
-                            CommonUtils.getUnformattedPhoneNumber(tiet_phone.text.toString().trim())
+                                mBinding.ccpPhone.selectedCountryCodeWithPlus,
+                            CommonUtils.getUnformattedPhoneNumber(mBinding.tietPhone.text.toString().trim())
                         )
-                    )
+                    )*/
                 }
 
                 else -> {
-                    btn_continue.loadingFailed()
+                    mBinding.btnContinue.loadingFailed()
 
                     if(!isApiCommonError(response.data.statusCode, response.data.message)){
 
@@ -119,12 +110,12 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                                     true,
                                     getString(R.string.sign_up), object : CustomDialog.ICustomDialogListener {
                                         override fun onActionClicked() {
-                                            findNavController().navigate(
+                                            /*findNavController().navigate(
                                                 VerifyPhoneFragmentDirections.actionVerifyPhoneToSignUp(
-                                                    ccp_phone.selectedCountryCodeWithPlus,
-                                                    CommonUtils.getUnformattedPhoneNumber(tiet_phone.text.toString().trim())
+                                                        mBinding.ccpPhone.selectedCountryCodeWithPlus,
+                                                    CommonUtils.getUnformattedPhoneNumber(mBinding.tiet_phone.text.toString().trim())
                                                 )
-                                            )
+                                            )*/
                                         }
 
                                     }
@@ -145,12 +136,12 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
     private fun setErrorOnPhone(message: String = "", invalidate: Boolean = false) {
         if (invalidate) {
-            tv_phone_hint.setTextColor(ContextCompat.getColor(activity!!, R.color.colorAlphaAppTextBlue))
-            tv_phone_error.visibility = View.INVISIBLE
+            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
+            mBinding.tvPhoneError.visibility = View.INVISIBLE
         } else {
-            tv_phone_hint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
-            tv_phone_error.visibility = View.VISIBLE
-            tv_phone_error.text = message
+            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
+            mBinding.tvPhoneError.visibility = View.VISIBLE
+            mBinding.tvPhoneError.text = message
         }
     }
 

@@ -7,17 +7,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bigtime.R
+import com.bigtime.data.api.Status
 import com.bigtime.databinding.FragmentLoginBinding
 import com.bigtime.ui.BaseFragment
-import com.smb.smbapplication.R
-import com.smb.smbapplication.data.api.Status
-import com.smb.smbapplication.databinding.FragmentLoginBinding
-import com.smb.smbapplication.ui.BaseFragment
-import com.smb.smbapplication.ui.home.HomeActivity
-import com.smb.smbapplication.ui.loginsignup.LoginSignUpViewModel
-import com.smb.smbapplication.utils.CommonUtils
-import com.smb.smbapplication.utils.SessionUtils
-import kotlinx.android.synthetic.main.fragment_choose_product.*
+import com.bigtime.ui.home.HomeActivity
+import com.bigtime.utils.CommonUtils
+import com.bigtime.utils.SessionUtils
 import org.jetbrains.anko.support.v4.intentFor
 
 /**
@@ -49,28 +44,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         if (savedInstanceState != null) return
 
-        activity!!.window.statusBarColor = ContextCompat.getColor(activity!!, R.color.colorWhite)
+        activity!!.window.statusBarColor = ContextCompat.getColor(activity!!, R.color.white)
 
-        mSignUpViewModel = getViewModel(LoginSignUpViewModel::class.java)
+        mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
 
-        countryCode = LoginFragmentArgs.fromBundle(arguments!!).countryCode
-        phone = LoginFragmentArgs.fromBundle(arguments!!).phone
+        //countryCode = LoginFragmentArgs.fromBundle(arguments!!).countryCode
+        //phone = LoginFragmentArgs.fromBundle(arguments!!).phone
 
         getFCMTokens()
 
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        // mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        //mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
-        til_password.typeface = CommonUtils.FONT_METROPOLIS_REGULAR(activity!!)
+        mBinding.tilPassword.typeface = CommonUtils.FONT_METROPOLIS_REGULAR(activity!!)
 
-        tv_forgot_password.setOnClickListener {
+        mBinding.tvForgotPassword.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginToForgotPassword(countryCode, phone))
         }
 
-        btn_login.setOnClickListener {
+        mBinding.btnLogin.setOnClickListener {
 
-            tiet_password.addTextChangedListener(generalTextWatcher)
+            mBinding.tietPassword.addTextChangedListener(generalTextWatcher)
 
             callLogin()
 
@@ -98,7 +93,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     val session = response.data.data
 
                     SessionUtils.setIsLoggedIn(true)
-                    SessionUtils.saveUserPassword(tiet_password.text.toString().trim())
+                    SessionUtils.saveUserPassword(mBinding.tietPassword.text.toString().trim())
                     SessionUtils.saveSession(session)
 
                     startActivity(intentFor<HomeActivity>())
@@ -119,17 +114,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun callLogin() {
 
-        if (tiet_password.text.toString().trim().isEmpty()) {
-            til_password.error = getString(R.string.password_required)
-            tiet_password.requestFocus()
+        if (mBinding.tietPassword.text.toString().trim().isEmpty()) {
+            mBinding.tilPassword.error = getString(R.string.password_required)
+            mBinding.tietPassword.requestFocus()
         } else {
-            dismissKeyboard(btn_login.windowToken)
+            dismissKeyboard(mBinding.btnLogin.windowToken)
             mBinding.isLoading = true
             mBinding.btnLogin.startLoading()
             val data = HashMap<String, String>()
             data["country_code"] = countryCode
             data["phone"] = phone
-            data["password"] = tiet_password.text.toString().trim()
+            data["password"] = mBinding.tietPassword.text.toString().trim()
 
             mSignUpViewModel.login(data)
         }
@@ -139,7 +134,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private val generalTextWatcher = object : TextWatcher {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            til_password.error = null
+            mBinding.tilPassword.error = null
         }
 
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}

@@ -7,20 +7,14 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bigtime.R
+import com.bigtime.data.api.Status
 import com.bigtime.databinding.FragmentResetPasswordBinding
 import com.bigtime.ui.BaseFragment
-import com.smb.smbapplication.R
-import com.smb.smbapplication.data.api.Status
-import com.smb.smbapplication.databinding.FragmentResetPasswordBinding
-import com.smb.smbapplication.ui.BaseFragment
-import com.smb.smbapplication.ui.loginsignup.LoginSignUpViewModel
-import com.smb.smbapplication.utils.CommonUtils
-import com.smb.smbapplication.widget.CustomDialog
-import kotlinx.android.synthetic.main.fragment_reset_password.*
+import com.bigtime.utils.CommonUtils
+import com.bigtime.widget.CustomDialog
 
-/**
- * Created by Ȿ₳Ɲ @ NEWAGESMB on Tuesday, April 30, 2019
- */
+
 
 class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), OnBackPressedCallback {
 
@@ -28,7 +22,7 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), OnBa
         const val TAG: String = "ResetPasswordFragment"
     }
 
-    private lateinit var mSignUpViewModel: LoginSignUpViewModel
+    private lateinit var mSignUpViewModel: LoginViewModel
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_reset_password
@@ -40,46 +34,45 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), OnBa
 
         if (savedInstanceState != null) return
 
-        mSignUpViewModel = getViewModel(LoginSignUpViewModel::class.java)
+        mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
 
         requireActivity().onBackPressedDispatcher.addCallback(this, this)
 
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { handleOnBackPressed() }
+        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        mBinding.toolbar.setNavigationOnClickListener { handleOnBackPressed() }
 
         val countryCode = ResetPasswordFragmentArgs.fromBundle(arguments!!).countryCode
         val phone = ResetPasswordFragmentArgs.fromBundle(arguments!!).phone
 
-        til_password.typeface = CommonUtils.FONT_METROPOLIS_REGULAR(activity!!)
-        til_confirm_password.typeface = CommonUtils.FONT_METROPOLIS_REGULAR(activity!!)
+        mBinding.tilPassword.typeface = CommonUtils.FONT_METROPOLIS_REGULAR(activity!!)
+        mBinding.tilConfirmPassword.typeface = CommonUtils.FONT_METROPOLIS_REGULAR(activity!!)
 
-        btn_submit.setOnClickListener {
+        mBinding.btnSubmit.setOnClickListener {
 
-            tiet_password.addTextChangedListener(GenericTextWatcher(tiet_password))
-            tiet_confirm_password.addTextChangedListener(GenericTextWatcher(tiet_confirm_password))
+            mBinding.tietPassword.addTextChangedListener(GenericTextWatcher(mBinding.tietPassword))
+            mBinding.tietConfirmPassword.addTextChangedListener(GenericTextWatcher(mBinding.tietConfirmPassword))
 
-            if (tiet_password.text.toString().trim().isEmpty()) {
-                til_password.error = getString(R.string.password_required)
-            } else if (!CommonUtils.PASSWORD.matcher(tiet_password.text.toString().trim()).matches()) {
-                til_password.isPasswordVisibilityToggleEnabled = true
-                til_password.error = getString(R.string.password_invalid)
-                tiet_confirm_password.setText("")
-                tiet_password.requestFocus()
-            } else if (tiet_confirm_password.text.toString().trim().isEmpty()) {
-                til_confirm_password.error = getString(R.string.reenter_password)
-            } else if (tiet_password.text.toString().trim() != tiet_confirm_password.text.toString().trim()) {
-                til_confirm_password.isPasswordVisibilityToggleEnabled = true
-                til_confirm_password.error = getString(R.string.password_not_matching)
+            if (mBinding.tietPassword.text.toString().trim().isEmpty()) {
+                mBinding.tilPassword.error = getString(R.string.password_required)
+            } else if (!CommonUtils.PASSWORD.matcher(mBinding.tietPassword.text.toString().trim()).matches()) {
+                mBinding.tilPassword.isPasswordVisibilityToggleEnabled = true
+                mBinding.tilPassword.error = getString(R.string.password_invalid)
+                mBinding.tietConfirmPassword.setText("")
+                mBinding.tietPassword.requestFocus()
+            } else if (mBinding.tietConfirmPassword.text.toString().trim().isEmpty()) {
+                mBinding.tilConfirmPassword.error = getString(R.string.reenter_password)
+            } else if (mBinding.tietPassword.text.toString().trim() != mBinding.tietConfirmPassword.text.toString().trim()) {
+                mBinding.tilConfirmPassword.isPasswordVisibilityToggleEnabled = true
+                mBinding.tilConfirmPassword.error = getString(R.string.password_not_matching)
             } else {
                 val data = HashMap<String, String>()
-                data["password"] = tiet_password.text.toString().trim()
-                data["country_code"] = countryCode
-                data["phone"] = phone
+                data["password"] = mBinding.tietPassword.text.toString().trim()
                 mBinding.isLoading = true
                 mSignUpViewModel.resetPassword(data)
             }
         }
+
 
         mSignUpViewModel.resetPasswordResponseLiveData.removeObservers(this)
         mSignUpViewModel.resetPasswordResponseLiveData.observe(this, Observer { response ->
@@ -126,8 +119,8 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), OnBa
         override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
         override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
             when (view.id) {
-                R.id.tiet_password -> til_password.error = null
-                R.id.tiet_confirm_password -> til_confirm_password.error = null
+                R.id.tiet_password -> mBinding.tilPassword.error = null
+                R.id.tiet_confirm_password -> mBinding.tilConfirmPassword.error = null
             }
         }
 

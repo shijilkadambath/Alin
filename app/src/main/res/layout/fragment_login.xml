@@ -6,7 +6,7 @@
 
         <variable
             name="layoutBinder"
-            type="com.bigtime.ui.add_product.LoginFragment" />
+            type="com.bigtime.ui.login.LoginFragment" />
 
         <variable
             name="isLoading"

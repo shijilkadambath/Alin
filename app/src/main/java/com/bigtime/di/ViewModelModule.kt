@@ -19,7 +19,12 @@ package com.bigtime.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bigtime.common.SmbViewModelFactory
+import com.bigtime.ui.add_product.AddProductViewModel
+import com.bigtime.ui.approved_product.ApprovedProductViewModel
+import com.bigtime.ui.home.HomeViewModel
 import com.bigtime.ui.login.LoginViewModel
+import com.bigtime.ui.order.OrderViewModel
+import com.bigtime.ui.pending_product.PendingProductViewModel
 
 
 import dagger.Binds
@@ -42,5 +47,30 @@ abstract class ViewModelModule {
     @Binds
    @IntoMap
    @ViewModelKey(LoginViewModel::class)
-   abstract fun bindRepoViewModel(viewModel: LoginViewModel): ViewModel
+   abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddProductViewModel::class)
+    abstract fun bindAddProductViewModel(viewModel: AddProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OrderViewModel::class)
+    abstract fun bindOrderViewModel(viewModel: OrderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PendingProductViewModel::class)
+    abstract fun bindPendingProductViewModel(viewModel: PendingProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ApprovedProductViewModel::class)
+    abstract fun bindApprovedProductViewModel(viewModel: ApprovedProductViewModel): ViewModel
 }

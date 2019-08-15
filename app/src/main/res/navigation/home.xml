@@ -16,12 +16,12 @@
   -->
 <navigation xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.bigtime.ui.login.LoginFragment"
-        android:label="LoginFragment" >>
+        android:id="@+id/homeFragment"
+        android:name="com.bigtime.ui.home.HomeFragment"
+        android:label="HomeFragment" >>
     </fragment>
 
 

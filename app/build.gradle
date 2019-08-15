@@ -83,6 +83,8 @@ dependencies {
     implementation 'org.jetbrains.anko:anko:0.10.8'
     implementation 'androidx.core:core-ktx:1.2.0-alpha02'
 
+    // FCM
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
     //implementation "org.jetbrains.anko:anko:0.10.5"
     implementation 'org.apache.commons:commons-text:1.6'
 
@@ -111,9 +113,11 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:' + rootProject.dagger_version
     kapt 'com.google.dagger:dagger-android-processor:' + rootProject.dagger_version
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.dagger_version
+
     // Image Loading
     implementation 'com.github.bumptech.glide:glide:' + rootProject.glideVersion
     kapt 'com.github.bumptech.glide:compiler:' + rootProject.glideVersion
+
     // retrofit webservice
     implementation('com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion) {
         exclude module: 'okhttp-ws'
@@ -123,7 +127,9 @@ dependencies {
     }
     implementation 'com.squareup.okhttp3:logging-interceptor:' + rootProject.okHttpVersion
 
+    // Country picker
     implementation 'com.hbb20:ccp:2.2.7'
+    implementation 'com.facebook.fresco:fresco:1.13.0'
 
     // Memory Leaks
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
@@ -172,3 +178,4 @@ project.tasks.whenTaskAdded {
         it.enabled = false
     }
 }
+apply plugin: 'com.google.gms.google-services'

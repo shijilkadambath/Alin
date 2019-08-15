@@ -23,9 +23,12 @@ import com.bigtime.AppExecutors
 import com.bigtime.data.api.BaseResponse
 import com.bigtime.data.api.WebService
 import com.bigtime.data.api.Resource
+import com.bigtime.data.api.StatusCode
 import com.bigtime.data.db.AppDb
 import com.bigtime.data.db.UMSDao
 import com.bigtime.data.model.User
+import com.bigtime.utils.SessionUtils
+import java.util.HashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 /**
@@ -71,7 +74,7 @@ class UMSRepository @Inject constructor(
                result.addSource(umsoDao.loadUsers(), Observer {
                         list->
 
-                        result.setValue(BaseResponse("",true,list))
+                        result.setValue(BaseResponse("",true,"",StatusCode.OK,list))
                 })
 
                 return  result
@@ -85,6 +88,42 @@ class UMSRepository @Inject constructor(
     }
 
 
+
+    fun resetPassword(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun forgotPasswordValidateOTP(data: HashMap<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun forgotPassword(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun login(data: HashMap<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun verifyPhone(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun registration(data: HashMap<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun verifyOTP(data: HashMap<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun sentOtp(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun getProfile(): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 
 }

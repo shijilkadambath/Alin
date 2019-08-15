@@ -17,7 +17,14 @@
 package com.bigtime.di
 
 
+import com.bigtime.ui.add_product.AddProductDetailFragment
+import com.bigtime.ui.add_product.AddProductUploadFragment
+import com.bigtime.ui.add_product.ChooseFragment
+import com.bigtime.ui.approved_product.ApprovedProductFragment
+import com.bigtime.ui.home.HomeFragment
 import com.bigtime.ui.login.*
+import com.bigtime.ui.order.OrderFragment
+import com.bigtime.ui.pending_product.PendingProductFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 /**
@@ -44,4 +51,26 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeVerifyPhoneFragment(): VerifyPhoneFragment
+
+
+    @ContributesAndroidInjector
+    abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChooseFragment(): ChooseFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddProductUploadFragment(): AddProductUploadFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddProductDetailFragment(): AddProductDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeOrderFragment(): OrderFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeApprovedProductFragment(): ApprovedProductFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePendingProductFragment(): PendingProductFragment
 }

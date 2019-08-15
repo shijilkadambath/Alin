@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.smb.smbapplication.common.AbsentLiveData
-import com.smb.smbapplication.data.api.BaseResponse
-import com.smb.smbapplication.data.api.Resource
-import com.smb.smbapplication.repo.UMSRepository
-import com.smb.smbapplication.utils.SessionUtils
+import com.bigtime.common.AbsentLiveData
+import com.bigtime.data.api.BaseResponse
+import com.bigtime.data.api.Resource
+import com.bigtime.repo.UMSRepository
+import com.bigtime.utils.SessionUtils
 import javax.inject.Inject
 
 /**
@@ -16,7 +16,6 @@ import javax.inject.Inject
  * for NewAgeSMB
  * Email : shijil@newagesmb.com
  *
- * Updated by Ȿ₳Ɲ @ NEWAGESMB on Monday, May 21, 2019
  */
 
 class LoginViewModel
@@ -65,7 +64,7 @@ class LoginViewModel
 
     val registrationResponseLiveData: LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> =
         Transformations.switchMap(registrationRequestLiveData) { data ->
-            if (data == null) {
+           if (data == null) {
                 AbsentLiveData.create()
             } else {
                 repoRepository.registration(data)

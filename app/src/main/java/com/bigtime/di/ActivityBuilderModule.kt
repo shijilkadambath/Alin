@@ -16,8 +16,12 @@
 
 package com.bigtime.di
 
+import com.bigtime.ui.add_product.AddProductActivity
+import com.bigtime.ui.approved_product.ApprovedProductActivity
 import com.bigtime.ui.home.HomeActivity
 import com.bigtime.ui.login.LoginActivity
+import com.bigtime.ui.order.OrderActivity
+import com.bigtime.ui.pending_product.PendingProductActivity
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -36,4 +40,20 @@ abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
     abstract fun contributeHomeActivity(): HomeActivity
+
+
+    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
+    abstract fun contributeAddProductActivity(): AddProductActivity
+
+
+    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
+    abstract fun contributeOrderActivity(): OrderActivity
+
+
+    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
+    abstract fun contributePendingProductActivity(): PendingProductActivity
+
+
+    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
+    abstract fun contributeApprovedProductActivity(): ApprovedProductActivity
 }
