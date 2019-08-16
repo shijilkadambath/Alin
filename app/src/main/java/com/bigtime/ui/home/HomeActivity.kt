@@ -9,6 +9,8 @@ import android.util.DisplayMetrics
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -119,7 +121,19 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
                 startActivity(intentFor<ApprovedProductActivity>())
             }
             R.id.tv_pending -> {
+                togglePendingVisibility()
+                return
+            }
 
+            R.id.tv_draft -> {
+                startActivity(intentFor<PendingProductActivity>())
+            }
+
+            R.id.tv_review -> {
+                startActivity(intentFor<PendingProductActivity>())
+            }
+
+            R.id.tv_rejected-> {
                 startActivity(intentFor<PendingProductActivity>())
             }
 
@@ -132,6 +146,31 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
             drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
+
+    var rotationAngle:Float =0F
+    private fun togglePendingVisibility() {
+
+        var visibile =lPending.visibility == View.VISIBLE
+
+        //rotationAngle =if(rotationAngle == 0f )  180f else 0f;  //toggle
+
+
+
+        if (visibile){
+            lPending.visibility = View.GONE
+            rotationAngle = 180f
+
+        }else{
+            lPending.visibility = View.VISIBLE
+
+            rotationAngle = 0f
+        }
+
+
+        ivArrow.animate().rotation(rotationAngle).setDuration(500).start();
+
+    }
+
     fun logout() {
         val alert = AlertDialog.Builder(this!!)
         alert.setMessage("Are you sure?")
@@ -144,6 +183,8 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
 
     }
 
+    lateinit var lPending:RelativeLayout
+    lateinit var ivArrow:ImageView
     // Setting Up One Time Navigation
     private fun setupNavigation() {
 
@@ -188,7 +229,11 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
         navigationView.findViewById<View>(R.id.tv_approved).setOnClickListener(this)
         navigationView.findViewById<View>(R.id.tv_pending).setOnClickListener(this)
         navigationView.findViewById<View>(R.id.tv_logout).setOnClickListener(this)
-
+        navigationView.findViewById<View>(R.id.tv_draft).setOnClickListener(this)
+        navigationView.findViewById<View>(R.id.tv_review).setOnClickListener(this)
+        navigationView.findViewById<View>(R.id.tv_rejected).setOnClickListener(this)
+        lPending=navigationView.findViewById(R.id.l_pending)
+        ivArrow=navigationView.findViewById(R.id.iv_arrow)
 
     }
 

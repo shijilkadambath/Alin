@@ -130,6 +130,7 @@ dependencies {
     // Country picker
     implementation 'com.hbb20:ccp:2.2.7'
     implementation 'com.facebook.fresco:fresco:1.13.0'
+    implementation 'com.chaos.view:pinview:1.4.3'
 
     // Memory Leaks
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'

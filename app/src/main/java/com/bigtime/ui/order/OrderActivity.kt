@@ -15,7 +15,7 @@ class OrderActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true);
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true);
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

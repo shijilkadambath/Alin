@@ -18,11 +18,17 @@ import com.bigtime.widget.CustomDialog
 
 class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
+
     companion object {
-        const val TAG: String = "VerifyPhoneFragment"
+        const val TAG: String = "RegistrationOtpFragment"
+        const val FROM_SIGN_UP: Int = 1
+        const val FROM_FORGOT_PASSWORD: Int = 2
     }
 
-    lateinit var mSignUpViewModel: LoginViewModel
+    private lateinit var mSignUpViewModel: LoginViewModel
+    private var page: Int = 0
+    private var phone: String = ""
+    private var countryCode: String = ""
 
 
     override fun getLayoutId(): Int {
@@ -34,44 +40,60 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
         if (savedInstanceState != null) return
 
-        activity!!.window.statusBarColor = ContextCompat.getColor(activity!!, R.color.white)
-
         mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
 
+        /**
+         * FROM WHICH PAGE
+         * 1 -> From Sign Up
+         * 2 -> From Forgot Password
+         */
+        page = VerifyPhoneFragmentArgs.fromBundle(arguments!!).fromWhichPage
+        phone = VerifyPhoneFragmentArgs.fromBundle(arguments!!).phone
+        countryCode = VerifyPhoneFragmentArgs.fromBundle(arguments!!).countryCode
+
         mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        mBinding.toolbar.setNavigationOnClickListener { if (!mBinding.isLoading) findNavController().navigateUp() }
 
-        mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
-        mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
+        mBinding.tvTitle2.text = getString(R.string.we_sent_to_you, countryCode, phone)
 
-        mBinding.btnContinue.setOnClickListener {
-
-            mBinding.tietPhone.addTextChangedListener(GenericTextWatcher(mBinding.tietPhone))
-
-            if (mBinding.tietPhone.text.toString().trim().isEmpty()) {
-                setErrorOnPhone(getString(R.string.phone_required))
-                mBinding.tietPhone.requestFocus()
-            } else if (!mBinding.ccpPhone.isValidFullNumber) {
-                setErrorOnPhone(getString(R.string.phone_invalid))
-                mBinding.tietPhone.requestFocus()
-            } else {
-
-                dismissKeyboard(mBinding.btnContinue.windowToken)
-
-                mBinding.isLoading = true
-                mBinding.btnContinue.startLoading()
+        mBinding.btnResendOtp.setOnClickListener {
+            mBinding.isLoading = true
+            if (page == FROM_SIGN_UP) {
                 val data = HashMap<String, String>()
-                data["country_code"] = mBinding.ccpPhone.selectedCountryCodeWithPlus
-                data["phone"] = CommonUtils.getUnformattedPhoneNumber(mBinding.tietPhone.text.toString().trim())
-
-                mSignUpViewModel.verifyPhone(data)
+                data["country_code"] = countryCode
+                data["phone"] = phone
+                mSignUpViewModel.sentOtp(data)
+            } else {
+                val data = HashMap<String, String>()
+                data["country_code"] = countryCode
+                data["phone"] = phone
+                mSignUpViewModel.forgotPassword(data)
             }
-
         }
 
-        mSignUpViewModel.verifyPhoneResponseLiveData.removeObservers(this)
-        mSignUpViewModel.verifyPhoneResponseLiveData.observe(this, Observer { response ->
+        mBinding.btnChangeNumber.setOnClickListener { if (!mBinding.isLoading) findNavController().navigateUp() }
+
+        mBinding.btnContinue.setOnClickListener {
+            if (mBinding.pinView.text!!.toString().length == 4) {
+                mBinding.isLoading = true
+                val data = HashMap<String, String>()
+                data["otp"] = mBinding.pinView.text!!.toString().trim()
+                data["country_code"] = countryCode
+                data["phone"] = phone
+
+                when (page) {
+                    FROM_SIGN_UP -> mSignUpViewModel.verifyOTP(data)
+                    FROM_FORGOT_PASSWORD -> mSignUpViewModel.forgotPasswordValidateOTP(data)
+                }
+
+            } else {
+                showSnackBar(getString(R.string.enter_valid_otp))
+            }
+        }
+
+        mSignUpViewModel.sentOtpResponseLiveData.removeObservers(this)
+        mSignUpViewModel.sentOtpResponseLiveData.observe(this, Observer { response ->
 
             if (response == null || response.status == Status.LOADING) {
                 return@Observer
@@ -81,81 +103,118 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
             when {
                 response.data == null -> {
-                    mBinding.btnContinue.loadingFailed()
                     showSnackBar(response.message!!)
                 }
 
                 response.data.status -> {
-                    mBinding.btnContinue.loadingSuccessful()
-                    /*findNavController().navigate(
-                        VerifyPhoneFragmentDirections.actionVerifyPhoneToLogin(
-                                mBinding.ccpPhone.selectedCountryCodeWithPlus,
-                            CommonUtils.getUnformattedPhoneNumber(mBinding.tietPhone.text.toString().trim())
-                        )
-                    )*/
+                    showSnackBar(response.data.message)
                 }
 
                 else -> {
-                    mBinding.btnContinue.loadingFailed()
-
-                    if(!isApiCommonError(response.data.statusCode, response.data.message)){
-
-                        when (response.data.statusCode) {
-                            StatusCode.ACCOUNT_NOT_FOUND -> {
-                                CustomDialog.with(
-                                    activity!!,
-                                    R.drawable.ic_close,
-                                    getString(R.string.hello),
-                                    getString(R.string.alert_to_sign_up),
-                                    true,
-                                    getString(R.string.sign_up), object : CustomDialog.ICustomDialogListener {
-                                        override fun onActionClicked() {
-                                            /*findNavController().navigate(
-                                                VerifyPhoneFragmentDirections.actionVerifyPhoneToSignUp(
-                                                        mBinding.ccpPhone.selectedCountryCodeWithPlus,
-                                                    CommonUtils.getUnformattedPhoneNumber(mBinding.tiet_phone.text.toString().trim())
-                                                )
-                                            )*/
-                                        }
-
-                                    }
-                                )
-                            }
-
-                            else -> showSnackBar(response.data.message)
-                        }
-                    }
-
+                    showSnackBar(response.data.message)
                 }
             }
 
-            mSignUpViewModel.verifyPhone(null)
+            mSignUpViewModel.sentOtp(null)
+
+        })
+
+        mSignUpViewModel.verifyOTPResponseLiveData.removeObservers(this)
+        mSignUpViewModel.verifyOTPResponseLiveData.observe(this, Observer { response ->
+
+            if (response == null || response.status == Status.LOADING) {
+                return@Observer
+            }
+
+            mBinding.isLoading = false
+
+            when {
+                response.data == null -> {
+                    showSnackBar(response.message!!)
+                }
+
+                response.data.status -> {
+
+                    /*findNavController().navigate(
+                            RegistrationOtpFragmentDirections.actionOtpToRegistration(
+                                    countryCode,
+                                    phone
+                            )
+                    )*/
+
+                }
+
+                else -> {
+                    showSnackBar(response.data.message)
+                }
+            }
+
+            mSignUpViewModel.verifyOTP(null)
+
+        })
+
+        mSignUpViewModel.forgotPasswordValidateOTPResponseLiveData.removeObservers(this)
+        mSignUpViewModel.forgotPasswordValidateOTPResponseLiveData.observe(this, Observer { response ->
+
+            if (response == null || response.status == Status.LOADING) {
+                return@Observer
+            }
+
+            mBinding.isLoading = false
+
+            when {
+                response.data == null -> {
+                    showSnackBar(response.message!!)
+                }
+
+                response.data.status -> {
+
+                   /* findNavController().navigate(
+                            RegistrationOtpFragmentDirections.actionOtpToResetPassword(
+                                    countryCode,
+                                    phone
+                            )
+                    )*/
+
+                }
+
+                else -> {
+                    showSnackBar(response.data.message)
+                }
+            }
+
+            mSignUpViewModel.forgotPasswordValidateOTP(null)
+
+        })
+
+        mSignUpViewModel.forgotPasswordResponseLiveData.removeObservers(this)
+        mSignUpViewModel.forgotPasswordResponseLiveData.observe(this, Observer { response ->
+
+            if (response == null || response.status == Status.LOADING) {
+                return@Observer
+            }
+
+            mBinding.isLoading = false
+
+            when {
+                response.data == null -> {
+                    showSnackBar(response.message!!)
+                }
+
+                response.data.status -> {
+                    showSnackBar(response.data.message)
+                }
+
+                else -> {
+                    showSnackBar(response.data.message)
+                }
+            }
+
+            mSignUpViewModel.forgotPassword(null)
+
         })
 
     }
 
-    private fun setErrorOnPhone(message: String = "", invalidate: Boolean = false) {
-        if (invalidate) {
-            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
-            mBinding.tvPhoneError.visibility = View.INVISIBLE
-        } else {
-            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
-            mBinding.tvPhoneError.visibility = View.VISIBLE
-            mBinding.tvPhoneError.text = message
-        }
-    }
 
-    private inner class GenericTextWatcher internal constructor(private val view: View) : TextWatcher {
-
-        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            when (view.id) {
-                R.id.tiet_phone -> setErrorOnPhone(invalidate = true)
-            }
-        }
-
-        override fun afterTextChanged(editable: Editable) {}
-    }
-
-
-}
+  }

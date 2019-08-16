@@ -72,6 +72,8 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
                 data["phone"] = phone
                 mSignUpViewModel.forgotPassword(data)
             }
+
+            findNavController().navigate(ForgotPasswordFragmentDirections.actionBackToVerifyPhone(phone,  countryCode))
         }
 
         mSignUpViewModel.forgotPasswordResponseLiveData.removeObservers(this)
@@ -89,8 +91,7 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
                 }
 
                 response.data.status -> {
-                    /*findNavController().navigate(
-                        ForgotPasswordFragmentDirections.actionForgotPasswordToOtp(
+                    /*findNavController().navigate(ForgotPasswordFragmentDirections.actionForgotPasswordToOtp(
                             fromWhichPage = RegistrationOtpFragment.FROM_FORGOT_PASSWORD,
                             phone = phone, countryCode = countryCode
                         )

@@ -15,7 +15,7 @@ class PendingProductActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pending_prodcut)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true);
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true);
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

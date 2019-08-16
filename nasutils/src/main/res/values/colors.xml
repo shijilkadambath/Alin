@@ -3,7 +3,8 @@
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/white</color>
     <color name="colorAccent">#FF2CACD1</color>
-    <color name="colorAccentLight">#FF55bddb</color>
+    <color name="colorAccentLight">#FFaadeed</color>
+    <color name="colorAccentLight2">#FFddf1f7</color>
 
     <color name="white">@android:color/white</color>
     <color name="black">@android:color/black</color>

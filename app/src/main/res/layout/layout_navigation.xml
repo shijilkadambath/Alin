@@ -111,20 +111,101 @@
             android:text="Approved Products"
             app:layout_constraintTop_toBottomOf="@+id/tv_add" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_pending"
-            style="@style/Text.Small.Regular"
+
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/seperator"
-            android:textColor="@color/primaryText"
-            android:background="?attr/selectableItemBackground"
-            android:paddingLeft="@dimen/main_padding"
-            android:paddingRight="@dimen/main_padding"
-            android:paddingTop="@dimen/normal_padding"
-            android:paddingBottom="@dimen/normal_padding"
-            android:text="Pending Products"
-            app:layout_constraintTop_toBottomOf="@+id/tv_approved" />
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:animateLayoutChanges="true"
+            app:layout_constraintTop_toBottomOf="@+id/tv_approved"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_pending"
+                    style="@style/Text.Small.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/main_padding"
+                    android:paddingRight="@dimen/main_padding"
+                    android:paddingTop="@dimen/normal_padding"
+                    android:paddingBottom="@dimen/normal_padding"
+                    android:layout_marginTop="@dimen/seperator"
+                    android:textColor="@color/primaryText"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Pending Products" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_arrow"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="right"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="@dimen/normal_padding"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/main_padding"
+                android:id="@+id/l_pending"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_draft"
+                    style="@style/Text.Small.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/main_padding"
+                    android:paddingRight="@dimen/main_padding"
+                    android:paddingTop="@dimen/seperator"
+                    android:paddingBottom="@dimen/normal_padding"
+                    android:layout_marginTop="@dimen/seperator"
+                    android:textColor="@color/primaryText"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Products in Draft" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_review"
+                    style="@style/Text.Small.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/main_padding"
+                    android:paddingRight="@dimen/main_padding"
+                    android:paddingTop="@dimen/seperator"
+                    android:paddingBottom="@dimen/normal_padding"
+                    android:layout_marginTop="@dimen/seperator"
+                    android:textColor="@color/primaryText"
+                    android:layout_below="@+id/tv_draft"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Products in Review" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_rejected"
+                    style="@style/Text.Small.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/main_padding"
+                    android:paddingRight="@dimen/main_padding"
+                    android:paddingTop="@dimen/seperator"
+                    android:paddingBottom="@dimen/normal_padding"
+                    android:layout_below="@+id/tv_review"
+                    android:layout_marginTop="@dimen/seperator"
+                    android:textColor="@color/primaryText"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Products in Rejected" />
+
+            </RelativeLayout>
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_logout"

@@ -15,7 +15,7 @@ class ApprovedProductActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_approved_prodcut)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true);
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true);
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
