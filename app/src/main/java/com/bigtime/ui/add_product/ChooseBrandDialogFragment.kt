@@ -15,7 +15,9 @@ import com.bigtime.R
 import com.bigtime.common.autoCleared
 import com.bigtime.data.api.Status
 import com.bigtime.databinding.FragmentChooseBrandDialogBinding
+import com.bigtime.di.AppModule
 import com.bigtime.ui.BaseDialogFragment
+import com.bigtime.utils.AppConstants
 import javax.inject.Inject
 
 
@@ -74,11 +76,16 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
 
         val params = HashMap<String, String>()
 
+        AppConstants.SCHEME = "http"
+        AppConstants.HOST = "dev4.shoekonnect.com"
+
         params["sessionToken"] = "IlNLMTQ5MDI3MTA2NDE1NjYwNTUwNjUi:1hz0Se:SpzvNCcH2GsDdJSVukbZhZiJb3U"
         params["platform"] = "postman"
         params["packageName"] = "com.bizcrum.shoekonnect"
         params["isAuthRequired"] = "true"
         params["Content-Type"] = "application/json"
+
+
 
         viewModel.loadBrands(params)
 

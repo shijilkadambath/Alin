@@ -26,8 +26,10 @@ import com.bigtime.data.db.UMSDao
 import com.bigtime.data.model.Brand
 import com.bigtime.data.model.MainCategory
 import com.bigtime.data.model.User
+import com.bigtime.utils.AppConstants
 import com.bigtime.utils.SessionUtils
 import com.google.gson.JsonObject
+import org.json.JSONObject
 import java.util.HashMap
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -86,6 +88,36 @@ class UMSRepository @Inject constructor(
     }
 
 
+    fun login(data: Map<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
+
+        val header = HashMap<String, String>()
+        header["SOURCE"] = "cCX1G9EVpL"
+        header["PLATFORM"] = "PLATFORM"
+        header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
+        header["SKAUTH-TOKEN"] = "0"
+        header["Content-Type"] = "application/json"
+
+        AppConstants.HOST = AppConstants.HOST_LOGIN
+        AppConstants.PORT = 4000
+        return object : NetworkBoundResourceNoCache<BaseResponse<SessionUtils.LoginSession>>(appExecutors) {
+
+            override fun createCall(): LiveData<ApiResponse<BaseResponse<SessionUtils.LoginSession>>> {
+                return webService.login(header, JsonObject().apply {
+
+
+                    for ((k, v) in data) {
+                        addProperty(k, v)
+                    }
+
+
+                })
+            }
+        }.asLiveData()
+
+
+    }
+
+
 
     fun resetPassword(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -99,9 +131,6 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun login(data: HashMap<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     fun verifyPhone(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

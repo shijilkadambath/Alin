@@ -25,6 +25,7 @@ import com.bigtime.data.db.UMSDao
 import com.bigtime.utils.AppConstants
 import dagger.Module
 import dagger.Provides
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,25 +38,80 @@ import javax.inject.Singleton
  */
 
 @Module(includes = [ViewModelModule::class])
-class AppModule {
+class  AppModule {
 
-    private val BASE_URL = "http://dev4.shoekonnect.com/"
+    private val BASE_URL = "http://localhost/"//"http://dev4.shoekonnect.com/"
+
+   /* var scheme: String = ""
+        set(url) {
+            field = HttpUrl.parse(url)!!.scheme()
+        }
 
 
+    var host: String = ""
+        set(url) {
+            field = HttpUrl.parse(url)!!.host()
+        }*/
 
-    @Singleton @Provides
-    fun provideGithubService(): WebService {
+    //@JvmStatic
+    @Singleton
+    @Provides
+    fun provideOkHttpClient() =
+            OkHttpClient.Builder()
+                    .addInterceptor {
+                        val request = it.request()
 
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        val client = OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build()
+                        val newUrl: HttpUrl?
+                        newUrl = when {
+                            AppConstants.SCHEME != null && AppConstants.HOST != null -> request.url().newBuilder()
+                                    .scheme( AppConstants.SCHEME)
+                                    .host(AppConstants.HOST)
+                                    .port(AppConstants.PORT)
+                                    //.addQueryParameter("apikey", "something")
+                                    .build()
+                            else -> request.url().newBuilder()
+                                    //.addQueryParameter("apikey", "something")
+                                    .build()
+                        }
+
+                        it.proceed(
+                                request.newBuilder()
+                                        .url(newUrl)
+                                        .build())
+
+                    }
+                    .build()!!
+   /* //@JvmStatic
+    @Singleton
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit.Builder {
+
+        val okHttpBuilder = provideOkHttpClient().newBuilder()
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        okHttpBuilder.addInterceptor(httpLoggingInterceptor)
 
 
         return Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                //.addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .client(okHttpBuilder.build())
+                .baseUrl("http://localhost/")
+
+    }*/
+
+
+    @Singleton @Provides
+    fun provideGithubService(okHttpClient: OkHttpClient): WebService {
+
+        val okHttpBuilder = okHttpClient.newBuilder()
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        okHttpBuilder.addInterceptor(httpLoggingInterceptor)
+
+        return Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(client)
+                .client(okHttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .build()

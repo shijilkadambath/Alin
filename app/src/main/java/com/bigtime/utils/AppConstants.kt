@@ -27,6 +27,17 @@ object AppConstants {
 
 
     const val APP_KEY = "Leaf"
+
+
+    var HOST_LOGIN = "devpyapi4.shoekonnect.com"
+
+     var SCHEME = "http"
+     var PORT = 80
+     var HOST = "dev4.shoekonnect.com"
+
+
+
+
     const val APP_DEVICE = "Android"
 
     const val KEYSTORE_ALIAS = "LEAF_ALIAS"

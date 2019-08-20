@@ -3,6 +3,7 @@ package com.bigtime.ui.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -56,6 +57,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         // mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         //mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+
+        mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
+        mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
+
+        if (countryCode.isNotEmpty()) mBinding.ccpPhone.setCountryForPhoneCode(countryCode.replace("+","").toInt())
+        if (phone.isNotEmpty()) mBinding.tietPhone.setText(phone)
 
         mBinding.tilPassword.typeface = CommonUtils.FONT_METROPOLIS_REGULAR(activity!!)
 
@@ -114,21 +121,30 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun callLogin() {
 
-        if (mBinding.tietPassword.text.toString().trim().isEmpty()) {
+        mBinding.tietPhone.addTextChangedListener(GenericTextWatcher(mBinding.tietPhone))
+
+        if (mBinding.tietPhone.text.toString().trim().isEmpty()) {
+            setErrorOnPhone(getString(R.string.phone_required))
+        } else if (!mBinding.ccpPhone.isValidFullNumber) {
+            setErrorOnPhone(getString(R.string.phone_invalid))
+        }else if (mBinding.tietPassword.text.toString().trim().isEmpty()) {
             mBinding.tilPassword.error = getString(R.string.password_required)
             mBinding.tietPassword.requestFocus()
         } else {
             dismissKeyboard(mBinding.btnLogin.windowToken)
             mBinding.isLoading = true
             mBinding.btnLogin.startLoading()
+
+            countryCode = mBinding.ccpPhone.selectedCountryCodeWithPlus
+            phone = CommonUtils.getUnformattedPhoneNumber(mBinding.tietPhone.text.toString().trim())
             val data = HashMap<String, String>()
-            data["country_code"] = countryCode
-            data["phone"] = phone
-            data["password"] = mBinding.tietPassword.text.toString().trim()
+            //data["username"] = countryCode+phone
+            data["username"] = phone
+            data["devMode"] = "1"
+            data["pword"] = mBinding.tietPassword.text.toString().trim()
 
             mSignUpViewModel.login(data)
         }
-
     }
 
     private val generalTextWatcher = object : TextWatcher {
@@ -143,4 +159,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     }
 
+
+    private inner class GenericTextWatcher internal constructor(private val view: View) : TextWatcher {
+
+        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+            when (view.id) {
+                R.id.tiet_phone -> setErrorOnPhone(invalidate = true)
+            }
+        }
+
+        override fun afterTextChanged(editable: Editable) {}
+    }
+
+
+    private fun setErrorOnPhone(message: String = "", invalidate: Boolean = false) {
+        if (invalidate) {
+            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
+            mBinding.tvPhoneError.visibility = View.INVISIBLE
+        } else {
+            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
+            mBinding.tvPhoneError.visibility = View.VISIBLE
+            mBinding.tvPhoneError.text = message
+        }
+    }
 }

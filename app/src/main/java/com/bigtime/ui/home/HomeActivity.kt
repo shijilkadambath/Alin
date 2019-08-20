@@ -55,12 +55,12 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        /* if (!SessionUtils.hasSession() || !SessionUtils.isLoggedIn!!) {
+        if (!SessionUtils.hasSession() || !SessionUtils.isLoggedIn!!) {
              startActivity(intentFor<LoginActivity>())
              super.onCreate(savedInstanceState)
              finishAffinity()
              return
-         }*/
+         }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -181,8 +181,9 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
         val alert = AlertDialog.Builder(this!!)
         alert.setMessage("Are you sure?")
         alert.setPositiveButton(R.string.yes) { dialog, which ->
-            //clearCredentials();
-            //mViewModel.logOut()
+            SessionUtils.clearSession()
+            startActivity(intentFor<LoginActivity>())
+            finish()
         }
         alert.setNegativeButton(R.string.no, { dialog, which -> dialog.dismiss() })
         alert.show()

@@ -20,7 +20,9 @@ import androidx.lifecycle.LiveData
 import com.bigtime.data.model.Brand
 import com.bigtime.data.model.MainCategory
 import com.bigtime.data.model.User
+import com.bigtime.utils.SessionUtils
 import com.google.gson.JsonObject
+import org.json.JSONObject
 import retrofit2.http.*
 
 /**
@@ -44,7 +46,10 @@ interface WebService {
     fun loadUsers(): LiveData<ApiResponse<BaseResponse<List<User>>>>
 
     @POST("api/sellerApp/data/getBrandData/")
-    fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponseTwo<List<Brand>,List<MainCategory>>>>
+    fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject ): LiveData<ApiResponse<BaseResponseTwo<List<Brand>,List<MainCategory>>>>
 
+
+    @POST("userservice/sellerLogin/")
+    fun login(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<SessionUtils.LoginSession>>>
 
 }
