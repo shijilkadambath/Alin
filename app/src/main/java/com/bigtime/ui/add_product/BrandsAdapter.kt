@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import com.bigtime.AppExecutors
 import com.bigtime.R
-import com.bigtime.data.model.BrandListItem
+import com.bigtime.data.model.Brand
 import com.bigtime.databinding.InflateBrandItemBinding
 import com.bigtime.ui.BaseDataBindListAdapter
 
@@ -17,13 +17,13 @@ import com.bigtime.ui.BaseDataBindListAdapter
  */
 class BrandsAdapter(private val dataBindingComponent: DataBindingComponent,
                     appExecutors: AppExecutors,
-                    private val itemClickCallback: ((BrandListItem) -> Unit)) : BaseDataBindListAdapter<BrandListItem, InflateBrandItemBinding>(
-        appExecutors, object : DiffUtil.ItemCallback<BrandListItem>() {
-    override fun areItemsTheSame(oldItem: BrandListItem, newItem: BrandListItem): Boolean {
+                    private val itemClickCallback: ((Brand) -> Unit)) : BaseDataBindListAdapter<Brand, InflateBrandItemBinding>(
+        appExecutors, object : DiffUtil.ItemCallback<Brand>() {
+    override fun areItemsTheSame(oldItem: Brand, newItem: Brand): Boolean {
         return oldItem.brandId == newItem.brandId
     }
 
-    override fun areContentsTheSame(oldItem: BrandListItem, newItem: BrandListItem): Boolean {
+    override fun areContentsTheSame(oldItem: Brand, newItem: Brand): Boolean {
         return oldItem.brandName.equals(newItem.brandName)
     }
 }
@@ -46,7 +46,7 @@ class BrandsAdapter(private val dataBindingComponent: DataBindingComponent,
 
     }
 
-    override fun bind(binding: InflateBrandItemBinding, item: BrandListItem) {
+    override fun bind(binding: InflateBrandItemBinding, item: Brand) {
         binding.brandItem = item
     }
 }

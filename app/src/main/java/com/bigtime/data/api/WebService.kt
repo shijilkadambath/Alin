@@ -17,10 +17,10 @@
 package com.bigtime.data.api
 
 import androidx.lifecycle.LiveData
-import com.bigtime.data.model.Brands
+import com.bigtime.data.model.Brand
+import com.bigtime.data.model.MainCategory
 import com.bigtime.data.model.User
 import com.google.gson.JsonObject
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**
@@ -44,7 +44,7 @@ interface WebService {
     fun loadUsers(): LiveData<ApiResponse<BaseResponse<List<User>>>>
 
     @POST("api/sellerApp/data/getBrandData/")
-    fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<Brands>>>
+    fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponseTwo<List<Brand>,List<MainCategory>>>>
 
 
 }

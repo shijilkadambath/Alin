@@ -6,13 +6,11 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.bigtime.common.AbsentLiveData
 import com.bigtime.data.api.BaseResponse
+import com.bigtime.data.api.BaseResponseTwo
 import com.bigtime.data.api.Resource
-import com.bigtime.data.model.Brands
+import com.bigtime.data.model.Brand
+import com.bigtime.data.model.MainCategory
 import com.bigtime.repo.UMSRepository
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import okhttp3.MediaType
-import okhttp3.RequestBody
 import javax.inject.Inject
 
 /**
@@ -34,7 +32,7 @@ class ChooseBrandViewModel
 //        val requestBody = RequestBody.create(MediaType.parse("text/plain"), text)
     }
 
-    val getBrands: LiveData<Resource<BaseResponse<Brands>>> =
+    val getBrands: LiveData<Resource<BaseResponseTwo<List<Brand>, List<MainCategory>>>> =
             Transformations.switchMap(apiParams) { data ->
                 if (data == null){
                     AbsentLiveData.create()

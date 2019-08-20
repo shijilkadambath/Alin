@@ -23,7 +23,8 @@ import com.bigtime.AppExecutors
 import com.bigtime.data.api.*
 import com.bigtime.data.db.AppDb
 import com.bigtime.data.db.UMSDao
-import com.bigtime.data.model.Brands
+import com.bigtime.data.model.Brand
+import com.bigtime.data.model.MainCategory
 import com.bigtime.data.model.User
 import com.bigtime.utils.SessionUtils
 import com.google.gson.JsonObject
@@ -122,9 +123,10 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Brands>>> {
-        return object : NetworkBoundResourceNoCache<BaseResponse<Brands>>(appExecutors) {
-            override fun createCall(): LiveData<ApiResponse<BaseResponse<Brands>>> {
+    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<List<Brand>,List<MainCategory>>>> {
+        return object : NetworkBoundResourceNoCache<BaseResponseTwo<List<Brand>,List<MainCategory>>>(appExecutors) {
+
+            override fun createCall(): LiveData<ApiResponse<BaseResponseTwo<List<Brand>,List<MainCategory>>>> {
                 return webService.loadBrands(data, JsonObject().apply {
                     addProperty("a", "b")
                 })

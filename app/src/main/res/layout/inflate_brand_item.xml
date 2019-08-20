@@ -15,7 +15,7 @@
 
 		<variable
 			name="brandItem"
-			type="com.bigtime.data.model.BrandListItem" />
+			type="com.bigtime.data.model.Brand" />
 
 
 	</data>

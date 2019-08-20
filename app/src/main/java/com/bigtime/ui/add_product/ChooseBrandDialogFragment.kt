@@ -99,7 +99,8 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
 
                     mBinding.searchResource = response
 
-                    adapter.submitList(response.data.data?.brandList)
+                    adapter.submitList(response.data.data)
+                    //adapter.submitList(response.data.data2)  Main category list
                 }
                 else -> {
 
