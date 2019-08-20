@@ -123,10 +123,10 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<List<Brand>,List<MainCategory>>>> {
-        return object : NetworkBoundResourceNoCache<BaseResponseTwo<List<Brand>,List<MainCategory>>>(appExecutors) {
+    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
+        return object : NetworkBoundResourceNoCache<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>(appExecutors) {
 
-            override fun createCall(): LiveData<ApiResponse<BaseResponseTwo<List<Brand>,List<MainCategory>>>> {
+            override fun createCall(): LiveData<ApiResponse<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
                 return webService.loadBrands(data, JsonObject().apply {
                     addProperty("a", "b")
                 })

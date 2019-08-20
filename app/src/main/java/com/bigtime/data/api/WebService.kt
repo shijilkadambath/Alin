@@ -44,7 +44,7 @@ interface WebService {
     fun loadUsers(): LiveData<ApiResponse<BaseResponse<List<User>>>>
 
     @POST("api/sellerApp/data/getBrandData/")
-    fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponseTwo<List<Brand>,List<MainCategory>>>>
+    fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>>
 
 
 }
