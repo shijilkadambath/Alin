@@ -1,11 +1,14 @@
 package com.bigtime.ui
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.annotation.LayoutRes
@@ -53,6 +56,11 @@ abstract class BaseDialogFragment<T : ViewDataBinding>: DialogFragment(), Inject
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false, dataBindingComponent)
+
+        val window = dialog?.window
+
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         return mBinding.root
     }

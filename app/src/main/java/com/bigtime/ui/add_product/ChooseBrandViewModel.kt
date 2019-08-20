@@ -32,7 +32,7 @@ class ChooseBrandViewModel
 //        val requestBody = RequestBody.create(MediaType.parse("text/plain"), text)
     }
 
-    val getBrands: LiveData<Resource<BaseResponseTwo<List<Brand>, List<MainCategory>>>> =
+    val getBrands: LiveData<Resource<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>> =
             Transformations.switchMap(apiParams) { data ->
                 if (data == null){
                     AbsentLiveData.create()

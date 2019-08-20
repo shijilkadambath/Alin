@@ -32,7 +32,7 @@
 		android:id="@+id/radioButton"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:checked="true"
+		android:checked="false"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
 		/>
@@ -46,7 +46,7 @@
 			app:layout_constraintTop_toTopOf="@id/radioButton"
 			tools:text="Puma"
 			android:layout_marginStart="10dp"
-			style="@style/Text.Title.Regular"/>
+			style="@style/Text.Medium.Medium"/>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
