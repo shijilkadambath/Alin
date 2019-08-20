@@ -15,7 +15,7 @@ class AddProductActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_prodcut)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true);
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

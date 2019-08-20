@@ -27,6 +27,7 @@ import com.bigtime.ui.BaseDataBindListAdapter
 import com.bigtime.ui.BaseFragment
 import com.bigtime.ui.RetryCallback
 import com.bigtime.ui.add_product.AddProductActivity
+import com.bigtime.ui.add_product.ChooseBrandDialogFragment
 import com.bigtime.ui.order.OrderActivity
 import com.bigtime.utils.SessionUtils
 import com.bigtime.widget.CustomDialog
@@ -86,7 +87,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         }
 
         mBinding.btnAdd.setOnClickListener {
-            startActivity(intentFor<AddProductActivity>())
+            val fragment = ChooseBrandDialogFragment.newInstance("", "")
+            val fm = this@HomeFragment.childFragmentManager
+            fragment.show(fm, "brandsDialog")
+//            startActivity(intentFor<AddProductActivity>())
         }
 
         mBinding.btnOrder.setOnClickListener {

@@ -17,9 +17,11 @@
 package com.bigtime.data.api
 
 import androidx.lifecycle.LiveData
+import com.bigtime.data.model.Brands
 import com.bigtime.data.model.User
-import retrofit2.http.GET
-import retrofit2.http.Query
+import com.google.gson.JsonObject
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 /**
  * Created by Shijil Kadambath on 03/08/2018
@@ -39,8 +41,10 @@ interface WebService {
 
 
     @GET("api/speciality_list")
-
     fun loadUsers(): LiveData<ApiResponse<BaseResponse<List<User>>>>
+
+    @POST("api/sellerApp/data/getBrandData/")
+    fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<Brands>>>
 
 
 }

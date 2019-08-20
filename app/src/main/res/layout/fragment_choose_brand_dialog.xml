@@ -1,0 +1,106 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	tools:context="com.bigtime.ui.add_product.ChooseBrandDialogFragment">
+
+	<data>
+
+		 <import type="com.bigtime.data.api.Status" />
+
+        <import type="com.bigtime.data.api.Resource" />
+
+		<variable
+			name="layoutBinder"
+			type="com.bigtime.ui.add_product.ChooseBrandDialogFragment" />
+
+		 <variable
+			 name="searchResource"
+			 type="Resource" />
+
+		<variable
+			name="showLoading"
+			type="boolean" />
+
+		<variable
+			name="callback"
+			type="com.bigtime.ui.RetryCallback" />
+
+	</data>
+
+	 <androidx.constraintlayout.widget.ConstraintLayout
+		 android:layout_width="match_parent"
+		 android:layout_height="300dp"
+		 >
+
+		 <androidx.constraintlayout.widget.Guideline
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:orientation="vertical"
+			 app:layout_constraintGuide_percent=".05"
+			 android:id="@+id/guideLeft"/>
+
+		 <androidx.constraintlayout.widget.Guideline
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:id="@+id/guideRight"
+			 android:orientation="vertical"
+			 app:layout_constraintGuide_percent=".95"/>
+
+		 <androidx.constraintlayout.widget.Guideline
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:id="@+id/top"
+			 android:orientation="horizontal"
+			 app:layout_constraintGuide_percent=".02"/>
+
+
+		 <androidx.appcompat.widget.AppCompatTextView
+			 android:layout_width="0dp"
+			 android:layout_height="wrap_content"
+			 android:id="@+id/title"
+			 app:layout_constraintStart_toStartOf="@id/guideLeft"
+			 app:layout_constraintEnd_toStartOf="@+id/closeButton"
+			 app:layout_constraintTop_toTopOf="@id/closeButton"
+			 app:layout_constraintBottom_toBottomOf="@id/closeButton"
+			 android:text="Choose Brand"
+			 style="@style/Text.Title.Medium"/>
+
+
+		 <androidx.appcompat.widget.AppCompatImageView
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 app:layout_constraintEnd_toEndOf="@id/guideRight"
+			 app:layout_constraintStart_toEndOf="@+id/title"
+			 app:layout_constraintTop_toTopOf="@id/top"
+			 app:srcCompat="@drawable/ic_close_black_24dp"
+			 android:padding="@dimen/normal_padding"
+			 android:id="@+id/closeButton"/>
+
+
+		 <androidx.recyclerview.widget.RecyclerView
+			 android:layout_width="0dp"
+			 android:layout_height="wrap_content"
+			 android:id="@+id/recyclerViewBrands"
+			 tools:listitem="@layout/inflate_brand_item"
+			 app:layout_constraintStart_toStartOf="@id/guideLeft"
+			 app:layout_constraintEnd_toEndOf="@id/guideRight"
+			 app:layout_constraintTop_toBottomOf="@id/closeButton"
+			 android:layout_marginTop="@dimen/normal_padding"
+			 android:orientation="vertical"
+			 />
+
+
+		 <include
+			 layout="@layout/widget_progress_bar"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 app:showLoading="@{showLoading}"
+			 app:layout_constraintTop_toBottomOf="@+id/closeButton"
+			 app:layout_constraintEnd_toEndOf="@id/guideRight"
+			 app:layout_constraintStart_toStartOf="@id/guideLeft"
+			 app:layout_constraintBottom_toBottomOf="parent"
+			  />
+
+	 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

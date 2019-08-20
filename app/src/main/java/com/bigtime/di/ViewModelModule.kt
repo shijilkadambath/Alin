@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bigtime.common.SmbViewModelFactory
 import com.bigtime.ui.add_product.AddProductViewModel
+import com.bigtime.ui.add_product.ChooseBrandViewModel
 import com.bigtime.ui.approved_product.ApprovedProductViewModel
 import com.bigtime.ui.home.HomeViewModel
 import com.bigtime.ui.login.LoginViewModel
@@ -73,4 +74,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ApprovedProductViewModel::class)
     abstract fun bindApprovedProductViewModel(viewModel: ApprovedProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChooseBrandViewModel::class)
+    abstract fun bindChooseBrandViewModel(viewModel: ChooseBrandViewModel): ViewModel
 }

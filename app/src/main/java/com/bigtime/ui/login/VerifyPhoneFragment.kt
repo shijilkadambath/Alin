@@ -106,7 +106,7 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                     showSnackBar(response.message!!)
                 }
 
-                response.data.status -> {
+                response.data.status == 1 -> {
                     showSnackBar(response.data.message)
                 }
 
@@ -133,7 +133,7 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                     showSnackBar(response.message!!)
                 }
 
-                response.data.status -> {
+                response.data.isSuccess() -> {
 
                     /*findNavController().navigate(
                             RegistrationOtpFragmentDirections.actionOtpToRegistration(
@@ -167,7 +167,7 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                     showSnackBar(response.message!!)
                 }
 
-                response.data.status -> {
+                response.data.isSuccess() -> {
 
                    /* findNavController().navigate(
                             RegistrationOtpFragmentDirections.actionOtpToResetPassword(
@@ -201,7 +201,7 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                     showSnackBar(response.message!!)
                 }
 
-                response.data.status -> {
+                response.data.isSuccess() -> {
                     showSnackBar(response.data.message)
                 }
 

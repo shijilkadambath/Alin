@@ -90,7 +90,7 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
                     showSnackBar(response.message!!)
                 }
 
-                response.data.status -> {
+                response.data.isSuccess() -> {
                     /*findNavController().navigate(ForgotPasswordFragmentDirections.actionForgotPasswordToOtp(
                             fromWhichPage = RegistrationOtpFragment.FROM_FORGOT_PASSWORD,
                             phone = phone, countryCode = countryCode

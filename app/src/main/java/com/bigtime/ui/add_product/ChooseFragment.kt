@@ -33,7 +33,7 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
 
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_choose_product;
+        return R.layout.fragment_choose_product
     }
 
 

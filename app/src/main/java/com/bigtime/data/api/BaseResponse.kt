@@ -8,7 +8,6 @@ package com.bigtime.data.api
 
 import com.google.gson.annotations.SerializedName
 
-
 /**
  * Base Gson class structure of all api responses.
  */
@@ -19,7 +18,7 @@ data class BaseResponse<T>(
         val function: String,
 
         @field:SerializedName("status")
-        val status: Boolean,
+        val status: Int,
 
         @field:SerializedName("message")
         val message: String,
@@ -27,13 +26,11 @@ data class BaseResponse<T>(
         @field:SerializedName("status_code")
         val statusCode: Int,
 
-
         @field:SerializedName("data")
         val data: T?
 
 ) {
     fun isSuccess(): Boolean {
-
-        return status
+        return status == 1
     }
 }

@@ -19,6 +19,7 @@ package com.bigtime.di
 
 import com.bigtime.ui.add_product.AddProductDetailFragment
 import com.bigtime.ui.add_product.AddProductUploadFragment
+import com.bigtime.ui.add_product.ChooseBrandDialogFragment
 import com.bigtime.ui.add_product.ChooseFragment
 import com.bigtime.ui.approved_product.ApprovedProductFragment
 import com.bigtime.ui.home.HomeFragment
@@ -52,7 +53,6 @@ abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeVerifyPhoneFragment(): VerifyPhoneFragment
 
-
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
 
@@ -73,4 +73,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributePendingProductFragment(): PendingProductFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChooseBrandFragment(): ChooseBrandDialogFragment
 }

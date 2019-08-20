@@ -24,6 +24,7 @@ import com.bigtime.R
 import com.bigtime.binding.BindingAdapters
 import com.bigtime.ui.BaseActivity
 import com.bigtime.ui.add_product.AddProductActivity
+import com.bigtime.ui.add_product.ChooseBrandDialogFragment
 import com.bigtime.ui.approved_product.ApprovedProductActivity
 import com.bigtime.ui.login.LoginActivity
 import com.bigtime.ui.order.OrderActivity
@@ -113,7 +114,12 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
                 startActivity(intentFor<OrderActivity>())
             }
             R.id.tv_add -> {
-                startActivity(intentFor<AddProductActivity>())
+
+                val fragment = ChooseBrandDialogFragment.newInstance("", "")
+                val fm = this@HomeActivity.supportFragmentManager
+                fragment.show(fm, "brandsDialog")
+
+//                startActivity(intentFor<AddProductActivity>())
             }
 
             R.id.tv_approved -> {
@@ -167,7 +173,7 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
         }
 
 
-        ivArrow.animate().rotation(rotationAngle).setDuration(500).start();
+        ivArrow.animate().rotation(rotationAngle).setDuration(500).start()
 
     }
 

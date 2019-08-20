@@ -39,8 +39,7 @@ import javax.inject.Singleton
 @Module(includes = [ViewModelModule::class])
 class AppModule {
 
-    private val BASE_URL = //"https://newagesme.com:5681/"
-            "https://statchat.com:5681/";
+    private val BASE_URL = "http://dev4.shoekonnect.com/"
 
 
 

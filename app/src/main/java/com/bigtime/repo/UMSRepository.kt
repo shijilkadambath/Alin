@@ -20,14 +20,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import com.bigtime.AppExecutors
-import com.bigtime.data.api.BaseResponse
-import com.bigtime.data.api.WebService
-import com.bigtime.data.api.Resource
-import com.bigtime.data.api.StatusCode
+import com.bigtime.data.api.*
 import com.bigtime.data.db.AppDb
 import com.bigtime.data.db.UMSDao
+import com.bigtime.data.model.Brands
 import com.bigtime.data.model.User
 import com.bigtime.utils.SessionUtils
+import com.google.gson.JsonObject
 import java.util.HashMap
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -74,15 +73,13 @@ class UMSRepository @Inject constructor(
                result.addSource(umsoDao.loadUsers(), Observer {
                         list->
 
-                        result.setValue(BaseResponse("",true,"",StatusCode.OK,list))
+                        result.setValue(BaseResponse("",1,"",StatusCode.OK,list))
                 })
 
                 return  result
             }
 
             override fun createCall() = webService.loadUsers()
-
-
 
         }.asLiveData()
     }
@@ -125,5 +122,13 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
+    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Brands>>> {
+        return object : NetworkBoundResourceNoCache<BaseResponse<Brands>>(appExecutors) {
+            override fun createCall(): LiveData<ApiResponse<BaseResponse<Brands>>> {
+                return webService.loadBrands(data, JsonObject().apply {
+                    addProperty("a", "b")
+                })
+            }
+        }.asLiveData()
+    }
 }

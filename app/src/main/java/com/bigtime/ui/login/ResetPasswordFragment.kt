@@ -88,7 +88,7 @@ class ResetPasswordFragment : BaseFragment<FragmentResetPasswordBinding>(), OnBa
                     showSnackBar(response.message!!)
                 }
 
-                response.data.status -> {
+                response.data.isSuccess() -> {
                     CustomDialog.with(
                         activity!!,
                         R.drawable.ic_tick,
