@@ -98,7 +98,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         }
 
 
-        mViewModel.loadData()
+       // mViewModel.loadData()
     }
 
 

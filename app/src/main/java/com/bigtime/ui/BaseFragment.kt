@@ -151,7 +151,7 @@ abstract class BaseFragment< T : ViewDataBinding> : Fragment() , Injectable {
                 R.drawable.ic_close,
                 getString(
                         R.string.hello_user,
-                        if (SessionUtils.loginSession!!.firstName.isNullOrEmpty()) "" else SessionUtils.loginSession!!.firstName
+                        if (SessionUtils.loginSession!!.companyName.isNullOrEmpty()) "" else SessionUtils.loginSession!!.companyName
                 ),
                 message,
                 true,

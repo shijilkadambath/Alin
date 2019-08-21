@@ -102,6 +102,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     SessionUtils.setIsLoggedIn(true)
                     SessionUtils.saveUserPassword(mBinding.tietPassword.text.toString().trim())
                     SessionUtils.saveSession(session)
+                    SessionUtils.saveAuthTokens(response.data.token,"refresh")
 
                     startActivity(intentFor<HomeActivity>())
                     activity!!.finishAffinity()

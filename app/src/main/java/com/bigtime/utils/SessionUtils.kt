@@ -19,28 +19,45 @@ class SessionUtils {
 
     inner class LoginSession {
 
-        @SerializedName("user_id")
+        @SerializedName("userid")
         @Expose
         var userId: Int? = null
-        @SerializedName("email")
+        @SerializedName("emailverified")
         @Expose
-        var email: String? = null
-        @SerializedName("first_name")
+        var emailVerified: Int? = null
+        @SerializedName("username")
         @Expose
-        var firstName: String? = null
-        @SerializedName("last_name")
+        var username: String? = null
+        @SerializedName("mobileverified")
         @Expose
-        var lastName: String? = null
-
-        @SerializedName("is_email_verified")
+        var mobileverified: Int? = null
+        @SerializedName("companyname")
         @Expose
-        var isEmailVerified: String = "N"
-
-
-        fun isEmailVerified(): Boolean {
-            return isEmailVerified == "Y"
-        }
-
+        var companyName: String? = null
+        @SerializedName("companylogo")
+        @Expose
+        var companyLogo: String? = null
+        @SerializedName("companyphone")
+        @Expose
+        var companyPhone: String? = null
+        @SerializedName("concernperson")
+        @Expose
+        var concernPerson: String? = null
+        @SerializedName("tinno")
+        @Expose
+        var tinNo: String? = null
+        @SerializedName("isbrandedseller")
+        @Expose
+        var brandedSeller: Int? = null
+        @SerializedName("isselleractive")
+        @Expose
+        var sellerActive: Int? = null
+        @SerializedName("isactive")
+        @Expose
+        var active: Int? = null
+        @SerializedName("isseller")
+        @Expose
+        var seller: Int? = null
     }
 
     companion object {

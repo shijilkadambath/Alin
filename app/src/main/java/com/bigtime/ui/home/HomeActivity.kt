@@ -14,6 +14,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -29,6 +30,7 @@ import com.bigtime.ui.approved_product.ApprovedProductActivity
 import com.bigtime.ui.login.LoginActivity
 import com.bigtime.ui.order.OrderActivity
 import com.bigtime.ui.pending_product.PendingProductActivity
+import com.bigtime.utils.FrescoUtils
 import com.bigtime.utils.SessionUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
@@ -214,6 +216,14 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
         //navigationView.setNavigationItemSelectedListener(this)
 
         supportActionBar!!.setTitle(R.string.app_name)
+
+
+       FrescoUtils.setImageToFrescoDraweeView(
+               navigationView.findViewById<SimpleDraweeView>(R.id.sdv_user_pic), SessionUtils.loginSession!!.companyLogo)
+
+        navigationView.findViewById<AppCompatTextView>(R.id.tv_name).setText(SessionUtils.loginSession!!.concernPerson)
+        navigationView.findViewById<AppCompatTextView>(R.id.tv_mobile).setText(SessionUtils.loginSession!!.companyName)
+
         //toolbar.setTitle(R.string.app_name)
         /*var session= SessionUtils.getLoginSession()
 

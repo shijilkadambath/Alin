@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_view"
-    android:layout_width="wrap_content"
+    android:layout_width="300dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:background="@color/white"
@@ -24,43 +24,52 @@
             app:backgroundImage="@color/gray_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:placeholderImage="@drawable/logo"
+            app:layout_constraintRight_toLeftOf="@+id/l_name"
+            app:placeholderImage="@drawable/ic_user"
             app:placeholderImageScaleType="focusCrop"
             app:progressBarAutoRotateInterval="1000"
             app:progressBarImage="@drawable/progress_half_circle_green"
             app:progressBarImageScaleType="centerInside"
             app:roundAsCircle="true" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/l_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/normal_padding"
             android:paddingRight="@dimen/normal_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sdv_user_pic"
             app:layout_constraintBottom_toBottomOf="@+id/sdv_user_pic"
-            app:layout_constraintLeft_toRightOf="@+id/sdv_user_pic"
             app:layout_constraintTop_toTopOf="@+id/sdv_user_pic">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
-                style="@style/Text.Title.Regular.AppTextBlue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="marquee"
+                app:autoSizeTextType="uniform"
                 android:text="Tillie Walker"
-                android:gravity="center"
+                app:autoSizeMaxTextSize="20sp"
+                android:fontFamily="@font/medium"
+                android:gravity="left"
+                android:textColor="?android:textColorPrimary"
                 android:singleLine="true"
                 tools:text="Jasmine Fox" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_mobile"
                 style="@style/Text.SubTitle.Light.AppTextBlue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="left"
+                android:maxLines="1"
+                app:autoSizeMaxTextSize="13sp"
+                app:autoSizeTextType="uniform"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:text="New Delhi" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         <androidx.appcompat.widget.AppCompatTextView
