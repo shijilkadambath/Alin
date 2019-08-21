@@ -64,7 +64,7 @@
 			 app:layout_constraintTop_toTopOf="@id/closeButton"
 			 app:layout_constraintBottom_toBottomOf="@id/closeButton"
 			 android:text="Choose Brand"
-			 style="@style/Text.SecondTitle.Medium"/>
+			 style="@style/Text.SubTitle.Regular"/>
 
 
 		 <androidx.appcompat.widget.AppCompatImageView

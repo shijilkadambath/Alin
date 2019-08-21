@@ -45,20 +45,36 @@
         android:label="VerifyPhone"
         tools:layout="@layout/fragment_verify_phone">
 
-        <argument
+       <!-- <argument
             android:name="fromWhichPage"
             android:defaultValue="1"
-            app:argType="integer" />
-
-        <argument
-            android:name="countryCode"
-            app:argType="string" />
+            app:argType="integer" />-->
 
         <argument
             android:name="phone"
             app:argType="string" />
 
+        <argument
+            android:name="password"
+            app:argType="string" />
 
+        <argument
+            android:name="otp"
+            app:argType="string" />
+
+        <argument
+            android:name="auth"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_back_to_verifyPhone"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="false" />
 
     </fragment>
 

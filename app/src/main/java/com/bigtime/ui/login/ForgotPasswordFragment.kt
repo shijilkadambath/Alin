@@ -27,7 +27,7 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
     }
 
     lateinit var mSignUpViewModel: LoginViewModel
-    private var countryCode: String = ""
+    private var password: String = ""
     private var phone: String = ""
 
     override fun getLayoutId(): Int {
@@ -43,7 +43,7 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
         mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
 
-        countryCode = ForgotPasswordFragmentArgs.fromBundle(arguments!!).countryCode
+        //countryCode = ForgotPasswordFragmentArgs.fromBundle(arguments!!).countryCode
         phone = ForgotPasswordFragmentArgs.fromBundle(arguments!!).phone
 
         mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
@@ -52,28 +52,36 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
         mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
         mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
 
-        if (countryCode.isNotEmpty()) mBinding.ccpPhone.setCountryForPhoneCode(countryCode.replace("+","").toInt())
+        //if (countryCode.isNotEmpty()) mBinding.ccpPhone.setCountryForPhoneCode(countryCode.replace("+","").toInt())
         if (phone.isNotEmpty()) mBinding.tietPhone.setText(phone)
 
         mBinding.btnContinue.setOnClickListener {
 
+            mBinding.tilPassword.isErrorEnabled=false
             mBinding.tietPhone.addTextChangedListener(GenericTextWatcher(mBinding.tietPhone))
+
+            password=mBinding.tietPassword.text.toString().trim()
 
             if (mBinding.tietPhone.text.toString().trim().isEmpty()) {
                 setErrorOnPhone(getString(R.string.phone_required))
             } else if (!mBinding.ccpPhone.isValidFullNumber) {
                 setErrorOnPhone(getString(R.string.phone_invalid))
+            }else if (password.isEmpty()) {
+                mBinding.tilPassword.isErrorEnabled=true
+                mBinding.tilPassword.error = getString(R.string.password_required)
+                mBinding.tietPassword.requestFocus()
             } else {
+                dismissKeyboard(mBinding.btnContinue.windowToken)
                 mBinding.isLoading = true
-                countryCode = mBinding.ccpPhone.selectedCountryCodeWithPlus
+                //countryCode = mBinding.ccpPhone.selectedCountryCodeWithPlus
+
                 phone = CommonUtils.getUnformattedPhoneNumber(mBinding.tietPhone.text.toString().trim())
                 val data = HashMap<String, String>()
-                data["country_code"] = countryCode
-                data["phone"] = phone
+                //data["country_code"] = countryCode
+                data["phoneNumber"] = phone
                 mSignUpViewModel.forgotPassword(data)
             }
 
-            findNavController().navigate(ForgotPasswordFragmentDirections.actionBackToVerifyPhone(phone,  countryCode))
         }
 
         mSignUpViewModel.forgotPasswordResponseLiveData.removeObservers(this)
@@ -90,12 +98,15 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
                     showSnackBar(response.message!!)
                 }
 
-                response.data.isSuccess() -> {
+                response.data!!.isSuccess() -> {
                     /*findNavController().navigate(ForgotPasswordFragmentDirections.actionForgotPasswordToOtp(
                             fromWhichPage = RegistrationOtpFragment.FROM_FORGOT_PASSWORD,
                             phone = phone, countryCode = countryCode
                         )
                     )*/
+
+                    findNavController().navigate(ForgotPasswordFragmentDirections.actionBackToVerifyPhone(phone,
+                            password,response.data.data!!,response.data.token))
                 }
 
                 else -> {

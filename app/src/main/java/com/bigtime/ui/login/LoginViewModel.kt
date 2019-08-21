@@ -45,7 +45,7 @@ class LoginViewModel
         verifyOTPRequestLiveData.value = data
     }
 
-    val verifyOTPResponseLiveData: LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> =
+    val verifyOTPResponseLiveData: LiveData<Resource<BaseResponse<Any>>> =
         Transformations.switchMap(verifyOTPRequestLiveData) { data ->
             if (data == null) {
                 AbsentLiveData.create()
@@ -113,7 +113,7 @@ class LoginViewModel
         forgotPasswordRequestLiveData.value = data
     }
 
-    val forgotPasswordResponseLiveData: LiveData<Resource<BaseResponse<Any>>> =
+    val forgotPasswordResponseLiveData: LiveData<Resource<BaseResponse<String>>> =
         Transformations.switchMap(forgotPasswordRequestLiveData) { data ->
             if (data == null) {
                 AbsentLiveData.create()

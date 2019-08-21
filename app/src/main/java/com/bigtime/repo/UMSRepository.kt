@@ -76,7 +76,7 @@ class UMSRepository @Inject constructor(
                result.addSource(umsoDao.loadUsers(), Observer {
                         list->
 
-                        result.setValue(BaseResponse("",1,"",StatusCode.OK,list))
+                        result.setValue(BaseResponse("",1,"",StatusCode.OK,"",list))
                 })
 
                 return  result
@@ -92,7 +92,7 @@ class UMSRepository @Inject constructor(
 
         val header = HashMap<String, String>()
         header["SOURCE"] = "cCX1G9EVpL"
-        header["PLATFORM"] = "PLATFORM"
+        header["PLATFORM"] = "Android"
         header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
         header["SKAUTH-TOKEN"] = "0"
         header["Content-Type"] = "application/json"
@@ -102,19 +102,47 @@ class UMSRepository @Inject constructor(
         return object : NetworkBoundResourceNoCache<BaseResponse<SessionUtils.LoginSession>>(appExecutors) {
 
             override fun createCall(): LiveData<ApiResponse<BaseResponse<SessionUtils.LoginSession>>> {
-                return webService.login(header, JsonObject().apply {
-
-
-                    for ((k, v) in data) {
-                        addProperty(k, v)
-                    }
-
-
-                })
+                return webService.login(header, data)
             }
         }.asLiveData()
 
 
+    }
+    fun forgotPassword(data: HashMap<String, String>): LiveData<Resource<BaseResponse<String>>> {
+        val header = HashMap<String, String>()
+        header["SOURCE"] = "cCX1G9EVpL"
+        header["PLATFORM"] = "Android"
+        header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
+        header["SKAUTH-TOKEN"] = "0"
+        header["Content-Type"] = "application/json"
+
+        AppConstants.HOST = AppConstants.HOST_LOGIN
+        AppConstants.PORT = 4000
+        return object : NetworkBoundResourceNoCache<BaseResponse<String>>(appExecutors) {
+
+            override fun createCall(): LiveData<ApiResponse<BaseResponse<String>>> {
+                return webService.forgotPassword(header, data)
+            }
+        }.asLiveData()
+    }
+
+    fun verifyOTP(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
+
+        val header = HashMap<String, String>()
+        header["SOURCE"] = "cCX1G9EVpL"
+        header["PLATFORM"] = "Android"
+        header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
+        header["SKAUTH-TOKEN"] = data["token"]!!
+        header["Content-Type"] = "application/json"
+
+        AppConstants.HOST = AppConstants.HOST_LOGIN
+        AppConstants.PORT = 4000
+        return object : NetworkBoundResourceNoCache<BaseResponse<Any>>(appExecutors) {
+
+            override fun createCall(): LiveData<ApiResponse<BaseResponse<Any>>> {
+                return webService.changePassword(header, data)
+            }
+        }.asLiveData()
     }
 
 
@@ -127,9 +155,7 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun forgotPassword(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
 
 
     fun verifyPhone(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
@@ -140,9 +166,7 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun verifyOTP(data: HashMap<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
 
     fun sentOtp(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,7 +17,7 @@ import com.bigtime.utils.CommonUtils
 import com.bigtime.widget.CustomDialog
 
 
-class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
+class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>(), OnBackPressedCallback {
 
 
     companion object {
@@ -27,8 +28,12 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
     private lateinit var mSignUpViewModel: LoginViewModel
     private var page: Int = 0
+
+
     private var phone: String = ""
-    private var countryCode: String = ""
+    private var password: String = ""
+    private var otp: String = ""
+    private var token: String = ""
 
 
     override fun getLayoutId(): Int {
@@ -42,33 +47,36 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
 
         mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
-
+        requireActivity().onBackPressedDispatcher.addCallback(this, this)
         /**
          * FROM WHICH PAGE
          * 1 -> From Sign Up
          * 2 -> From Forgot Password
          */
-        page = VerifyPhoneFragmentArgs.fromBundle(arguments!!).fromWhichPage
+        page = 1;//VerifyPhoneFragmentArgs.fromBundle(arguments!!).password
         phone = VerifyPhoneFragmentArgs.fromBundle(arguments!!).phone
-        countryCode = VerifyPhoneFragmentArgs.fromBundle(arguments!!).countryCode
+        password = VerifyPhoneFragmentArgs.fromBundle(arguments!!).password
+        otp = VerifyPhoneFragmentArgs.fromBundle(arguments!!).otp
+        token = VerifyPhoneFragmentArgs.fromBundle(arguments!!).auth
 
         mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         mBinding.toolbar.setNavigationOnClickListener { if (!mBinding.isLoading) findNavController().navigateUp() }
 
-        mBinding.tvTitle2.text = getString(R.string.we_sent_to_you, countryCode, phone)
+        mBinding.tvTitle2.text = getString(R.string.we_sent_to_you, "", phone)
 
         mBinding.btnResendOtp.setOnClickListener {
             mBinding.isLoading = true
+
             if (page == FROM_SIGN_UP) {
                 val data = HashMap<String, String>()
-                data["country_code"] = countryCode
+                //data["country_code"] = countryCode
                 data["phone"] = phone
-                mSignUpViewModel.sentOtp(data)
+               // mSignUpViewModel.sentOtp(data)
             } else {
                 val data = HashMap<String, String>()
-                data["country_code"] = countryCode
+                //data["country_code"] = countryCode
                 data["phone"] = phone
-                mSignUpViewModel.forgotPassword(data)
+               // mSignUpViewModel.forgotPassword(data)
             }
         }
 
@@ -79,13 +87,16 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                 mBinding.isLoading = true
                 val data = HashMap<String, String>()
                 data["otp"] = mBinding.pinView.text!!.toString().trim()
-                data["country_code"] = countryCode
-                data["phone"] = phone
+                data["phoneNumber"] = phone
+                data["pword"] = password
+                data["token"] = token
 
-                when (page) {
+                mSignUpViewModel.verifyOTP(data)
+
+                /*when (page) {
                     FROM_SIGN_UP -> mSignUpViewModel.verifyOTP(data)
                     FROM_FORGOT_PASSWORD -> mSignUpViewModel.forgotPasswordValidateOTP(data)
-                }
+                }*/
 
             } else {
                 showSnackBar(getString(R.string.enter_valid_otp))
@@ -141,6 +152,18 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                                     phone
                             )
                     )*/
+                    CustomDialog.with(
+                            activity!!,
+                            R.drawable.ic_tick,
+                            getString(R.string.hello),
+                            getString(R.string.alert_password_saved),
+                            true,
+                            getString(R.string.continue_to_login), object : CustomDialog.ICustomDialogListener {
+                        override fun onActionClicked() {
+                            handleOnBackPressed()
+                        }
+
+                    })
 
                 }
 
@@ -175,6 +198,18 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
                                     phone
                             )
                     )*/
+                    CustomDialog.with(
+                            activity!!,
+                            R.drawable.ic_tick,
+                            getString(R.string.hello),
+                            getString(R.string.alert_password_saved),
+                            true,
+                            getString(R.string.continue_to_login), object : CustomDialog.ICustomDialogListener {
+                        override fun onActionClicked() {
+                            handleOnBackPressed()
+                        }
+
+                    })
 
                 }
 
@@ -215,6 +250,10 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>() {
         })
 
     }
-
+    override fun handleOnBackPressed(): Boolean {
+        findNavController().navigate(R.id.action_back_to_verifyPhone)
+        //findNavController().navigate(VerifyPhoneFragmentDirections.actionBackToVerifyPhone())
+        return true
+    }
 
   }

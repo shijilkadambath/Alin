@@ -49,6 +49,14 @@ interface WebService {
 
 
     @POST("userservice/sellerLogin/")
-    fun login(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<SessionUtils.LoginSession>>>
+    fun login(@HeaderMap params: Map<String, String>, @Body body: Map<String,String>): LiveData<ApiResponse<BaseResponse<SessionUtils.LoginSession>>>
+
+
+    @POST("userservice/changePassword/")
+    fun changePassword(@HeaderMap params: Map<String, String>, @Body body: Map<String,String>): LiveData<ApiResponse<BaseResponse<Any>>>
+
+
+    @POST("userservice/forgotPassword/")
+    fun forgotPassword(@HeaderMap params: Map<String, String>, @Body body: Map<String,String>): LiveData<ApiResponse<BaseResponse<String>>>
 
 }
