@@ -53,7 +53,7 @@ class PendingProductFragment : BaseFragment<FragmentPendingProductBinding>() {
         mBinding.toolbar.setNavigationOnClickListener {
             activity!!.onBackPressed()
         }
-        mBinding.toolbar.title ="Product Listing"
+        mBinding.toolbar.title ="Draft Product"
 
         adapter = ListAdapter(dataBindingComponent = dataBindingComponent, appExecutors = appExecutors) {
 

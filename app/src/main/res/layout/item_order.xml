@@ -16,23 +16,32 @@
         android:layout_marginBottom="@dimen/normal_padding"
         android:layout_height="@dimen/profile_pic">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/tv_icon"
-            android:layout_width="wrap_content"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:actualImageScaleType="fitCenter"
+            android:layout_marginLeft="6dp"
+            app:backgroundImage="@color/greenLight"
             app:layout_constraintStart_toStartOf="parent"
-            android:paddingRight="@dimen/normal_padding"
-            android:paddingLeft="@dimen/normal_padding"
-            android:layout_height="wrap_content" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:placeholderImage="@drawable/ic_user"
+            app:placeholderImageScaleType="focusCrop"
+            app:progressBarAutoRotateInterval="1000"
+            app:progressBarImage="@drawable/progress_half_circle_green"
+            app:progressBarImageScaleType="centerInside"
+            app:roundAsCircle="true" />
+
+
 
         <LinearLayout
             android:layout_width="0dp"
             android:orientation="vertical"
             android:gravity="center_vertical"
+            android:layout_marginLeft="6dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_icon"
+            app:layout_constraintStart_toEndOf="@+id/iv_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_height="wrap_content">
@@ -42,7 +51,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
-                android:text="@string/mobile_number"/>
+                android:textColor="@color/primaryText"
+                android:text="@{order.name }"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_language"
@@ -50,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
-                android:text="160"/>
+                android:text="@{ `` + order.count }"/>
 
         </LinearLayout>
 

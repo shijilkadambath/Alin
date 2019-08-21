@@ -69,10 +69,13 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
 
         var list = ArrayList<Order>()
-        list.add(Order("1"))
-        list.add(Order("1"))
-        list.add(Order("1"))
-        list.add(Order("1"))
+        list.add(Order("1","New",129))
+        list.add(Order("1","In Process",12))
+        list.add(Order("1","In Packing",100))
+        list.add(Order("1","Initiate Pickup",229))
+        list.add(Order("1","Dispatch",19))
+        list.add(Order("1","Cancelled",100))
+
 
         adapter.submitList(list)
 
