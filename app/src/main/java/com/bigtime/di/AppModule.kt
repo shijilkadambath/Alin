@@ -33,8 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 /**
  * Created by Shijil Kadambath on 03/08/2018
- * for NewAgeSMB
- * Email : shijil@newagesmb.com
+ * Email : shijilkadambath@gmail.com
  */
 
 @Module(includes = [ViewModelModule::class])

@@ -1,7 +1,7 @@
 package com.bigtime.data.api
 
 /**
- * Created by Ȿ₳Ɲ @ NEWAGESMB on Wednesday, June 12, 2019
+ * Email : shijilkadambath@gmail.com
  */
 
 object StatusCode {

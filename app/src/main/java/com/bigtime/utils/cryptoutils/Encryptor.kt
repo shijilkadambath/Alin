@@ -9,9 +9,7 @@ import java.security.*
 import java.security.cert.CertificateException
 import javax.crypto.*
 
-/**
- * Created by Ȿ₳Ɲ @ NEWAGESMB on Monday, April 15, 2019
- */
+
 
 class Encryptor @Throws(
     CertificateException::class,
