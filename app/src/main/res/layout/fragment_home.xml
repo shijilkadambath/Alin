@@ -28,11 +28,19 @@
             type="com.bigtime.ui.RetryCallback" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:background="?android:colorBackground"
+        android:layout_height="match_parent">
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:paddingLeft="@dimen/normal_padding"
         android:paddingRight="@dimen/normal_padding"
+        android:paddingBottom="@dimen/main_padding"
         android:layout_height="match_parent">
 
 
@@ -174,7 +182,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/l_cancellation"
+            android:id="@+id/l_sales"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
@@ -197,13 +205,13 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:layout_marginLeft="@dimen/main_padding"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:fontFamily="@font/bold"
                     android:textColor="@color/primaryText"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:text="Sales Analysis"
                     android:layout_height="wrap_content"/>
 
@@ -216,7 +224,7 @@
                     android:fontFamily="@font/bold"
                     android:paddingRight="@dimen/main_padding"
                     android:textColor="@color/colorAccent"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:text="$1,20,006"
                     android:layout_height="wrap_content"/>
 
@@ -235,46 +243,376 @@
 
                 <RadioGroup
                     android:id="@+id/segment_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_hieght"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_order_count"
                     android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginRight="@dimen/normal_padding"
                     android:layout_gravity="center"
                     android:checkedButton="@+id/rb_month"
-                    android:background="@drawable/border_accent"
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/main_padding">
                     <RadioButton
                         android:id="@+id/rb_week"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:button="@null"
-                        android:checked="true"
+                        android:fontFamily="@font/normal"
+                        android:background="@drawable/radio_button_selector_left"
+                        android:button="@android:color/transparent"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
                         android:text="Last Week" />
 
                     <RadioButton
                         android:id="@+id/rb_month"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:button="@null"
+                        android:background="@drawable/radio_button_selector"
+                        android:button="@android:color/transparent"
                         android:gravity="center"
+                        android:fontFamily="@font/normal"
+                        android:checked="true"
                         android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
                         android:text="Last Month" />
 
                     <RadioButton
                         android:id="@+id/rb_year"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:button="@null"
+                        android:gravity="center"
+                        android:fontFamily="@font/normal"
+                        android:background="@drawable/radio_button_selector_right"
+                        android:button="@android:color/transparent"
+                        android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
+                        android:text="Last Year" />
+                </RadioGroup>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/l_cancellation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_padding"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/l_sales"
+            app:cardElevation="2dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/normal_padding"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_cancellation"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@color/primaryText"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Cancellation Rate:"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_cancellation_percent"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/bold"
+                    android:paddingRight="@dimen/main_padding"
+                    android:textColor="@color/red"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:text="30%"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_cancellation_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    android:textAllCaps="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_cancellation"
+                    android:fontFamily="@font/medium"
+                    android:layout_marginRight="@dimen/main_padding"
+                    android:textColor="@color/primaryText"
+                    android:text="( 25 Order )"
+                    android:layout_height="wrap_content"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_hieght"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_cancellation_rate"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginRight="@dimen/normal_padding"
+                    android:layout_gravity="center"
+                    android:checkedButton="@+id/rb_month_cancel"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/main_padding">
+                    <RadioButton
+                        android:id="@+id/rb_week_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/normal"
+                        android:background="@drawable/radio_button_selector_left"
+                        android:button="@android:color/transparent"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
+                        android:text="Last Week" />
+
+                    <RadioButton
+                        android:id="@+id/rb_month_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_selector"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:fontFamily="@font/normal"
+                        android:checked="true"
+                        android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
+                        android:text="Last Month" />
+
+                    <RadioButton
+                        android:id="@+id/rb_year_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/normal"
+                        android:background="@drawable/radio_button_selector_right"
+                        android:button="@android:color/transparent"
+                        android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
+                        android:text="Last Year" />
+                </RadioGroup>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/l_dispatch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_padding"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/l_cancellation"
+            app:cardElevation="2dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/normal_padding"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_dispatch"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@color/primaryText"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Average Dispatch Time:"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_dispatch_time_message"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_dispatch"
+                    android:fontFamily="@font/normal"
+                    android:paddingTop="@dimen/normal_padding"
+                    android:paddingBottom="@dimen/normal_padding"
+                    android:textColor="@color/secondary_text"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="Your average dispatch time this month"
+                    android:layout_height="wrap_content"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_dispatch_time_message"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/curverd_accent_light2"
+                    android:padding="@dimen/normal_padding"
+                    android:layout_marginRight="@dimen/main_padding"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_icon"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:scaleType="centerInside"
+                        android:background="@drawable/round_white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_product_pickup"
+                        android:layout_marginLeft="@dimen/main_padding"
+                        android:layout_marginRight="@dimen/seperator"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/main_padding"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_dispatch"
+                        android:fontFamily="@font/bold"
+                        android:textColor="@color/colorAccent"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:text="30 Days"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/l_return"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_padding"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/l_dispatch"
+            app:cardElevation="2dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/normal_padding"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_return"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@color/primaryText"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Return Ratio:"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_hieght"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_return"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginRight="@dimen/normal_padding"
+                    android:layout_gravity="center"
+                    android:checkedButton="@+id/rb_month"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/main_padding">
+                    <RadioButton
+                        android:id="@+id/rb_week_return"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/normal"
+                        android:background="@drawable/radio_button_selector_left"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
+                        android:text="Last Week" />
+
+                    <RadioButton
+                        android:id="@+id/rb_month_return"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_selector"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:fontFamily="@font/normal"
+                        android:checked="true"
+                        android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
+                        android:text="Last Month" />
+
+                    <RadioButton
+                        android:id="@+id/rb_year_return"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/normal"
+                        android:background="@drawable/radio_button_selector_right"
+                        android:button="@android:color/transparent"
+                        android:padding="5dp"
+                        android:textColor="@color/text_radio_button"
                         android:text="Last Year" />
                 </RadioGroup>
 
@@ -286,8 +624,191 @@
 
 
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/l_uploading"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_padding"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/l_return"
+            app:cardElevation="2dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/normal_padding"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
 
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_product"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@color/primaryText"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Product Uploading:"
+                    android:layout_height="wrap_content"/>
+
+
+                <LinearLayout
+                    android:id="@+id/l_upload_date"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/main_padding"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_product"
+                    android:background="@drawable/border_accent_white"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_product_upload_month"
+                        android:layout_width="wrap_content"
+                        android:textAllCaps="false"
+                        android:padding="@dimen/normal_padding"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginRight="@dimen/normal_padding"
+                        android:textColor="@color/colorAccent"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:text="Product"
+                        android:layout_height="wrap_content"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:background="@color/colorAccent"
+                        android:src="@drawable/ic_arrow"
+                        android:tint="@color/white"
+                        android:padding="@dimen/normal_padding"
+                        android:layout_toRightOf="@+id/txt_product_upload_month"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/main_padding"
+                    app:layout_constraintTop_toBottomOf="@+id/l_upload_date"
+                    android:background="@drawable/border_accent_white"
+                    android:layout_marginLeft="@dimen/main_padding"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_product_upload_count"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.5"
+                        android:textAllCaps="false"
+                        android:gravity="center"
+                        android:padding="@dimen/normal_padding"
+                        android:background="@color/colorAccent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:fontFamily="@font/medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="Products Uploaded"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_product_upload_status"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.5"
+                        android:textAllCaps="false"
+                        android:padding="@dimen/normal_padding"
+                        android:background="@color/colorAccent"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:fontFamily="@font/medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textColor="@color/white"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="Current Status"
+                        android:layout_height="wrap_content"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:background="@color/gray_dark"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/txt_product_upload_status"
+                        android:layout_height="0dp"/>
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_product_upload_count_number"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.5"
+                        android:textAllCaps="false"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_product_upload_count"
+                        android:padding="@dimen/normal_padding"
+                        android:fontFamily="@font/bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:gravity="center"
+                        android:textColor="@color/colorAccent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:singleLine="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:text="2000"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_product_upload_active"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.5"
+                        android:textAllCaps="false"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_product_upload_count"
+                        android:layout_marginTop="@dimen/normal_padding"
+                        android:fontFamily="@font/normal"
+                        android:gravity="center"
+                        android:textColor="@color/primaryText"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:singleLine="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="2000"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_product_upload_inactive"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.5"
+                        android:textAllCaps="false"
+                        android:paddingTop="@dimen/seperator"
+                        android:paddingBottom="@dimen/normal_padding"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_product_upload_active"
+                        android:fontFamily="@font/normal"
+                        android:gravity="center"
+                        android:textColor="@color/primaryText"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:singleLine="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="2000"
+                        android:layout_height="wrap_content"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -329,4 +850,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 </layout>
