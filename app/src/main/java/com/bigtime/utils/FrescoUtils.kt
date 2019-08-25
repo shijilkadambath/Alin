@@ -11,7 +11,7 @@ import java.io.File
 import javax.inject.Singleton
 
 /**
- * Created by Ȿ₳Ɲ @ NEWAGESMB on Friday, May 03, 2019
+ * Email : shijilkadambath@gmail.com
  */
 @Singleton
 class FrescoUtils {

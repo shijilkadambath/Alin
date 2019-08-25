@@ -23,8 +23,7 @@ import com.bigtime.R
 
 /**
  * Created by Shijil Kadambath on 03/08/2018
- * for NewAgeSMB
- * Email : shijil@newagesmb.com
+ * Email : shijilkadambath@gmail.com
  */
 
 /**

@@ -19,8 +19,7 @@ import com.bigtime.R
 
 /**
  * Created by Shijil Kadambath on 11/9/17
- * for NewAgeSMB
- * Email : shijil@newagesmb.com
+ * Email : shijilkadambath@gmail.com
  */
 
 

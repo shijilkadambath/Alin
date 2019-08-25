@@ -18,10 +18,7 @@ import org.jetbrains.anko.support.v4.intentFor
 
 /**
  * Created by Shijil Kadambath on 03/08/2018
- * for NewAgeSMB
- * Email : shijil@newagesmb.com
- *
- * Updated by Ȿ₳Ɲ @ NEWAGESMB on Thursday, April 11, 2019
+ *Email : shijilkadambath@gmail.com
  */
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {

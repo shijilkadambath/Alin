@@ -20,8 +20,7 @@ import android.util.Log;
 import com.bigtime.BuildConfig;
 /**
  * Created by Shijil Kadambath on 01/01/17
- * for NewAgeSMB
- * Email : shijil@newagesmb.com
+ Email : shijilkadambath@gmail.com
  */
 
 /**
