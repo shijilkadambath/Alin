@@ -41,10 +41,13 @@ class AddProductDetailFragment : BaseFragment<FragmentAddProductDetailsBinding>(
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        mViewModel = getViewModel(AddProductViewModel::class.java)
+        activity?.let {
+            mViewModel = getViewModelShared(it, AddProductViewModel::class.java)
+        }
+
+        mViewModel.setIconChange("frag2")
 
         mBinding.btnNext.setOnClickListener {
-
             navController().navigate(
                     AddProductDetailFragmentDirections.actionAddProductUploadFragment()
             )

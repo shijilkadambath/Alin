@@ -83,6 +83,11 @@ abstract class BaseFragment< T : ViewDataBinding> : Fragment() , Injectable {
 
     }
 
+    fun <V : ViewModel> getViewModelShared(activity: FragmentActivity, clazz: Class<V>): V {
+        return  ViewModelProviders.of(activity, mViewModelFactory).get(clazz)
+
+    }
+
     fun showSnackBar(message: String, duration: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(mBinding.root, message, duration).show()
     }

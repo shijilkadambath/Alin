@@ -1,6 +1,10 @@
 <resources>
 
 <!-- TODO: Remove or change this placeholder text -->
-	<string name="hello_blank_fragment">Hello blank fragment</string><string name="next">Next</string>
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="next">Next</string>
+	<string name="ChooseLotSize">Choose Lot Size</string>
+	<string name="plus">+</string>
+	<string name="minus">-</string><string name="chooseMOQ">Choose MOQ</string><string name="selectCategory">Select Category</string><string name="men">Men</string><string name="women">Women</string><string name="kids">Kids</string>
 
 </resources>

@@ -23,6 +23,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.bigtime.R
 import com.bigtime.binding.BindingAdapters
+import com.bigtime.data.model.Brand
 import com.bigtime.ui.BaseActivity
 import com.bigtime.ui.add_product.AddProductActivity
 import com.bigtime.ui.add_product.ChooseBrandDialogFragment
@@ -41,8 +42,10 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.support.v4.intentFor
 
 
-class HomeActivity : BaseActivity() ,View.OnClickListener{
-
+class HomeActivity : BaseActivity() ,View.OnClickListener, ChooseBrandDialogFragment.Callback{
+    override fun onNextClick(brandItem: Brand?) {
+        startActivity(intentFor<AddProductActivity>())
+    }
 
 
     lateinit var toolbar: Toolbar
@@ -57,12 +60,12 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        if (!SessionUtils.hasSession() || !SessionUtils.isLoggedIn!!) {
+        /*if (!SessionUtils.hasSession() || !SessionUtils.isLoggedIn!!) {
              startActivity(intentFor<LoginActivity>())
              super.onCreate(savedInstanceState)
              finishAffinity()
              return
-         }
+         }*/
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -119,6 +122,7 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
 
                 val fragment = ChooseBrandDialogFragment.newInstance("", "")
                 val fm = this@HomeActivity.supportFragmentManager
+                fragment.setCallBack(this)
                 fragment.show(fm, "brandsDialog")
 
 //                startActivity(intentFor<AddProductActivity>())
@@ -220,11 +224,16 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
         //supportActionBar!!.setTitle(R.string.app_name)
 
 
-       FrescoUtils.setImageToFrescoDraweeView(
-               navigationView.findViewById<SimpleDraweeView>(R.id.sdv_user_pic), SessionUtils.loginSession!!.companyLogo)
+        SessionUtils.loginSession?.let {
+            it.companyLogo.let {
+                FrescoUtils.setImageToFrescoDraweeView(
+                        navigationView.findViewById<SimpleDraweeView>(R.id.sdv_user_pic), it)
+            }
+        }
 
-        navigationView.findViewById<AppCompatTextView>(R.id.tv_name).setText(SessionUtils.loginSession!!.concernPerson)
-        navigationView.findViewById<AppCompatTextView>(R.id.tv_mobile).setText(SessionUtils.loginSession!!.companyName)
+
+//        navigationView.findViewById<AppCompatTextView>(R.id.tv_name).setText(SessionUtils.loginSession!!.concernPerson)
+//        navigationView.findViewById<AppCompatTextView>(R.id.tv_mobile).setText(SessionUtils.loginSession!!.companyName)
 
         //toolbar.setTitle(R.string.app_name)
         /*var session= SessionUtils.getLoginSession()

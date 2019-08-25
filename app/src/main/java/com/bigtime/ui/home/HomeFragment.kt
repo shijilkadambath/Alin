@@ -20,6 +20,7 @@ import com.bigtime.AppExecutors
 import com.bigtime.R
 import com.bigtime.common.autoCleared
 import com.bigtime.data.api.Status
+import com.bigtime.data.model.Brand
 import com.bigtime.data.model.User
 import com.bigtime.databinding.FragmentHomeBinding
 import com.bigtime.databinding.ItemUserBinding
@@ -37,7 +38,10 @@ import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(){
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), ChooseBrandDialogFragment.Callback{
+    override fun onNextClick(brandItem: Brand?) {
+        startActivity(intentFor<AddProductActivity>())
+    }
 
 
     lateinit var mViewModel: HomeViewModel
@@ -81,14 +85,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             override fun retry() {
                 mViewModel.retry()
 
-
-
             }
         }
 
         mBinding.lAddProduct.setOnClickListener {
             val fragment = ChooseBrandDialogFragment.newInstance("", "")
             val fm = this@HomeFragment.childFragmentManager
+            fragment.setCallBack(this)
             fragment.show(fm, "brandsDialog")
 //            startActivity(intentFor<AddProductActivity>())
         }

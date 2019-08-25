@@ -41,8 +41,10 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductDetailsBinding>(
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        mViewModel = getViewModel(AddProductViewModel::class.java)
-
+        activity?.let {
+            mViewModel = getViewModelShared(it, AddProductViewModel::class.java)
+        }
+        mViewModel.setIconChange("frag3")
 
     }
 

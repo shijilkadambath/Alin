@@ -39,6 +39,7 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
     private lateinit var viewModel: ChooseBrandViewModel
 
     private var adapter by autoCleared<BrandsAdapter>()
+    private var listener by autoCleared<Callback>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -57,6 +58,10 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    fun setCallBack(listener: Callback) {
+        this.listener = listener
     }
 
     override fun onResume() {
@@ -86,8 +91,13 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
             dismiss()
         }
 
-        adapter = BrandsAdapter(dataBindingComponent, appExecutors = appExecutors){
+        adapter = BrandsAdapter(dataBindingComponent, appExecutors = appExecutors){item ->
+           viewModel.selectedItem(item)
+        }
 
+        mBinding.nextButton.setOnClickListener {
+            listener.onNextClick(viewModel.getSelectedBrand())
+            dismiss()
         }
 
         mBinding.recyclerViewBrands.adapter = adapter
@@ -156,5 +166,9 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    interface Callback {
+        fun onNextClick(brandItem: Brand?)
     }
 }
