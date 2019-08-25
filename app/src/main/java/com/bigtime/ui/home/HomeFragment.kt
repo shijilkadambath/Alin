@@ -86,14 +86,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             }
         }
 
-        mBinding.btnAdd.setOnClickListener {
+        mBinding.lAddProduct.setOnClickListener {
             val fragment = ChooseBrandDialogFragment.newInstance("", "")
             val fm = this@HomeFragment.childFragmentManager
             fragment.show(fm, "brandsDialog")
 //            startActivity(intentFor<AddProductActivity>())
         }
 
-        mBinding.btnOrder.setOnClickListener {
+        mBinding.lOrder.setOnClickListener {
             startActivity(intentFor<OrderActivity>())
         }
 

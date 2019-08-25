@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF2CACD1</color>
     <color name="colorAccentLight">#FFaadeed</color>
     <color name="colorAccentLight2">#FFddf1f7</color>
+    32B6F1
 
     <color name="white">@android:color/white</color>
     <color name="black">@android:color/black</color>
@@ -24,5 +25,6 @@
     <color name="whiteAlpha">#72FFFFFF</color>
     <color name="greenLight">#D1E2C5</color>
     <color name="green">#FF39C2C2</color>
+    <color name="sand_light">#FFF5DDBC</color>
 
 </resources>

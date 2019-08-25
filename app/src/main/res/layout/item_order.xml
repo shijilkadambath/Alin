@@ -12,26 +12,23 @@
         android:layout_marginLeft="@dimen/seperator"
         android:layout_marginRight="@dimen/seperator"
         android:layout_marginTop="@dimen/seperator"
-        android:padding="@dimen/seperator"
-        android:layout_marginBottom="@dimen/normal_padding"
-        android:layout_height="@dimen/profile_pic">
+        android:padding="@dimen/normal_padding"
+        android:layout_height="wrap_content">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_icon"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            app:actualImageScaleType="fitCenter"
-            android:layout_marginLeft="6dp"
-            app:backgroundImage="@color/greenLight"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/round_accent_light2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:placeholderImage="@drawable/ic_user"
-            app:placeholderImageScaleType="focusCrop"
-            app:progressBarAutoRotateInterval="1000"
-            app:progressBarImage="@drawable/progress_half_circle_green"
-            app:progressBarImageScaleType="centerInside"
-            app:roundAsCircle="true" />
+            app:imageResource="@{order.imageRes }"
+            android:layout_marginLeft="@dimen/seperator"
+            android:layout_marginBottom="@dimen/normal_padding"
+            android:layout_marginTop="@dimen/normal_padding"
+            android:layout_marginRight="@dimen/seperator"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
 
