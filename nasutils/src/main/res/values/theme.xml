@@ -9,10 +9,25 @@
 
     </style>
 
+    <style name="AppTheme.DarkStatus" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:statusBarColor">@color/colorAccent</item>
+
+    </style>
+
 
     <style name="AppTheme.NoActionBar" parent="@style/AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Login" parent="@style/AppTheme.DarkStatus">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
     </style>
 
 

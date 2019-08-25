@@ -24,6 +24,33 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_scrollFlags="scroll|enterAlways">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:src="@mipmap/ic_launcher"
+                        android:paddingBottom="@dimen/seperator"
+                        android:paddingTop="@dimen/seperator"
+                        android:layout_height="match_parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/seperator"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:fontFamily="@font/bold"
+                        android:textColor="@color/primaryText"
+                        android:text="@string/app_name"/>
+
+
+
+
+
+                </LinearLayout>
+
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 

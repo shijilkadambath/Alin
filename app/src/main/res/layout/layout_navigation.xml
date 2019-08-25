@@ -172,7 +172,7 @@
                     android:scaleType="centerInside"
                     android:layout_gravity="right"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginRight="@dimen/normal_padding"
+                    android:layout_marginRight="@dimen/edittext_hieght"
                     android:layout_height="match_parent" />
 
             </FrameLayout>

@@ -44,6 +44,9 @@ object CommonUtils {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    fun isPhone(email: String): Boolean {
+        return Patterns.PHONE.matcher(email).matches()
+    }
     /*@Throws(IOException::class)
     fun loadJSONFromAsset(context: Context, jsonFileName: String): String {
         val manager = context.assets

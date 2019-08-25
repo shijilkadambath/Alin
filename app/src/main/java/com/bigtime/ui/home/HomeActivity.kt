@@ -198,9 +198,11 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
     private fun setupNavigation() {
 
         toolbar = findViewById(R.id.toolbar)
+
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        //supportActionBar!!.setIcon(R.mipmap.ic_launcher);
 
         drawerLayout = findViewById(R.id.drawer_layout)
 
@@ -215,7 +217,7 @@ class HomeActivity : BaseActivity() ,View.OnClickListener{
 
         //navigationView.setNavigationItemSelectedListener(this)
 
-        supportActionBar!!.setTitle(R.string.app_name)
+        //supportActionBar!!.setTitle(R.string.app_name)
 
 
        FrescoUtils.setImageToFrescoDraweeView(

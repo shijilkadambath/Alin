@@ -45,7 +45,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         if (savedInstanceState != null) return
 
-        activity!!.window.statusBarColor = ContextCompat.getColor(activity!!, R.color.white)
+        //activity!!.window.statusBarColor = ContextCompat.getColor(activity!!, R.color.white)
 
         mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
@@ -58,8 +58,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         // mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         //mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
-        mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
-        mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
+        //mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
+        //mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
 
         if (countryCode.isNotEmpty()) mBinding.ccpPhone.setCountryForPhoneCode(countryCode.replace("+","").toInt())
         if (phone.isNotEmpty()) mBinding.tietPhone.setText(phone)
@@ -126,10 +126,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         if (mBinding.tietPhone.text.toString().trim().isEmpty()) {
             setErrorOnPhone(getString(R.string.phone_required))
-        } else if (!mBinding.ccpPhone.isValidFullNumber) {
+        //} else if (!mBinding.ccpPhone.isValidFullNumber) {
+        } else if (!CommonUtils.isPhone(mBinding.tietPhone.text.toString().trim())) {
             setErrorOnPhone(getString(R.string.phone_invalid))
         }else if (mBinding.tietPassword.text.toString().trim().isEmpty()) {
-            mBinding.tilPassword.error = getString(R.string.password_required)
+            //mBinding.tilPassword.error = getString(R.string.password_required)
+            mBinding.tietPassword.error = getString(R.string.password_required)
             mBinding.tietPassword.requestFocus()
         } else {
             dismissKeyboard(mBinding.btnLogin.windowToken)
@@ -151,7 +153,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private val generalTextWatcher = object : TextWatcher {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            mBinding.tilPassword.error = null
+            mBinding.tietPassword.error = null
         }
 
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -176,12 +178,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun setErrorOnPhone(message: String = "", invalidate: Boolean = false) {
         if (invalidate) {
-            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
-            mBinding.tvPhoneError.visibility = View.INVISIBLE
+            mBinding.tietPhone.error =null
+            //mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
+            //mBinding.tvPhoneError.visibility = View.INVISIBLE
         } else {
-            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
+            /*mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
             mBinding.tvPhoneError.visibility = View.VISIBLE
-            mBinding.tvPhoneError.text = message
+            mBinding.tvPhoneError.text = message*/
+
+            mBinding.tietPhone.error =message
         }
     }
 }

@@ -23,4 +23,6 @@
 
     <color name="whiteAlpha">#72FFFFFF</color>
     <color name="greenLight">#D1E2C5</color>
+    <color name="green">#FF39C2C2</color>
+
 </resources>

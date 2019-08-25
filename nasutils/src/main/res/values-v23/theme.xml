@@ -12,4 +12,15 @@
     </style>
 
 
+    <style name="AppTheme.DarkStatus" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:statusBarColor">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+    </style>
+
+
 </resources>

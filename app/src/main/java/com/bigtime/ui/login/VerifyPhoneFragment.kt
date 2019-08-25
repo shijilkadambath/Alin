@@ -62,7 +62,8 @@ class VerifyPhoneFragment : BaseFragment<FragmentVerifyPhoneBinding>(), OnBackPr
         mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         mBinding.toolbar.setNavigationOnClickListener { if (!mBinding.isLoading) findNavController().navigateUp() }
 
-        mBinding.tvTitle2.text = getString(R.string.we_sent_to_you, "", phone)
+        //mBinding.tvTitle2.text = getString(R.string.we_sent_to_you, "", phone)
+        mBinding.tvPhone.text = phone
 
         mBinding.btnResendOtp.setOnClickListener {
             mBinding.isLoading = true

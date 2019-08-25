@@ -38,37 +38,43 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //countryCode = ForgotPasswordFragmentArgs.fromBundle(arguments!!).countryCode
+        phone = ForgotPasswordFragmentArgs.fromBundle(arguments!!).phone
+        if (phone.isNotEmpty()) mBinding.tietPhone.setText(phone)
+
         if (savedInstanceState != null) return
 
         mSignUpViewModel = getViewModel(LoginViewModel::class.java)
         mBinding.layoutBinder = this
 
-        //countryCode = ForgotPasswordFragmentArgs.fromBundle(arguments!!).countryCode
-        phone = ForgotPasswordFragmentArgs.fromBundle(arguments!!).phone
+
 
         mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         mBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
-        mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
-        mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
+        //mBinding.ccpPhone.setTypeFace(CommonUtils.FONT_METROPOLIS_REGULAR(activity!!))
+        //mBinding.ccpPhone.registerCarrierNumberEditText(mBinding.tietPhone)
 
         //if (countryCode.isNotEmpty()) mBinding.ccpPhone.setCountryForPhoneCode(countryCode.replace("+","").toInt())
-        if (phone.isNotEmpty()) mBinding.tietPhone.setText(phone)
+
 
         mBinding.btnContinue.setOnClickListener {
 
-            mBinding.tilPassword.isErrorEnabled=false
+           // mBinding.tilPassword.isErrorEnabled=false
+            mBinding.tietPassword.error =null
             mBinding.tietPhone.addTextChangedListener(GenericTextWatcher(mBinding.tietPhone))
 
             password=mBinding.tietPassword.text.toString().trim()
 
             if (mBinding.tietPhone.text.toString().trim().isEmpty()) {
                 setErrorOnPhone(getString(R.string.phone_required))
-            } else if (!mBinding.ccpPhone.isValidFullNumber) {
+           // } else if (!mBinding.ccpPhone.isValidFullNumber) {
+            } else if (!CommonUtils.isPhone(mBinding.tietPhone.text.toString().trim())) {
                 setErrorOnPhone(getString(R.string.phone_invalid))
             }else if (password.isEmpty()) {
-                mBinding.tilPassword.isErrorEnabled=true
-                mBinding.tilPassword.error = getString(R.string.password_required)
+                //mBinding.tilPassword.isErrorEnabled=true
+               // mBinding.tilPassword.error = getString(R.string.password_required)
+                mBinding.tietPassword.error = getString(R.string.password_required)
                 mBinding.tietPassword.requestFocus()
             } else {
                 dismissKeyboard(mBinding.btnContinue.windowToken)
@@ -134,12 +140,15 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
 
     private fun setErrorOnPhone(message: String = "", invalidate: Boolean = false) {
         if (invalidate) {
-            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
-            mBinding.tvPhoneError.visibility = View.INVISIBLE
+           /* mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, R.color.primaryText))
+            mBinding.tvPhoneError.visibility = View.INVISIBLE*/
+            mBinding.tietPhone.error = null
         } else {
-            mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
+            /*mBinding.tvPhoneHint.setTextColor(ContextCompat.getColor(activity!!, android.R.color.holo_red_light))
             mBinding.tvPhoneError.visibility = View.VISIBLE
-            mBinding.tvPhoneError.text = message
+            mBinding.tvPhoneError.text = message*/
+
+            mBinding.tietPhone.error = message
         }
     }
 }
