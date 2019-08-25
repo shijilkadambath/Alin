@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/chooseFragment">
+
+
+    <fragment
+        android:id="@+id/chooseFragment"
+        android:name="com.bigtime.ui.add_product.ChooseFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_choose_product">
+
+
+        <action
+            android:id="@+id/action_addProductDetailFragment"
+            app:destination="@id/AddProductDetailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
+
+
+
+
+    <fragment
+        android:id="@+id/AddProductDetailFragment"
+        android:name="com.bigtime.ui.add_product.AddProductDetailFragment"
+        android:label="AddProductDetailFragment"
+        tools:layout="@layout/fragment_add_product_details">
+
+        <action
+            android:id="@+id/action_addProductUploadFragment"
+            app:destination="@id/AddProductUploadFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/AddProductUploadFragment"
+        android:name="com.bigtime.ui.add_product.AddProductUploadFragment"
+        android:label="AddProductUploadFragment"
+        tools:layout="@layout/fragment_add_product_upload">
+
+
+
+    </fragment>
+
+
+
+</navigation>

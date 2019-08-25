@@ -1,0 +1,12 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="@dimen/edittext_hieght"
+        android:topRightRadius="@dimen/edittext_hieght"
+        android:topLeftRadius="0dp"
+
+
+        />
+
+    <solid android:color="@color/colorAccent"/>
+</shape>

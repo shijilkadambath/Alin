@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment">
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.bigtime.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+
+
+        <action
+            android:id="@+id/action_login_to_forgotPassword"
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
+
+
+
+
+    <fragment
+        android:id="@+id/legalAgreementFragment"
+        android:name="com.bigtime.ui.login.LegalAgreementFragment"
+        android:label="LegalAgreementFragment"
+        tools:layout="@layout/fragment_legal_agreement">
+
+        <argument
+            android:name="agreementType"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/verifyPhoneFragment"
+        android:name="com.bigtime.ui.login.VerifyPhoneFragment"
+        android:label="VerifyPhone"
+        tools:layout="@layout/fragment_verify_phone">
+
+       <!-- <argument
+            android:name="fromWhichPage"
+            android:defaultValue="1"
+            app:argType="integer" />-->
+
+        <argument
+            android:name="phone"
+            app:argType="string" />
+
+        <argument
+            android:name="password"
+            app:argType="string" />
+
+        <argument
+            android:name="otp"
+            app:argType="string" />
+
+        <argument
+            android:name="auth"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_back_to_verifyPhone"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="false" />
+
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.bigtime.ui.login.ForgotPasswordFragment"
+        android:label="ForgotPassword"
+        tools:layout="@layout/fragment_forgot_password">
+
+        <argument
+            android:name="countryCode"
+            app:argType="string" />
+
+        <argument
+            android:name="phone"
+            app:argType="string" />
+
+      <!--  <action
+            android:id="@+id/action_forgotPassword_to_otp"
+            app:destination="@id/resetPasswordFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />-->
+
+        <action
+            android:id="@+id/action_back_to_verifyPhone"
+            app:destination="@id/verifyPhoneFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="false" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.bigtime.ui.login.ResetPasswordFragment"
+        android:label="ResetPassword"
+        tools:layout="@layout/fragment_reset_password">
+
+        <argument
+            android:name="countryCode"
+            app:argType="string" />
+
+        <argument
+            android:name="phone"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_back_to_verifyPhone"
+            app:destination="@id/verifyPhoneFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="false" />
+
+    </fragment>
+
+</navigation>
