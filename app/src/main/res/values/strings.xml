@@ -5,6 +5,6 @@
 	<string name="next">Next</string>
 	<string name="ChooseLotSize">Choose Lot Size</string>
 	<string name="plus">+</string>
-	<string name="minus">-</string><string name="chooseMOQ">Choose MOQ</string><string name="selectCategory">Select Category</string><string name="men">Men</string><string name="women">Women</string><string name="kids">Kids</string>
+	<string name="minus">-</string><string name="chooseMOQ">Choose MOQ</string><string name="selectCategory">Select Category</string><string name="men">Men</string><string name="women">Women</string><string name="kids">Kids</string><string name="saveDrafts">Save In Drafts</string><string name="detailHeading">Product Details</string><string name="headingPriceDetails">Add Pricing Details</string><string name="headingLotLevel">Lot Level Price</string><string name="headingBulkPrice">Bulk Price</string><string name="headingPackageType">Type of Packaging</string><string name="headingProductDesc">Product Description</string><string name="imported">Imported</string>
 
 </resources>

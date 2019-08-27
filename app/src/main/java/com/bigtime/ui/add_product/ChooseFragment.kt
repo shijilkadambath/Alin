@@ -6,17 +6,16 @@ package com.bigtime.ui.add_product
  */
 import android.os.Bundle
 import android.text.*
+import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bigtime.AppExecutors
 
 import com.bigtime.R
-import com.bigtime.common.autoCleared
 import com.bigtime.databinding.FragmentChooseProductBinding
-import com.bigtime.databinding.FragmentLoginBinding
 import com.bigtime.ui.BaseFragment
-import com.bigtime.ui.RetryCallback
+import com.bigtime.utils.AddProductConstants
 import javax.inject.Inject
 
 private const val TAG: String = "LoginFragment"
@@ -41,11 +40,13 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+//        setUpUI(mBinding.parentView)
+
         activity?.let {
             mViewModel = getViewModelShared(it, AddProductViewModel::class.java)
         }
 
-        mViewModel.setIconChange("frag1")
+        mViewModel.setIconChange(AddProductConstants.chooseFragment)
 
         initUi()
 
@@ -59,29 +60,44 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
 
 
     private fun initUi() {
+
         mBinding.lotValue.addTextChangedListener(MyTextWatcher(mBinding.lotValue))
         mBinding.moqValue.addTextChangedListener(MyTextWatcher(mBinding.moqValue))
 
-        mViewModel.setDefaultLotValue(8)
+        if (mViewModel.lotValue.isEmpty())
+            mBinding.lotValue.setText("8")
 
         mBinding.lotIncrement.setOnClickListener {
             dismissKeyboard(mBinding.lotIncrement.windowToken)
-            mViewModel.lotValueIncrement(mBinding.lotValue.text.toString())
+            val lot = mBinding.lotValue.text.toString()
+            if (lot.isEmpty()) {
+                mBinding.lotValue.setText("3")
+                return@setOnClickListener
+            }
+
+            val addedValue = (lot.toInt() + 1).toString()
+            mBinding.lotValue.setText(addedValue)
         }
 
         mBinding.lotDecrement.setOnClickListener {
             dismissKeyboard(mBinding.lotDecrement.windowToken)
-            mViewModel.lotValueDecrement(mBinding.lotValue.text.toString())
+
+            val lot = mBinding.lotValue.text.toString()
+            if (lot.isEmpty())
+                return@setOnClickListener
+
+            val subValue = (lot.toInt() - 1)
+            if (subValue >= 0)
+            mBinding.lotValue.setText(subValue.toString())
+
         }
 
-        mViewModel.getLotValue().observe(this, Observer {value ->
-            mBinding.lotValue.setText(value)
-        })
-
-        mViewModel.isLotValueSuccess().observe(this, Observer {
+        mViewModel.isLotValueValid().observe(this, Observer {
             moqViewChange(it)
-            if (!it) {
-                showSnackBar("Invalid Size")
+            mBinding.lotError.visibility = if (it) {
+                View.INVISIBLE
+            }else{
+                View.VISIBLE
             }
         })
 
@@ -101,16 +117,19 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
             mBinding.moqValue.setText(it)
         })
 
-        mViewModel.isMoqValueSuccess().observe(this, Observer {
-            if (!it) {
-                showSnackBar("Invalid MOQ")
+        mViewModel.isMoqValueValid().observe(this, Observer {
+            mViewModel.enableNextButton(it)
+            mBinding.moqError.visibility = if (it) {
+                View.INVISIBLE
+            }else{
+                View.VISIBLE
             }
         })
 
     }
 
     private fun moqViewChange(enabled: Boolean) {
-        mBinding.moqValue.setText("")
+//        mBinding.moqValue.setText("")
         mBinding.moqIncrement.isEnabled = enabled
         mBinding.moqDecrement.isEnabled = enabled
         mBinding.moqValue.isEnabled = enabled

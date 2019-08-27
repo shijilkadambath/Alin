@@ -29,6 +29,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
 	        android:fillViewport="true"
+	        android:id="@+id/parentView"
 	        app:layout_constraintTop_toTopOf="parent">
 	            <androidx.constraintlayout.widget.ConstraintLayout
 		            android:layout_width="match_parent"
@@ -61,7 +62,7 @@
 			            android:layout_height="wrap_content"
 			            android:id="@+id/textLotSize"
 			            android:text="@string/ChooseLotSize"
-			            style="@style/Text.SemiLarge.Medium"
+			            style="@style/Text.SecondTitle.Medium"
 			            android:textColor="@color/black"
 			            app:layout_constraintEnd_toStartOf="@+id/lotDecrement"
 			            app:layout_constraintStart_toStartOf="@id/left"
@@ -99,6 +100,17 @@
 
 
 		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/lotError"
+			            android:text="Invalid Size"
+			            android:visibility="invisible"
+			            app:layout_constraintTop_toBottomOf="@+id/lotValue"
+			            android:textColor="@color/red"
+			            app:layout_constraintStart_toStartOf="@id/lotValue"/>
+
+
+		            <androidx.appcompat.widget.AppCompatTextView
 			            android:layout_width="@dimen/iconHeight"
 			            android:layout_height="@dimen/iconHeight"
 			            android:id="@+id/lotDecrement"
@@ -129,7 +141,7 @@
 			            android:layout_height="wrap_content"
 			            android:id="@+id/textMOQ"
 			            android:text="@string/chooseMOQ"
-			            style="@style/Text.SemiLarge.Medium"
+			            style="@style/Text.SecondTitle.Medium"
 			            android:textColor="@color/black"
 			            app:layout_constraintEnd_toStartOf="@+id/moqDecrement"
 			            app:layout_constraintStart_toStartOf="@id/left"
@@ -166,6 +178,16 @@
 			            app:layout_constraintEnd_toStartOf="@+id/moqIncrement"
 			            app:layout_constraintTop_toTopOf="@id/moqIncrement"/>
 
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/moqError"
+			            android:text="Invalid Moq"
+			            android:visibility="invisible"
+			            app:layout_constraintTop_toBottomOf="@+id/moqValue"
+			            android:textColor="@color/red"
+			            app:layout_constraintStart_toStartOf="@id/moqValue"/>
+
 
 		            <androidx.appcompat.widget.AppCompatTextView
 			            android:layout_width="@dimen/iconHeight"
@@ -199,7 +221,7 @@
 			            android:layout_height="wrap_content"
 			            android:id="@+id/selectCategory"
 			            android:text="@string/selectCategory"
-			            style="@style/Text.SemiLarge.Medium"
+			            style="@style/Text.SecondTitle.Medium"
 			            android:textColor="@color/black"
 			            app:layout_constraintStart_toStartOf="@id/left"
 			            android:layout_marginTop="20dp"
@@ -235,6 +257,7 @@
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:text="@string/men"
+				            android:textColor="@color/black"
 				            style="@style/Text.Medium.Regular"/>
 
 		            </LinearLayout>
@@ -270,6 +293,7 @@
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:text="@string/women"
+				            android:textColor="@color/black"
 				            android:layout_marginStart="4dp"
 				            style="@style/Text.Medium.Regular"/>
 
@@ -305,6 +329,7 @@
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:text="@string/kids"
+				            android:textColor="@color/black"
 				            android:layout_marginStart="4dp"
 				            style="@style/Text.Medium.Regular"/>
 

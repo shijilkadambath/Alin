@@ -16,6 +16,7 @@ import com.bigtime.databinding.FragmentChooseProductBinding
 import com.bigtime.databinding.FragmentLoginBinding
 import com.bigtime.ui.BaseFragment
 import com.bigtime.ui.RetryCallback
+import com.bigtime.utils.AddProductConstants
 import javax.inject.Inject
 
 private const val TAG: String = "LoginFragment"
@@ -33,7 +34,7 @@ class AddProductDetailFragment : BaseFragment<FragmentAddProductDetailsBinding>(
 
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_add_product_details;
+        return R.layout.fragment_add_product_details
     }
 
 
@@ -44,14 +45,14 @@ class AddProductDetailFragment : BaseFragment<FragmentAddProductDetailsBinding>(
             mViewModel = getViewModelShared(it, AddProductViewModel::class.java)
         }
 
-        mViewModel.setIconChange("frag2")
+        mViewModel.setIconChange(AddProductConstants.detailFragment)
 
-        mBinding.btnNext.setOnClickListener {
+        /*mBinding.btnNext.setOnClickListener {
             navController().navigate(
                     AddProductDetailFragmentDirections.actionAddProductUploadFragment()
             )
 
-        }
+        }*/
     }
 
     fun navController() = findNavController()

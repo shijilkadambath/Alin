@@ -5,69 +5,54 @@ package com.bigtime.ui.add_product
  */
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.bigtime.common.AbsentLiveData
-import com.bigtime.data.api.BaseResponse
-import com.bigtime.data.api.Resource
-import com.bigtime.data.model.User
 import com.bigtime.repo.UMSRepository
 import javax.inject.Inject
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
+import com.bigtime.utils.AddProductConstants
 
 
 class AddProductViewModel
 @Inject constructor( repoRepository: UMSRepository) : ViewModel() {
 
     private var headerIconChange = MutableLiveData<String>()
-    private var lotValueSuccess = MutableLiveData<Boolean>()
-    private var lotValueObserve = MutableLiveData<String>()
-    private var moqValueObserve = MutableLiveData<String>()
-    private var moqValueSuccess = MutableLiveData<Boolean>()
+    var whichFragment: String = AddProductConstants.chooseFragment
 
-    private var lotValue: Int = 0
-    private var moqValue: Int = 0
+    private var lotValueValid = MutableLiveData<Boolean>()
+    private var moqValueObserve = MutableLiveData<String>()
+    private var moqValueValid = MutableLiveData<Boolean>()
+    private var nextButtonEnable = MutableLiveData<Boolean>()
+
+    var lotValue: String = ""
+    var moqValue: String = ""
 
     fun getIconChange() : LiveData<String> {
         return headerIconChange
     }
 
     fun setIconChange(whichView: String) {
+        whichFragment = whichView
         headerIconChange.value = whichView
-    }
-
-    //lot value logic
-    fun setDefaultLotValue(defaultLotValue: Int) {
-        lotValueObserve.value = defaultLotValue.toString()
-    }
-    fun lotValueIncrement(lot: String) {
-        lotValueObserve.value = (lot.toInt() + 1).toString()
-    }
-
-    fun lotValueDecrement(lot: String) {
-        val v = lot.toInt() - 1
-        if (v >= 0) {
-            lotValueObserve.value = v.toString()
-        }
-    }
-
-    fun getLotValue(): LiveData<String> {
-        return lotValueObserve
     }
 
     fun checkLotValue(value: String) {
         if (value.isNotEmpty()) {
             val tempValue = value.toInt()
 
-            val length = value.length
-            lotValueSuccess.value = (tempValue in 3..24 && length <= 2).apply {
-                lotValue = if (this) tempValue else 0
+            if (moqValue.isNotEmpty()) {
+                moqValue = ""
+                moqValueObserve.value = ""
+                moqValueValid.value = false
             }
+
+            lotValueValid.value = (tempValue in 3..24).apply {
+                lotValue = if (this) tempValue.toString() else ""
+            }
+        }else {
+            lotValue = ""
         }
     }
-    fun isLotValueSuccess() : LiveData<Boolean> {
-        return lotValueSuccess
+    fun isLotValueValid() : LiveData<Boolean> {
+        return lotValueValid
     }
 
     //moqValueLogic
@@ -75,19 +60,19 @@ class AddProductViewModel
         if (moq.isNotEmpty()) {
             val tempMoq = moq.toInt()
             if (isMoqMultiplyValid(tempMoq))
-            moqValueObserve.value = (tempMoq + lotValue).toString()
+            moqValueObserve.value = (tempMoq + lotValue.toInt()).toString()
         }else {
-            moqValueObserve.value = lotValue.toString()
+            moqValueObserve.value = lotValue
         }
     }
 
     fun moqValueDecrement(moq: String) {
         if (moq.isNotEmpty()) {
             val tempMoq = moq.toInt()
-            if (isMoqMultiplyValid(tempMoq) && tempMoq > lotValue)
-            moqValueObserve.value = (tempMoq - lotValue).toString()
+            if (isMoqMultiplyValid(tempMoq) && tempMoq > lotValue.toInt())
+            moqValueObserve.value = (tempMoq - lotValue.toInt()).toString()
         }else {
-            moqValueObserve.value = lotValue.toString()
+            moqValueObserve.value = lotValue
         }
     }
 
@@ -98,18 +83,29 @@ class AddProductViewModel
     fun checkMoqValue(moq: String) {
         if (moq.isNotEmpty()) {
             val m = moq.toInt()
-            moqValueSuccess.value = (m in 3..1200 && isMoqMultiplyValid(m)).apply {
-                moqValue = if (this) m  else 0
+            moqValueValid.value = (m in 3..1200 && isMoqMultiplyValid(m)).apply {
+                moqValue = if (this) m.toString()  else ""
             }
+        }else {
+            moqValueValid.value = false
+            moqValue = ""
         }
     }
 
     private fun isMoqMultiplyValid(moq: Int) : Boolean {
-        return  moq/lotValue <= 50
+        return  moq/lotValue.toInt() <= 50 && moq%lotValue.toInt() == 0
     }
 
-    fun isMoqValueSuccess() : LiveData<Boolean> {
-        return moqValueSuccess
+    fun isMoqValueValid() : LiveData<Boolean> {
+        return moqValueValid
+    }
+
+    fun enableNextButton(enable: Boolean) {
+        nextButtonEnable.value = enable
+    }
+
+    fun isNextButtonEnable(): LiveData<Boolean> {
+        return nextButtonEnable
     }
 
 }
