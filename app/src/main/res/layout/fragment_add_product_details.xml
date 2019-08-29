@@ -227,7 +227,7 @@
 		    android:id="@+id/layoutBulkValue">
 
 
-		    <com.google.android.material.textfield.TextInputEditText
+		    <androidx.appcompat.widget.AppCompatSpinner
 			    android:layout_width="match_parent"
 			    android:layout_height="@dimen/iconHeight"
 			    android:inputType="number"
@@ -397,7 +397,7 @@
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"
@@ -445,7 +445,7 @@
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"
@@ -493,13 +493,12 @@
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"
 		    android:id="@+id/sole"
 		    style="@style/Text.Medium.Regular"
-		    android:maxLength="4"
 		    android:hint="Choose Sole"
 		    android:textColor="@color/colorAccent"
 		    android:gravity="center"
@@ -535,13 +534,13 @@
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleType"
-			    android:text="Sole"
+			    android:text="Type"
 			    style="@style/Text.SubTitle.Light"
 			    android:textColor="@color/black"
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"
@@ -589,7 +588,7 @@
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"
@@ -637,7 +636,7 @@
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"
@@ -685,7 +684,7 @@
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"
@@ -733,7 +732,7 @@
 			    android:layout_alignParentTop="true"
 			    />
 
-	    <com.google.android.material.textfield.TextInputEditText
+	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:layout_width="wrap_content"
 		    android:layout_height="@dimen/iconHeight"
 		    android:inputType="number"

@@ -16,8 +16,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.bigtime.data.model.Brand
 import com.bigtime.utils.AddProductConstants
 import kotlinx.android.synthetic.main.activity_add_prodcut.*
+import org.jetbrains.anko.intentFor
 import javax.inject.Inject
 
 
@@ -36,6 +38,10 @@ class AddProductActivity : BaseActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         viewModel = ViewModelProviders.of(this, mViewModelFactory).get(AddProductViewModel::class.java)
+
+        if (intent.hasExtra("brand")) {
+            viewModel.setBrandItem(intent.getParcelableExtra("brand"))
+        }
 
         observeDatas()
 

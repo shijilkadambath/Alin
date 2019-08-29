@@ -44,7 +44,7 @@ import org.jetbrains.anko.support.v4.intentFor
 
 class HomeActivity : BaseActivity() ,View.OnClickListener, ChooseBrandDialogFragment.Callback{
     override fun onNextClick(brandItem: Brand?) {
-        startActivity(intentFor<AddProductActivity>())
+        startActivity(intentFor<AddProductActivity>("brand" to brandItem))
     }
 
 

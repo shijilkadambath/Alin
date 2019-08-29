@@ -26,6 +26,9 @@ import com.bigtime.data.db.UMSDao
 import com.bigtime.data.model.Brand
 import com.bigtime.data.model.MainCategory
 import com.bigtime.data.model.User
+import com.bigtime.data.model.product_details.CategoryItem
+import com.bigtime.data.model.product_details.FootwearTypeItem
+import com.bigtime.data.model.product_details.SolesItem
 import com.bigtime.utils.AppConstants
 import com.bigtime.utils.SessionUtils
 import com.google.gson.JsonObject
@@ -183,6 +186,22 @@ class UMSRepository @Inject constructor(
                     addProperty("a", "b")
                 })
             }
+        }.asLiveData()
+    }
+
+    fun loadBrandDetails(data: HashMap<String, String>) : LiveData<Resource<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
+        val header = HashMap<String, String>()
+        header["sessionToken"] = "IlNLMTQ5MDI3MTA2NDE1NjYwNTUwNjUi:1hz0Se:SpzvNCcH2GsDdJSVukbZhZiJb3U"
+        header["platform"] = "postman"
+        header["packageName"] = "com.bizcrum.shoekonnect"
+        header["isAuthRequired"] = "true"
+        header["Content-Type"] = "application/json"
+
+        return object : NetworkBoundResourceNoCache<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>(appExecutors) {
+            override fun createCall(): LiveData<ApiResponse<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
+                return webService.loadBrandDetails(header, data)
+            }
+
         }.asLiveData()
     }
 }

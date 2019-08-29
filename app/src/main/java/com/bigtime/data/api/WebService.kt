@@ -20,6 +20,9 @@ import androidx.lifecycle.LiveData
 import com.bigtime.data.model.Brand
 import com.bigtime.data.model.MainCategory
 import com.bigtime.data.model.User
+import com.bigtime.data.model.product_details.CategoryItem
+import com.bigtime.data.model.product_details.FootwearTypeItem
+import com.bigtime.data.model.product_details.SolesItem
 import com.bigtime.utils.SessionUtils
 import com.google.gson.JsonObject
 import retrofit2.http.*
@@ -57,5 +60,8 @@ interface WebService {
 
     @POST("userservice/forgotPassword/")
     fun forgotPassword(@HeaderMap params: Map<String, String>, @Body body: Map<String,String>): LiveData<ApiResponse<BaseResponse<String>>>
+
+    @POST("api/sellerApp/data/getProductFormDetails/")
+    fun loadBrandDetails(@HeaderMap params: Map<String, String>, @Body body: Map<String, String>): LiveData<ApiResponse<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>>
 
 }

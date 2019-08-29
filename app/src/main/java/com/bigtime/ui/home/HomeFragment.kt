@@ -40,9 +40,8 @@ import javax.inject.Inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), ChooseBrandDialogFragment.Callback{
     override fun onNextClick(brandItem: Brand?) {
-        startActivity(intentFor<AddProductActivity>())
+        startActivity(intentFor<AddProductActivity>("brand" to brandItem))
     }
-
 
     lateinit var mViewModel: HomeViewModel
 
@@ -103,10 +102,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), ChooseBrandDialogFragm
 
        // mViewModel.loadData()
     }
-
-
-
-
 
     class ListAdapter(
             private val dataBindingComponent: DataBindingComponent,

@@ -96,8 +96,13 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
         }
 
         mBinding.nextButton.setOnClickListener {
-            listener.onNextClick(viewModel.getSelectedBrand())
-            dismiss()
+            if (viewModel.getSelectedBrand() != null) {
+                listener.onNextClick(viewModel.getSelectedBrand())
+                dismiss()
+            }else {
+                showSnackBar("Please Select Brand")
+            }
+
         }
 
         mBinding.recyclerViewBrands.adapter = adapter
@@ -133,11 +138,7 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
                 response.data.isSuccess() ->{
 
                     mBinding.searchResource = response
-                    adapter.submitList(response.data.data.apply {
-                        this?.add(Brand("Puma", 101))
-                        this?.add(Brand("Adidas", 102))
-                        this?.add(Brand("Nike", 103))
-                    })
+                    adapter.submitList(response.data.data)
                     //adapter.submitList(response.data.data2)  Main category list
                 }
                 else -> {
