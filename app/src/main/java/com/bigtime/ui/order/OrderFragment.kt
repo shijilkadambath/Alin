@@ -21,6 +21,7 @@ import com.bigtime.data.api.Status
 import com.bigtime.data.model.Order
 import com.bigtime.databinding.*
 import com.bigtime.ui.BaseDataBindListAdapter
+import com.bigtime.ui.BaseDataBindViewHolder
 import com.bigtime.ui.BaseFragment
 import com.bigtime.ui.RetryCallback
 import com.bigtime.utils.SessionUtils
@@ -64,6 +65,14 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
                      HomeFragmentDirections.showRegistration()
              )*/
         }
+        var list = ArrayList<String>()
+        list.add("-")
+        list.add("-")
+        list.add("-")
+        list.add("-")
+        list.add("-")
+        list.add("-")
+        adapter.submitList(list)
 
         mBinding.recycler.layoutManager = GridLayoutManager(activity,2)
         mBinding.recycler.adapter = adapter
@@ -83,7 +92,34 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
                     showSnackBar(response.message!!)
                 }
 
+
                 response.data.status == 1 -> {
+
+                    var order =  response.data.data!![0]
+
+                    list[0] = order.newOrders.toString()
+                    list.set(1,order.inProcess.toString())
+                    list.set(2,order.inPackaging.toString())
+                    list.set(3,order.initiatedPickup.toString())
+                    list.set(4,order.inDispatch.toString())
+                    list.set(5,order.cancelled.toString())
+
+
+                    adapter.submitList(list)
+                    adapter.notifyDataSetChanged()
+
+                    /*  var list = ArrayList<Order>()
+                   list.add(Order("1","New",129,R.drawable.ic_product_new))
+                   list.add(Order("1","In Process",12,R.drawable.ic_product_progress))
+                   list.add(Order("1","In Packing",100,R.drawable.ic_product_progress))
+                   list.add(Order("1","Initiate Pickup",229,R.drawable.ic_product_pickup))
+                   list.add(Order("1","Dispatch",19,R.drawable.ic_product_dispatch))
+                   list.add(Order("1","Cancelled",100,R.drawable.ic_product_cancelled))
+
+                   adapter.submitList(list)*/
+
+
+
                     showSnackBar(response.data.message)
                 }
 
@@ -98,17 +134,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
 
 
-        var list = ArrayList<Order>()
-        list.add(Order("1","New",129,R.drawable.ic_product_new))
-        list.add(Order("1","In Process",12,R.drawable.ic_product_progress))
-        list.add(Order("1","In Packing",100,R.drawable.ic_product_progress))
-        list.add(Order("1","Initiate Pickup",229,R.drawable.ic_product_pickup))
-        list.add(Order("1","Dispatch",19,R.drawable.ic_product_dispatch))
-        list.add(Order("1","Cancelled",100,R.drawable.ic_product_cancelled))
-
-
-        adapter.submitList(list)
-
+        mBinding.isLoading = true
         val data = HashMap<String, String>()
         data["userID"] = SessionUtils.loginSession!!.userId.toString()
         data["token"] = SessionUtils.getAuthTokens(true)!!
@@ -123,16 +149,15 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
     class ListAdapter(
             private val dataBindingComponent: DataBindingComponent,
             appExecutors: AppExecutors,
-            private val itemClickCallback: ((Order) -> Unit)?
-    ) : BaseDataBindListAdapter<Order, ItemOrderBinding>(
+            private val itemClickCallback: ((String) -> Unit)?
+    ) : BaseDataBindListAdapter<String, ItemOrderBinding>(
             appExecutors = appExecutors,
-            diffCallback = object : DiffUtil.ItemCallback<Order>() {
-                override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
-                    return oldItem.id == newItem.id
+            diffCallback = object : DiffUtil.ItemCallback<String>() {
+                override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+                    return oldItem.equals(newItem)
                 }
-
-                override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean {
-                    return oldItem.id == newItem.id
+                override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+                    return oldItem.equals(newItem)
                 }
             }
     ) {
@@ -145,16 +170,37 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
                     false,
                     dataBindingComponent
             )
-            binding.root.setOnClickListener {
+          /*  binding.root.setOnClickListener {
                 binding.order?.let {
                     itemClickCallback?.invoke(it)
                 }
-            }
+            }*/
             return binding
         }
+        override fun onBindViewHolder(holder: BaseDataBindViewHolder<ItemOrderBinding>, position: Int) {
+           // bind(holder.binding, getItem(position))
 
-        override fun bind(binding: ItemOrderBinding, item: Order) {
-            binding.order = item
+            when (position) {
+                0 -> bind(holder.binding,"New",getItem(0),R.drawable.ic_product_new)
+                1 -> bind(holder.binding,"In Process",getItem(1),R.drawable.ic_product_progress)
+                2 -> bind(holder.binding,"In Packing",getItem(2),R.drawable.ic_product_progress)
+                3 -> bind(holder.binding,"Initiate Pickup",getItem(3),R.drawable.ic_product_pickup)
+                4 -> bind(holder.binding,"Dispatch",getItem(4),R.drawable.ic_product_dispatch)
+                5 -> bind(holder.binding,"Cancelled",getItem(5),R.drawable.ic_product_cancelled)
+                else -> { // Note the block
+                    print("x is neither 1 nor 2")
+                }
+            }
+
+
+            holder.binding.executePendingBindings()
         }
+        fun bind(binding: ItemOrderBinding,name: String,value: String,image: Int) {
+            binding.image = image
+            binding.orderCount = value
+            binding.orderName = name
+        }
+
+        override fun bind(binding: ItemOrderBinding, item: String) {}
     }
 }

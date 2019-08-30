@@ -25,7 +25,7 @@ class OrderViewModel
         orderRequestLiveData.value = data
     }
 
-    val orderResponseLiveData: LiveData<Resource<BaseResponse<Order>>> =
+    val orderResponseLiveData: LiveData<Resource<BaseResponse<ArrayList<Order>>>> =
             Transformations.switchMap(orderRequestLiveData) { data ->
                 if (data == null) {
                     AbsentLiveData.create()

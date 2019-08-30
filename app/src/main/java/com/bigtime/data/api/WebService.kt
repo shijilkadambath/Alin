@@ -17,10 +17,7 @@
 package com.bigtime.data.api
 
 import androidx.lifecycle.LiveData
-import com.bigtime.data.model.Brand
-import com.bigtime.data.model.MainCategory
-import com.bigtime.data.model.Order
-import com.bigtime.data.model.User
+import com.bigtime.data.model.*
 import com.bigtime.data.model.product_details.CategoryItem
 import com.bigtime.data.model.product_details.FootwearTypeItem
 import com.bigtime.data.model.product_details.SolesItem
@@ -67,7 +64,10 @@ interface WebService {
 
 
     @POST("/orders/globalCount/")
-    fun loadOrderDetails(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<Order>>>
+    fun loadOrderDetails(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<ArrayList<Order>>>>
+
+    @POST("api/sellerApp/data/approvedProducts/")
+    fun loadApprovedProducts(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<ArrayList<Product>>>>
 
 
 }

@@ -67,13 +67,8 @@ class PendingProductFragment : BaseFragment<FragmentPendingProductBinding>() {
 
 
 
-        var list = ArrayList<Product>()
-        list.add(Product("1"))
-        list.add(Product("1"))
-        list.add(Product("1"))
-        list.add(Product("1"))
 
-        adapter.submitList(list)
+       // adapter.submitList(list)
     }
 
     fun navController() = findNavController()
@@ -86,11 +81,11 @@ class PendingProductFragment : BaseFragment<FragmentPendingProductBinding>() {
             appExecutors = appExecutors,
             diffCallback = object : DiffUtil.ItemCallback<Product>() {
                 override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-                    return oldItem.id == newItem.id
+                    return oldItem.productID == newItem.productID
                 }
 
                 override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-                    return oldItem.id == newItem.id
+                    return oldItem.productID == newItem.productID
                 }
             }
     ) {
@@ -114,7 +109,7 @@ class PendingProductFragment : BaseFragment<FragmentPendingProductBinding>() {
         override fun bind(binding: ItemProductBinding, item: Product) {
             binding.order = item
 
-            binding.tvLanguage.setText(item.id)
+            binding.tvLanguage.setText(item.brandName)
         }
     }
 }

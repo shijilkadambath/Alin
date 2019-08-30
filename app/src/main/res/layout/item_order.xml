@@ -3,8 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="order"
-            type="com.bigtime.data.model.Order"/>
+            name="orderCount"
+            type="String"/>
+
+        <variable
+            name="orderName"
+            type="String"/>
+
+        <variable
+            name="image"
+            type="Integer"/>
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,7 +32,7 @@
             android:background="@drawable/round_accent_light2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageResource="@{order.imageRes }"
+            app:imageResource="@{image }"
             android:layout_marginLeft="@dimen/seperator"
             android:layout_marginBottom="@dimen/normal_padding"
             android:layout_marginTop="@dimen/normal_padding"
@@ -49,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:textColor="@color/primaryText"
-                android:text="@{order.name }"/>
+                android:text="@{orderName}"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_language"
@@ -57,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
-                android:text="@{ `` + order.count }"/>
+                android:text="@{orderCount}"/>
 
         </LinearLayout>
 

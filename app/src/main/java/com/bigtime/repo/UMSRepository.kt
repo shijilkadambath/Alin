@@ -23,10 +23,7 @@ import com.bigtime.AppExecutors
 import com.bigtime.data.api.*
 import com.bigtime.data.db.AppDb
 import com.bigtime.data.db.UMSDao
-import com.bigtime.data.model.Brand
-import com.bigtime.data.model.MainCategory
-import com.bigtime.data.model.Order
-import com.bigtime.data.model.User
+import com.bigtime.data.model.*
 import com.bigtime.data.model.product_details.CategoryItem
 import com.bigtime.data.model.product_details.FootwearTypeItem
 import com.bigtime.data.model.product_details.SolesItem
@@ -213,24 +210,49 @@ class UMSRepository @Inject constructor(
     }
 
 
-        fun loadOrderDetais(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Order>>> {
+        fun loadOrderDetais(data: HashMap<String, String>): LiveData<Resource<BaseResponse<ArrayList<Order>>>> {
 
             val header = HashMap<String, String>()
             header["SOURCE"] = "cCX1G9EVpL"
             header["PLATFORM"] = "Android"
             header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
-            header["SKAUTH-TOKEN"] = data["token"]!!
+            header["SKAUTH-TOKEN"] = SessionUtils.getAuthTokens(true)!!
             header["Content-Type"] = "application/json"
 
             AppConstants.HOST = AppConstants.HOST_LOGIN
             AppConstants.PORT = 4000
-            return object : NetworkBoundResourceNoCache<BaseResponse<Order>>(appExecutors) {
+            return object : NetworkBoundResourceNoCache<BaseResponse<ArrayList<Order>>>(appExecutors) {
 
-                override fun createCall(): LiveData<ApiResponse<BaseResponse<Order>>> {
+                override fun createCall(): LiveData<ApiResponse<BaseResponse<ArrayList<Order>>>> {
                     return webService.loadOrderDetails(header, JsonObject().apply {
                         addProperty("userID", data["userID"]!!)
                     })
                 }
             }.asLiveData()
         }
+
+    fun loadApprovedProducts(data: HashMap<String, String>): LiveData<Resource<BaseResponse<ArrayList<Product>>>> {
+
+        val header = HashMap<String, String>()
+        header["platform"] = "Android"
+        header["isAuthRequired"] = "true"
+        header["packageName"] = "com.bizcrum.shoekonnect"
+        header["sessionToken"] = SessionUtils.getAuthTokens(true)!!
+        header["Content-Type"] = "application/json"
+
+        AppConstants.HOST = AppConstants.HOST
+        AppConstants.PORT = 80
+        return object : NetworkBoundResourceNoCache<BaseResponse<ArrayList<Product>>>(appExecutors) {
+
+            override fun createCall(): LiveData<ApiResponse<BaseResponse<ArrayList<Product>>>> {
+                return webService.loadApprovedProducts(header, JsonObject().apply {
+                    addProperty("searchKey", data["searchKey"]!!)
+                    addProperty("count", data["count"]!!)
+                    addProperty("start",data["start"]!!)
+                })
+            }
+        }.asLiveData()
+    }
 }
+
+

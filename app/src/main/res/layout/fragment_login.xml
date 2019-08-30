@@ -45,7 +45,9 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".65"
             android:layout_margin="@dimen/main_padding"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"

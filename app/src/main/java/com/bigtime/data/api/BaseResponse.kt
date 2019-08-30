@@ -16,7 +16,7 @@ data class BaseResponse<T>(
         @field:SerializedName("function")
         val function: String,
 
-        @field:SerializedName("status")
+        @SerializedName(value="status", alternate=(arrayOf("response")))
         val status: Int,
 
         @field:SerializedName("message")

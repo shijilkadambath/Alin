@@ -75,6 +75,13 @@
 
         </FrameLayout>
 
+        <include
+            layout="@layout/widget_light_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/l_top"
+            app:showLoading="@{isLoading}" />
+
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -165,5 +172,10 @@
         <variable
             name="callback"
             type="com.bigtime.ui.RetryCallback" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
     </data>
 </layout>
