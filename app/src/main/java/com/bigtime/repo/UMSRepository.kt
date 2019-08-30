@@ -180,8 +180,8 @@ class UMSRepository @Inject constructor(
     }
 
     fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
-        AppConstants.HOST = AppConstants.HOST_LOGIN
-        AppConstants.PORT = 4000
+        AppConstants.HOST = AppConstants.HOST
+        AppConstants.PORT = 80
 
         return object : NetworkBoundResourceNoCache<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>(appExecutors) {
 
@@ -202,7 +202,7 @@ class UMSRepository @Inject constructor(
         header["Content-Type"] = "application/json"
 
         AppConstants.HOST = AppConstants.HOST
-        AppConstants.PORT = 4000
+        AppConstants.PORT = 80
 
         return object : NetworkBoundResourceNoCache<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>(appExecutors) {
             override fun createCall(): LiveData<ApiResponse<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
