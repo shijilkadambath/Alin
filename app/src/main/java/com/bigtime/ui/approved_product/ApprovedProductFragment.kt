@@ -9,15 +9,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.*
 import com.bigtime.AppExecutors
 
 import com.bigtime.R
 import com.bigtime.common.autoCleared
 import com.bigtime.data.api.Status
 import com.bigtime.data.model.Product
+import com.bigtime.data.model.ProductVariant
 import com.bigtime.databinding.*
 import com.bigtime.ui.BaseDataBindListAdapter
 import com.bigtime.ui.BaseFragment
@@ -54,14 +56,17 @@ class ApprovedProductFragment : BaseFragment<FragmentApprovedProductBinding>() {
         mBinding.toolbar.setNavigationOnClickListener {
             activity!!.onBackPressed()
         }
-        mBinding.toolbar.title ="Product Listing"
+        mBinding.toolbar.title = "Product Listing"
 
-        adapter = ListAdapter(dataBindingComponent = dataBindingComponent, appExecutors = appExecutors) {
+        adapter = ListAdapter(dataBindingComponent = dataBindingComponent, appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<Product>() {
+            override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+                return oldItem.productID == newItem.productID
+            }
 
-            /* navController().navigate(
-                     HomeFragmentDirections.showRegistration()
-             )*/
-        }
+            override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+                return oldItem.productID == newItem.productID
+            }
+        })
 
         mBinding.recycler.adapter = adapter
 
@@ -76,7 +81,7 @@ class ApprovedProductFragment : BaseFragment<FragmentApprovedProductBinding>() {
 
             mBinding.isLoading = false
 
-           when {
+            when {
                 response.data == null -> {
                     showSnackBar(response.message!!)
                 }
@@ -110,24 +115,17 @@ class ApprovedProductFragment : BaseFragment<FragmentApprovedProductBinding>() {
 
     fun navController() = findNavController()
 
+
     class ListAdapter(
             private val dataBindingComponent: DataBindingComponent,
-            appExecutors: AppExecutors,
-            private val itemClickCallback: ((Product) -> Unit)?
-    ) : BaseDataBindListAdapter<Product, ItemProductBinding>(
-            appExecutors = appExecutors,
-            diffCallback = object : DiffUtil.ItemCallback<Product>() {
-                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-                    return oldItem.productID == newItem.productID
-                }
+            val appExecutors: AppExecutors,
+            diffCallback: DiffUtil.ItemCallback<Product>) : androidx.recyclerview.widget.ListAdapter<Product, ListAdapter.DataBindViewHolder>(
 
-                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-                    return oldItem.productID == newItem.productID
-                }
-            }
+            AsyncDifferConfig.Builder<Product>(diffCallback)
+                    .setBackgroundThreadExecutor(appExecutors.diskIO())
+                    .build()
     ) {
-
-        override fun createBinding(parent: ViewGroup): ItemProductBinding {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListAdapter.DataBindViewHolder{
             val binding = DataBindingUtil.inflate<ItemProductBinding>(
                     LayoutInflater.from(parent.context),
                     R.layout.item_product,
@@ -135,61 +133,71 @@ class ApprovedProductFragment : BaseFragment<FragmentApprovedProductBinding>() {
                     false,
                     dataBindingComponent
             )
-            binding.root.setOnClickListener {
-                binding.order?.let {
-                    itemClickCallback?.invoke(it)
-                }
+
+
+            return DataBindViewHolder(binding,dataBindingComponent,appExecutors )
+        }
+
+        override fun onBindViewHolder(holder: ListAdapter.DataBindViewHolder, position: Int) {
+            holder.binding.order = getItem(position)
+            holder.adapter.submitList(getItem(position).variants)
+            holder.binding.executePendingBindings()
+        }
+
+
+       /* class DataBindViewHolder constructor(val binding: ItemProductBinding) :
+                RecyclerView.ViewHolder(binding.root)*/
+
+        class DataBindViewHolder(val binding: ItemProductBinding,dataBindingComponent: DataBindingComponent,
+                                 appExecutors: AppExecutors) : RecyclerView.ViewHolder(binding.root) {
+
+
+            val adapter: SubListAdapter
+
+            init {
+                adapter =  SubListAdapter(dataBindingComponent = dataBindingComponent, appExecutors = appExecutors)
+                binding.recycler.layoutManager = LinearLayoutManager(binding.recycler.context,RecyclerView.HORIZONTAL,false)
+                binding.recycler.adapter = adapter
             }
-            return binding
         }
 
-        override fun bind(binding: ItemProductBinding, item: Product) {
-            binding.order = item
-
-            binding.tvLanguage.setText(item.brandName)
-        }
     }
+
 
 
 
 
     class SubListAdapter(
             private val dataBindingComponent: DataBindingComponent,
-            appExecutors: AppExecutors,
-            private val itemClickCallback: ((Product) -> Unit)?
-    ) : BaseDataBindListAdapter<Product, ItemProductBinding>(
+            appExecutors: AppExecutors) : BaseDataBindListAdapter<ProductVariant, ItemProductVariantBinding
+            >(
             appExecutors = appExecutors,
-            diffCallback = object : DiffUtil.ItemCallback<Product>() {
-                override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-                    return oldItem.productID == newItem.productID
+            diffCallback = object : DiffUtil.ItemCallback<ProductVariant>() {
+                override fun areItemsTheSame(oldItem: ProductVariant, newItem: ProductVariant): Boolean {
+                    return oldItem.variantID == newItem.variantID
                 }
 
-                override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-                    return oldItem.productID == newItem.productID
+                override fun areContentsTheSame(oldItem: ProductVariant, newItem: ProductVariant): Boolean {
+                    return oldItem.variantID == newItem.variantID
                 }
             }
     ) {
 
-        override fun createBinding(parent: ViewGroup): ItemProductBinding {
-            val binding = DataBindingUtil.inflate<ItemProductBinding>(
+        override fun createBinding(parent: ViewGroup): ItemProductVariantBinding {
+            val binding = DataBindingUtil.inflate<ItemProductVariantBinding>(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_product,
+                    R.layout.item_product_variant,
                     parent,
                     false,
                     dataBindingComponent
             )
-            binding.root.setOnClickListener {
-                binding.order?.let {
-                    itemClickCallback?.invoke(it)
-                }
-            }
             return binding
         }
 
-        override fun bind(binding: ItemProductBinding, item: Product) {
+        override fun bind(binding: ItemProductVariantBinding, item: ProductVariant) {
             binding.order = item
 
-            binding.tvLanguage.setText(item.brandName)
+            //binding.tvLanguage.setText(item.brandName)
         }
     }
 }
