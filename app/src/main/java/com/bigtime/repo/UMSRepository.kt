@@ -201,6 +201,9 @@ class UMSRepository @Inject constructor(
         header["isAuthRequired"] = "true"
         header["Content-Type"] = "application/json"
 
+        AppConstants.HOST = AppConstants.HOST
+        AppConstants.PORT = 4000
+
         return object : NetworkBoundResourceNoCache<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>(appExecutors) {
             override fun createCall(): LiveData<ApiResponse<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
                 return webService.loadBrandDetails(header, data)
