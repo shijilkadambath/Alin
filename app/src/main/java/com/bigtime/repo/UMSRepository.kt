@@ -25,6 +25,7 @@ import com.bigtime.data.db.AppDb
 import com.bigtime.data.db.UMSDao
 import com.bigtime.data.model.Brand
 import com.bigtime.data.model.MainCategory
+import com.bigtime.data.model.Order
 import com.bigtime.data.model.User
 import com.bigtime.utils.AppConstants
 import com.bigtime.utils.SessionUtils
@@ -176,6 +177,9 @@ class UMSRepository @Inject constructor(
     }
 
     fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
+        AppConstants.HOST = AppConstants.HOST_LOGIN
+        AppConstants.PORT = 4000
+
         return object : NetworkBoundResourceNoCache<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>(appExecutors) {
 
             override fun createCall(): LiveData<ApiResponse<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
@@ -185,4 +189,26 @@ class UMSRepository @Inject constructor(
             }
         }.asLiveData()
     }
+
+
+        fun loadOrderDetais(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Order>>> {
+
+            val header = HashMap<String, String>()
+            header["SOURCE"] = "cCX1G9EVpL"
+            header["PLATFORM"] = "Android"
+            header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
+            header["SKAUTH-TOKEN"] = data["token"]!!
+            header["Content-Type"] = "application/json"
+
+            AppConstants.HOST = AppConstants.HOST_LOGIN
+            AppConstants.PORT = 4000
+            return object : NetworkBoundResourceNoCache<BaseResponse<Order>>(appExecutors) {
+
+                override fun createCall(): LiveData<ApiResponse<BaseResponse<Order>>> {
+                    return webService.loadOrderDetails(header, JsonObject().apply {
+                        addProperty("userID", data["userID"]!!)
+                    })
+                }
+            }.asLiveData()
+        }
 }
