@@ -17,11 +17,13 @@ import com.bigtime.AppExecutors
 
 import com.bigtime.R
 import com.bigtime.common.autoCleared
+import com.bigtime.data.api.Status
 import com.bigtime.data.model.Order
 import com.bigtime.databinding.*
 import com.bigtime.ui.BaseDataBindListAdapter
 import com.bigtime.ui.BaseFragment
 import com.bigtime.ui.RetryCallback
+import com.bigtime.utils.SessionUtils
 import javax.inject.Inject
 
 private const val TAG: String = "OrderFragment"
@@ -40,7 +42,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
     lateinit var adapter: ListAdapter
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_order;
+        return R.layout.fragment_order
     }
 
 
@@ -67,6 +69,35 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
         mBinding.recycler.adapter = adapter
 
 
+        mViewModel.orderResponseLiveData.removeObservers(this)
+        mViewModel.orderResponseLiveData.observe(this, Observer { response ->
+
+            if (response == null || response.status == Status.LOADING) {
+                return@Observer
+            }
+
+            mBinding.isLoading = false
+
+            when {
+                response.data == null -> {
+                    showSnackBar(response.message!!)
+                }
+
+                response.data.status == 1 -> {
+                    showSnackBar(response.data.message)
+                }
+
+                else -> {
+                    showSnackBar(response.data.message)
+                }
+            }
+
+            mViewModel.loadOrderDetails(null)
+
+        })
+
+
+
         var list = ArrayList<Order>()
         list.add(Order("1","New",129,R.drawable.ic_product_new))
         list.add(Order("1","In Process",12,R.drawable.ic_product_progress))
@@ -77,6 +108,12 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
 
         adapter.submitList(list)
+
+        val data = HashMap<String, String>()
+        data["userID"] = SessionUtils.loginSession!!.userId.toString()
+        data["token"] = SessionUtils.getAuthTokens(true)!!
+
+        mViewModel.loadOrderDetails(data)
 
     }
 

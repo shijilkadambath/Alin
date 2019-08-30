@@ -21,7 +21,7 @@ class OrderViewModel
 
     private val orderRequestLiveData = MutableLiveData<HashMap<String, String>>()
 
-    fun login(data: HashMap<String, String>?) {
+    fun loadOrderDetails(data: HashMap<String, String>?) {
         orderRequestLiveData.value = data
     }
 
@@ -33,5 +33,7 @@ class OrderViewModel
                     repoRepository.loadOrderDetais(data)
                 }
             }
+
+
 
 }

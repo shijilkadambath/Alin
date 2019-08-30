@@ -15,6 +15,9 @@
             name="resultCount"
             type="int" />
 
+        <variable
+            name="isLoading"
+            type="boolean" />
 
         <variable
             name="searchResource"
@@ -46,6 +49,15 @@
 
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <include
+            layout="@layout/widget_light_progress_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/appbar"
+            app:layout_constraintEnd_toEndOf="@+id/appbar"
+            app:layout_constraintStart_toStartOf="@+id/appbar"
+            app:showLoading="@{isLoading}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
