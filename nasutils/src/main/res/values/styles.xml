@@ -86,6 +86,10 @@
     </style>
 
     <!--THIS IS FOR SECOND-TITLE FONTS-->
+    <style name="Text.SecondTitle.Medium" parent="TextAppearance.AppCompat.SearchResult.Title">
+        <item name="android:fontFamily">@font/bold</item>
+    </style>
+
     <style name="Text.SecondTitle.Regular" parent="TextAppearance.AppCompat.SearchResult.Title">
         <item name="android:fontFamily">@font/normal</item>
     </style>

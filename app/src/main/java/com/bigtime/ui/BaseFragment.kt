@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
@@ -64,7 +66,6 @@ abstract class BaseFragment< T : ViewDataBinding> : Fragment() , Injectable {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(),
                 container, false, dataBindingComponent)
-
         return mBinding.root
     }
 
@@ -79,6 +80,11 @@ abstract class BaseFragment< T : ViewDataBinding> : Fragment() , Injectable {
 
     fun <V : ViewModel> getViewModel(clazz: Class<V>): V {
        return  ViewModelProviders.of(this, mViewModelFactory).get(clazz)
+
+    }
+
+    fun <V : ViewModel> getViewModelShared(activity: FragmentActivity, clazz: Class<V>): V {
+        return  ViewModelProviders.of(activity, mViewModelFactory).get(clazz)
 
     }
 
@@ -110,6 +116,21 @@ abstract class BaseFragment< T : ViewDataBinding> : Fragment() , Injectable {
                 }
             } else {
                 Log.w(LoginFragment.TAG, "Getting FirebaseInstanceId failed", task.exception)
+            }
+        }
+    }
+
+    protected fun setUpUI(view: View) {
+        if (view !is EditText) {
+            view.setOnTouchListener { p0, p1 ->
+                dismissKeyboard(view.windowToken)
+                false
+            }
+        }
+        if (view is ViewGroup) {
+            for (i in 0..view.childCount) {
+                val v = view.getChildAt(i)
+                setUpUI(v)
             }
         }
     }

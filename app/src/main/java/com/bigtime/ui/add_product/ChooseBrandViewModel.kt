@@ -23,6 +23,7 @@ class ChooseBrandViewModel
 
     private val apiParams = MutableLiveData<HashMap<String, String>>()
 
+    private var selectedBrand: Brand? = null
 
     fun loadBrands(map: HashMap<String, String>) {
         apiParams.value = map
@@ -40,4 +41,12 @@ class ChooseBrandViewModel
                     repo.loadBrands(data)
                 }
             }
-}
+
+    fun selectedItem(brand: Brand?) {
+        this.selectedBrand = brand
+    }
+
+    fun getSelectedBrand(): Brand? {
+        return selectedBrand
+    }
+ }

@@ -5,16 +5,17 @@ package com.bigtime.ui.add_product
  * Email : shijilkadambath@gmail.com
  */
 import android.os.Bundle
+import android.text.*
+import android.view.MotionEvent
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bigtime.AppExecutors
 
 import com.bigtime.R
-import com.bigtime.common.autoCleared
 import com.bigtime.databinding.FragmentChooseProductBinding
-import com.bigtime.databinding.FragmentLoginBinding
 import com.bigtime.ui.BaseFragment
-import com.bigtime.ui.RetryCallback
+import com.bigtime.utils.AddProductConstants
 import javax.inject.Inject
 
 private const val TAG: String = "LoginFragment"
@@ -39,15 +40,134 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        mViewModel = getViewModel(AddProductViewModel::class.java)
+//        setUpUI(mBinding.parentView)
 
-        mBinding.btnNext.setOnClickListener {
+        activity?.let {
+            mViewModel = getViewModelShared(it, AddProductViewModel::class.java)
+        }
 
+        mViewModel.setIconChange(AddProductConstants.chooseFragment)
+
+        initUi()
+
+        /*mBinding.btnNext.setOnClickListener {
             navController().navigate(
                     ChooseFragmentDirections.actionAddProductDetailFragment()
             )
 
+        }*/
+    }
+
+
+    private fun initUi() {
+
+        mBinding.lotValue.addTextChangedListener(MyTextWatcher(mBinding.lotValue))
+        mBinding.moqValue.addTextChangedListener(MyTextWatcher(mBinding.moqValue))
+
+        if (mViewModel.lotValue.isEmpty())
+            mBinding.lotValue.setText("8")
+
+        mBinding.lotIncrement.setOnClickListener {
+            dismissKeyboard(mBinding.lotIncrement.windowToken)
+            val lot = mBinding.lotValue.text.toString()
+            if (lot.isEmpty()) {
+                mBinding.lotValue.setText("3")
+                return@setOnClickListener
+            }
+
+            val addedValue = (lot.toInt() + 1).toString()
+            mBinding.lotValue.setText(addedValue)
         }
+
+        mBinding.lotDecrement.setOnClickListener {
+            dismissKeyboard(mBinding.lotDecrement.windowToken)
+
+            val lot = mBinding.lotValue.text.toString()
+            if (lot.isEmpty())
+                return@setOnClickListener
+
+            val subValue = (lot.toInt() - 1)
+            if (subValue >= 0)
+            mBinding.lotValue.setText(subValue.toString())
+
+        }
+
+        mViewModel.isLotValueValid().observe(this, Observer {
+            moqViewChange(it)
+            mBinding.lotError.visibility = if (it) {
+                View.INVISIBLE
+            }else{
+                View.VISIBLE
+            }
+        })
+
+
+        //moqValue
+        mBinding.moqIncrement.setOnClickListener {
+            dismissKeyboard(mBinding.moqIncrement.windowToken)
+            mViewModel.moqValueIncrement(mBinding.moqValue.text.toString())
+        }
+
+        mBinding.moqDecrement.setOnClickListener {
+            dismissKeyboard(mBinding.moqDecrement.windowToken)
+            mViewModel.moqValueDecrement(mBinding.moqValue.text.toString())
+        }
+
+        mViewModel.getMoqValue().observe(this, Observer {
+            mBinding.moqValue.setText(it)
+        })
+
+        mViewModel.isMoqValueValid().observe(this, Observer {
+            mViewModel.enableNextButton(it)
+            mBinding.moqError.visibility = if (it) {
+                View.INVISIBLE
+            }else{
+                View.VISIBLE
+            }
+        })
+
+    }
+
+    private fun moqViewChange(enabled: Boolean) {
+//        mBinding.moqValue.setText("")
+        mBinding.moqIncrement.isEnabled = enabled
+        mBinding.moqDecrement.isEnabled = enabled
+        mBinding.moqValue.isEnabled = enabled
+    }
+
+   /* private inner class MyFilter(val sValue: Int, val eValue: Int): InputFilter {
+
+        override fun filter(p0: CharSequence?, p1: Int, p2: Int, p3: Spanned?, p4: Int, p5: Int): CharSequence {
+            val input = (p3.toString() + p0.toString()).toInt()
+            mViewModel.isInRange(sValue, eValue, input)
+            return  ""
+        }
+
+
+
+    }*/
+
+    private inner class MyTextWatcher(val view: View) : TextWatcher {
+        override fun afterTextChanged(p0: Editable?) {
+            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            when(view.id) {
+                R.id.lotValue -> {
+                    mViewModel.checkLotValue(p0.toString())
+                }
+
+                R.id.moqValue -> {
+                    mViewModel.checkMoqValue(p0.toString())
+                }
+            }
+        }
+
     }
 
     fun navController() = findNavController()

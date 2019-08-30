@@ -39,6 +39,7 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
     private lateinit var viewModel: ChooseBrandViewModel
 
     private var adapter by autoCleared<BrandsAdapter>()
+    private var listener by autoCleared<Callback>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -57,6 +58,10 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    fun setCallBack(listener: Callback) {
+        this.listener = listener
     }
 
     override fun onResume() {
@@ -86,7 +91,17 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
             dismiss()
         }
 
-        adapter = BrandsAdapter(dataBindingComponent, appExecutors = appExecutors){
+        adapter = BrandsAdapter(dataBindingComponent, appExecutors = appExecutors){item ->
+           viewModel.selectedItem(item)
+        }
+
+        mBinding.nextButton.setOnClickListener {
+            if (viewModel.getSelectedBrand() != null) {
+                listener.onNextClick(viewModel.getSelectedBrand())
+                dismiss()
+            }else {
+                showSnackBar("Please Select Brand")
+            }
 
         }
 
@@ -123,11 +138,7 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
                 response.data.isSuccess() ->{
 
                     mBinding.searchResource = response
-                    adapter.submitList(response.data.data.apply {
-                        this?.add(Brand("Puma", 101))
-                        this?.add(Brand("Adidas", 102))
-                        this?.add(Brand("Nike", 103))
-                    })
+                    adapter.submitList(response.data.data)
                     //adapter.submitList(response.data.data2)  Main category list
                 }
                 else -> {
@@ -156,5 +167,9 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    interface Callback {
+        fun onNextClick(brandItem: Brand?)
     }
 }

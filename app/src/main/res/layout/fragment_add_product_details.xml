@@ -25,32 +25,829 @@
             type="com.bigtime.ui.RetryCallback" />
     </data>
 
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true"
+		>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <TextView
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Product Details"
-            app:layout_constraintBottom_toTopOf="@+id/btn_next"
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/top"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01"/>
+
+		            <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/left"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.04"/>
+
+		            <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/right"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.95"/>
 
 
-        <Button
-            android:id="@+id/btn_next"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/detailIcon"
+	        android:src="@drawable/ic_user"
+	        android:padding="4dp"
+            app:layout_constraintStart_toStartOf="@id/left"
+	        app:layout_constraintTop_toTopOf="@id/top"/>
 
 
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/detailHeading"
+		    android:text="@string/detailHeading"
+		    style="@style/Text.SecondTitle.Medium"
+		    app:layout_constraintTop_toTopOf="@id/detailIcon"
+		    app:layout_constraintBottom_toBottomOf="@id/detailIcon"
+		    android:layout_marginStart="6dp"
+		    app:layout_constraintStart_toEndOf="@+id/detailIcon"/>
+
+
+	    <View
+		    android:layout_width="0dp"
+		    android:layout_height="1dp"
+		    android:id="@+id/v1"
+		    android:background="@color/colorSeparator"
+		    app:layout_constraintTop_toBottomOf="@id/detailIcon"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"/>
+
+	     <androidx.appcompat.widget.AppCompatTextView
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:id="@+id/headingPriceDetails"
+		     android:text="@string/headingPriceDetails"
+		     style="@style/Text.SecondTitle.Medium"
+		     android:textColor="@color/colorAccent"
+		     app:layout_constraintTop_toBottomOf="@+id/v1"
+		     android:layout_marginTop="15dp"
+		     app:layout_constraintStart_toStartOf="@id/left"/>
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/headingLotLevel"
+		    android:text="@string/headingLotLevel"
+		    style="@style/Text.SecondTitle.Medium"
+		    app:layout_constraintTop_toBottomOf="@+id/headingPriceDetails"
+		    android:layout_marginTop="15dp"
+		    app:layout_constraintStart_toStartOf="@id/left"/>
+
+
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/titleSkPrice"
+		    android:text="Sk Price"
+		    style="@style/Text.SubTitle.Light"
+		    android:textColor="@color/black"
+		    app:layout_constraintBottom_toTopOf="@+id/skValue"
+		    app:layout_constraintStart_toStartOf="@id/skValue"/>
+
+	    <com.google.android.material.textfield.TextInputEditText
+		    android:layout_width="0dp"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/skValue"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Enter Sk Price"
+		    android:layout_marginEnd="10dp"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    app:layout_constraintEnd_toStartOf="@+id/mrpValue"
+		    android:layout_marginTop="40dp"
+		    android:background="@drawable/bg_ractangle_white"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintTop_toBottomOf="@+id/headingLotLevel"/>
+
+
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/titleMrp"
+		    android:text="MRP"
+		    style="@style/Text.SubTitle.Light"
+		    android:textColor="@color/black"
+		    app:layout_constraintBottom_toTopOf="@+id/mrpValue"
+		    app:layout_constraintStart_toStartOf="@id/mrpValue"/>
+
+	    <com.google.android.material.textfield.TextInputEditText
+		    android:layout_width="0dp"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/mrpValue"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Enter MRP"
+		    app:layout_constraintEnd_toStartOf="@+id/calcSkPrice"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_marginEnd="10dp"
+		    android:layout_marginTop="40dp"
+		    android:background="@drawable/bg_ractangle_white"
+		    app:layout_constraintStart_toEndOf="@+id/skValue"
+		    app:layout_constraintTop_toBottomOf="@+id/headingLotLevel"/>
+
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="60dp"
+		    android:layout_height="45dp"
+		    android:id="@+id/calcSkPrice"
+		    android:background="@drawable/bg_calculator"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    app:layout_constraintTop_toTopOf="@id/mrpValue"
+		    app:layout_constraintBottom_toBottomOf="@id/mrpValue"
+		    app:layout_constraintStart_toEndOf="@id/mrpValue"/>
+
+
+	    <View
+		    android:layout_width="0dp"
+		    android:layout_height="1dp"
+		    android:id="@+id/v2"
+		    android:background="@color/colorSeparator"
+		    app:layout_constraintTop_toBottomOf="@id/calcSkPrice"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"/>
+
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/headingBulkPrice"
+		    android:text="@string/headingBulkPrice"
+		    style="@style/Text.SecondTitle.Medium"
+		    app:layout_constraintTop_toBottomOf="@+id/v2"
+		    android:layout_marginTop="15dp"
+		    app:layout_constraintStart_toStartOf="@id/left"/>
+
+
+
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/titleMOQ"
+		    android:text="MOQ"
+		    style="@style/Text.SubTitle.Light"
+		    android:textColor="@color/black"
+		    app:layout_constraintBottom_toTopOf="@+id/layoutBulkValue"
+		    app:layout_constraintStart_toStartOf="@id/layoutBulkValue"/>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="@dimen/iconHeight"
+		    android:orientation="horizontal"
+		    android:layout_marginTop="40dp"
+		    android:layout_marginEnd="10dp"
+		    android:background="@drawable/bg_ractangle_white"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toStartOf="@+id/skValueBulk"
+		    app:layout_constraintTop_toBottomOf="@+id/headingBulkPrice"
+		    android:id="@+id/layoutBulkValue">
+
+
+		    <androidx.appcompat.widget.AppCompatSpinner
+			    android:layout_width="match_parent"
+			    android:layout_height="@dimen/iconHeight"
+			    android:inputType="number"
+			    android:id="@+id/moqValue"
+			    style="@style/Text.Medium.Regular"
+			    android:maxLength="4"
+			    android:hint="Enter MOQ"
+			    android:layout_alignParentStart="true"
+			    android:layout_toStartOf="@+id/dropDownMoq"
+			    android:textColor="@color/colorAccent"
+			    android:gravity="center"
+			    android:background="@drawable/bg_ractangle_white"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownMoq"
+		    android:padding="4dp"
+		    android:layout_height="match_parent"/>
+
+	    </RelativeLayout>
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/titleSkPriceBulk"
+		    android:text="Sk Price"
+		    style="@style/Text.SubTitle.Light"
+		    android:textColor="@color/black"
+		    app:layout_constraintBottom_toTopOf="@+id/skValueBulk"
+		    app:layout_constraintStart_toStartOf="@id/skValueBulk"/>
+
+	    <com.google.android.material.textfield.TextInputEditText
+		    android:layout_width="0dp"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/skValueBulk"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Enter MRP"
+		    app:layout_constraintEnd_toStartOf="@+id/calcBulk"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_marginEnd="10dp"
+		    android:layout_marginTop="40dp"
+		    android:background="@drawable/bg_ractangle_white"
+		    app:layout_constraintStart_toEndOf="@+id/layoutBulkValue"
+		    app:layout_constraintTop_toBottomOf="@+id/headingBulkPrice"/>
+
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="60dp"
+		    android:layout_height="45dp"
+		    android:id="@+id/calcBulk"
+		    android:background="@drawable/bg_calculator"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    app:layout_constraintTop_toTopOf="@id/skValueBulk"
+		    app:layout_constraintBottom_toBottomOf="@id/skValueBulk"
+		    app:layout_constraintStart_toEndOf="@id/skValueBulk"/>
+
+
+	    <View
+		    android:layout_width="0dp"
+		    android:layout_height="1dp"
+		    android:id="@+id/v3"
+		    android:background="@color/colorSeparator"
+		    app:layout_constraintTop_toBottomOf="@id/calcBulk"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"/>
+
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/headingPackageType"
+		    android:text="@string/headingPackageType"
+		    style="@style/Text.SecondTitle.Medium"
+		    app:layout_constraintTop_toBottomOf="@+id/v3"
+		    android:layout_marginTop="15dp"
+		    app:layout_constraintStart_toStartOf="@id/left"/>
+
+
+	    <RadioGroup
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
+		    android:orientation="vertical"
+		    android:id="@+id/radioGroup1"
+		    app:layout_constraintTop_toBottomOf="@+id/headingPackageType"
+		    android:layout_marginTop="15dp">
+
+		    <RadioButton
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Branded Box"
+			    android:id="@+id/radioBtnBranded"/>
+
+		    <RadioButton
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Loose Packaging"
+			    android:id="@+id/radioBtnLoosePack"/>
+
+
+	    </RadioGroup>
+
+	    <RadioGroup
+		    android:id="@+id/radioGroup2"
+		    android:layout_width="0dp"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toEndOf="@+id/radioGroup1"
+		    app:layout_constraintTop_toBottomOf="@+id/headingPackageType"
+		    android:layout_marginTop="15dp"
+		    >
+		    <RadioButton
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Non Branded Box"
+			    android:id="@+id/radioBtnNonBranded"/>
+
+	    </RadioGroup>
+
+	    <View
+		    android:layout_width="0dp"
+		    android:layout_height="1dp"
+		    android:id="@+id/v4"
+		    android:background="@color/colorSeparator"
+		    app:layout_constraintTop_toBottomOf="@id/radioGroup1"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"/>
+
+
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/headingProductDesc"
+		    android:text="@string/headingProductDesc"
+		    style="@style/Text.SecondTitle.Medium"
+		    app:layout_constraintTop_toBottomOf="@+id/v4"
+		    android:layout_marginTop="15dp"
+		    app:layout_constraintStart_toStartOf="@id/left"/>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutSubCat"
+		    app:layout_constraintTop_toBottomOf="@+id/headingProductDesc">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleSubCat"
+			    android:text="Sub Category"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/subCategory"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose sub category"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownSubCat"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleSubCat"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownSubCat"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleSubCat"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutStyle"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutSubCat">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleStyle"
+			    android:text="Style"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/style"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose Style"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownStyle"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleStyle"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownStyle"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleStyle"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutSole"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutStyle">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleSole"
+			    android:text="Sole"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/sole"
+		    style="@style/Text.Medium.Regular"
+		    android:hint="Choose Sole"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownSole"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleSole"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownSole"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleSole"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutType"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutSole">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleType"
+			    android:text="Type"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/type"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose Type"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownType"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleType"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownType"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleType"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutLining"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutType">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleLining"
+			    android:text="Lining"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/lining"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose Lining"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownLining"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleLining"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownLining"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleLining"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutUpperMaterial"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutLining">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleUpperMaterial"
+			    android:text="Upper Material"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/upperMaterial"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose Upper Material"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownUpperMaterial"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleUpperMaterial"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownUpperMaterial"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleUpperMaterial"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutInSock"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutUpperMaterial">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleInSock"
+			    android:text="Insock"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/inSock"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose insock"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownInSock"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleInSock"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownInSock"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleInSock"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutHeel"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutInSock">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleHeel"
+			    android:text="Heel"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/heel"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose Heel"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownHeel"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleHeel"
+		    />
+
+	    <androidx.appcompat.widget.AppCompatImageView
+		    android:layout_width="wrap_content"
+		    android:background="@color/gray_dark"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black"
+		    android:layout_alignParentEnd="true"
+		    android:id="@+id/dropDownHeel"
+		    android:padding="6dp"
+		    android:layout_below="@+id/titleHeel"
+		    android:layout_height="@dimen/iconHeight"/>
+
+	    </RelativeLayout>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutWtPair"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutHeel">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleWtPair"
+			    android:text="Weight 1 Pair"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <com.google.android.material.textfield.TextInputEditText
+		    android:layout_width="match_parent"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/wtPair"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Enter weight 1 pair"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleWtPair"
+		    />
+	    </RelativeLayout>
+
+	    <CheckBox
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/imported"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutWtPair"
+		    android:layout_marginTop="15dp"
+		    android:text="@string/imported"
+		    style="@style/Text.SubTitle.Light"
+		    android:textColor="@color/black"
+		    app:layout_constraintStart_toStartOf="@id/left"/>
+
+	    <RelativeLayout
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    app:layout_constraintStart_toStartOf="@id/left"
+		    app:layout_constraintEnd_toEndOf="@id/right"
+		    android:layout_marginTop="15dp"
+		    android:id="@+id/layoutSizeSet"
+		    app:layout_constraintTop_toBottomOf="@+id/imported">
+
+		    <androidx.appcompat.widget.AppCompatTextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/titleSizeSet"
+			    android:text="Size Set"
+			    style="@style/Text.SubTitle.Light"
+			    android:textColor="@color/black"
+			    android:layout_alignParentTop="true"
+			    />
+
+	    <com.google.android.material.textfield.TextInputEditText
+		    android:layout_width="match_parent"
+		    android:layout_height="@dimen/iconHeight"
+		    android:inputType="number"
+		    android:id="@+id/sizeSet"
+		    style="@style/Text.Medium.Regular"
+		    android:maxLength="4"
+		    android:hint="Choose Size Set"
+		    android:textColor="@color/colorAccent"
+		    android:gravity="center"
+		    android:layout_alignParentStart="true"
+		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_below="@+id/titleSizeSet"
+		    />
+	    </RelativeLayout>
+
+	    <View
+		    android:layout_width="match_parent"
+		    android:layout_height="50dp"
+		    app:layout_constraintTop_toBottomOf="@+id/layoutSizeSet"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+	</androidx.core.widget.NestedScrollView>
 </layout>

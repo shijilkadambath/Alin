@@ -25,22 +25,329 @@
             type="com.bigtime.ui.RetryCallback" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:fillViewport="true"
+	        android:id="@+id/parentView"
+	        app:layout_constraintTop_toTopOf="parent">
+	            <androidx.constraintlayout.widget.ConstraintLayout
+		            android:layout_width="match_parent"
+		            android:layout_height="match_parent"
+		            android:background="@color/white">
+
+		            <androidx.constraintlayout.widget.Guideline
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/top"
+			            android:orientation="horizontal"
+			            app:layout_constraintGuide_percent="0.05"/>
+
+		            <androidx.constraintlayout.widget.Guideline
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/left"
+			            android:orientation="vertical"
+			            app:layout_constraintGuide_percent="0.04"/>
+
+		            <androidx.constraintlayout.widget.Guideline
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/right"
+			            android:orientation="vertical"
+			            app:layout_constraintGuide_percent="0.95"/>
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/textLotSize"
+			            android:text="@string/ChooseLotSize"
+			            style="@style/Text.SecondTitle.Medium"
+			            android:textColor="@color/black"
+			            app:layout_constraintEnd_toStartOf="@+id/lotDecrement"
+			            app:layout_constraintStart_toStartOf="@id/left"
+			            app:layout_constraintTop_toTopOf="@id/lotDecrement"
+			            app:layout_constraintBottom_toBottomOf="@id/lotDecrement"
+			            />
 
 
-        <TextView
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Choose"
-            app:layout_constraintBottom_toTopOf="@+id/btn_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="@dimen/iconHeight"
+			            android:layout_height="@dimen/iconHeight"
+			            android:id="@+id/lotIncrement"
+			            android:text="@string/plus"
+			            android:gravity="center"
+			            android:background="@drawable/bg_ractangle_light_accent"
+			            app:layout_constraintTop_toTopOf="@+id/top"
+			            style="@style/Text.Title.Medium"
+			            android:textColor="@color/colorAccent"
+			            app:layout_constraintEnd_toEndOf="@id/right"/>
 
 
-        <Button
+		            <com.google.android.material.textfield.TextInputEditText
+			            android:layout_width="80dp"
+			            android:layout_height="@dimen/iconHeight"
+			            android:inputType="number"
+			            android:id="@+id/lotValue"
+			            style="@style/Text.Medium.Medium"
+			            tools:text="8"
+			            android:maxLength="2"
+			            android:textColor="@color/colorAccent"
+			            android:gravity="center"
+			            android:background="@drawable/bg_ractangle_white"
+			            app:layout_constraintEnd_toStartOf="@+id/lotIncrement"
+			            app:layout_constraintTop_toTopOf="@id/top"/>
+
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/lotError"
+			            android:text="Invalid Size"
+			            android:visibility="invisible"
+			            app:layout_constraintTop_toBottomOf="@+id/lotValue"
+			            android:textColor="@color/red"
+			            app:layout_constraintStart_toStartOf="@id/lotValue"/>
+
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="@dimen/iconHeight"
+			            android:layout_height="@dimen/iconHeight"
+			            android:id="@+id/lotDecrement"
+			            android:text="@string/minus"
+			            android:gravity="center"
+			            android:background="@drawable/bg_ractangle_light_accent"
+			            app:layout_constraintTop_toTopOf="@+id/top"
+			            style="@style/Text.Title.Medium"
+			            android:textColor="@color/colorAccent"
+			            app:layout_constraintEnd_toStartOf="@+id/lotValue"/>
+
+
+		            <View
+			            android:layout_width="0dp"
+			            android:layout_height="1dp"
+			            android:id="@+id/separator1"
+			            app:layout_constraintTop_toBottomOf="@+id/lotValue"
+			            app:layout_constraintStart_toStartOf="@id/left"
+			            app:layout_constraintEnd_toEndOf="@id/right"
+			            android:background="@color/gray_dark"
+			            android:layout_marginTop="20dp"/>
+
+
+
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/textMOQ"
+			            android:text="@string/chooseMOQ"
+			            style="@style/Text.SecondTitle.Medium"
+			            android:textColor="@color/black"
+			            app:layout_constraintEnd_toStartOf="@+id/moqDecrement"
+			            app:layout_constraintStart_toStartOf="@id/left"
+			            app:layout_constraintTop_toTopOf="@id/moqDecrement"
+			            app:layout_constraintBottom_toBottomOf="@id/moqDecrement"
+			            />
+
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="@dimen/iconHeight"
+			            android:layout_height="@dimen/iconHeight"
+			            android:id="@+id/moqIncrement"
+			            android:text="@string/plus"
+			            android:gravity="center"
+			            android:background="@drawable/bg_ractangle_light_accent"
+			            app:layout_constraintTop_toBottomOf="@+id/separator1"
+			            style="@style/Text.Title.Medium"
+			            android:layout_marginTop="20dp"
+			            android:textColor="@color/colorAccent"
+			            app:layout_constraintEnd_toEndOf="@id/right"/>
+
+
+		            <com.google.android.material.textfield.TextInputEditText
+			            android:layout_width="80dp"
+			            android:layout_height="@dimen/iconHeight"
+			            android:id="@+id/moqValue"
+			            style="@style/Text.Medium.Medium"
+			            tools:text="8"
+			            android:maxLength="4"
+			            android:inputType="number"
+			            android:textColor="@color/colorAccent"
+			            android:gravity="center"
+			            android:background="@drawable/bg_ractangle_white"
+			            app:layout_constraintEnd_toStartOf="@+id/moqIncrement"
+			            app:layout_constraintTop_toTopOf="@id/moqIncrement"/>
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/moqError"
+			            android:text="Invalid Moq"
+			            android:visibility="invisible"
+			            app:layout_constraintTop_toBottomOf="@+id/moqValue"
+			            android:textColor="@color/red"
+			            app:layout_constraintStart_toStartOf="@id/moqValue"/>
+
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="@dimen/iconHeight"
+			            android:layout_height="@dimen/iconHeight"
+			            android:id="@+id/moqDecrement"
+			            android:text="@string/minus"
+			            android:gravity="center"
+			            android:background="@drawable/bg_ractangle_light_accent"
+			            app:layout_constraintTop_toTopOf="@+id/moqIncrement"
+			            style="@style/Text.Title.Medium"
+			            android:textColor="@color/colorAccent"
+			            app:layout_constraintEnd_toStartOf="@+id/moqValue"/>
+
+
+		            <View
+			            android:layout_width="0dp"
+			            android:layout_height="1dp"
+			            android:id="@+id/separator2"
+			            app:layout_constraintTop_toBottomOf="@+id/moqValue"
+			            app:layout_constraintStart_toStartOf="@id/left"
+			            app:layout_constraintEnd_toEndOf="@id/right"
+			            android:background="@color/gray_dark"
+			            android:layout_marginTop="20dp"/>
+
+
+
+
+
+		            <androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/selectCategory"
+			            android:text="@string/selectCategory"
+			            style="@style/Text.SecondTitle.Medium"
+			            android:textColor="@color/black"
+			            app:layout_constraintStart_toStartOf="@id/left"
+			            android:layout_marginTop="20dp"
+			            app:layout_constraintTop_toBottomOf="@+id/separator2"
+			            />
+
+
+		            <LinearLayout
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:orientation="horizontal"
+			            android:id="@+id/layoutMen"
+			            android:padding="5dp"
+			            android:layout_marginTop="20dp"
+			            android:background="@drawable/bg_ractangle_outline"
+			            android:gravity="center_vertical"
+			            app:layout_constraintEnd_toStartOf="@id/layoutWomen"
+			            app:layout_constraintTop_toBottomOf="@+id/selectCategory"
+			            app:layout_constraintStart_toStartOf="@id/left">
+
+			            <RadioButton
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:id="@+id/radioBtnMen"/>
+
+			            <androidx.appcompat.widget.AppCompatImageView
+				            android:layout_width="@dimen/iconHeight"
+				            android:layout_height="@dimen/iconHeight"
+				            android:padding="5dp"
+				            android:src="@drawable/ic_user"/>
+
+			            <androidx.appcompat.widget.AppCompatTextView
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/men"
+				            android:textColor="@color/black"
+				            style="@style/Text.Medium.Regular"/>
+
+		            </LinearLayout>
+
+		            <LinearLayout
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:orientation="horizontal"
+			            android:id="@+id/layoutWomen"
+			            android:padding="5dp"
+			            android:gravity="center_vertical"
+			            android:layout_marginStart="20dp"
+			            android:background="@drawable/bg_ractangle_outline"
+			            app:layout_constraintEnd_toEndOf="@id/right"
+			            app:layout_constraintTop_toTopOf="@id/layoutMen"
+			            app:layout_constraintTop_toBottomOf="@+id/selectCategory"
+			            app:layout_constraintStart_toEndOf="@+id/layoutMen">
+
+
+			            <RadioButton
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:id="@+id/radioBtnWomen"/>
+
+			            <androidx.appcompat.widget.AppCompatImageView
+				            android:layout_width="@dimen/iconHeight"
+				            android:layout_height="@dimen/iconHeight"
+				            android:layout_marginStart="4dp"
+				            android:padding="5dp"
+				            android:src="@drawable/ic_user"/>
+
+			            <androidx.appcompat.widget.AppCompatTextView
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/women"
+				            android:textColor="@color/black"
+				            android:layout_marginStart="4dp"
+				            style="@style/Text.Medium.Regular"/>
+
+		            </LinearLayout>
+
+		            <LinearLayout
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:orientation="horizontal"
+			            android:id="@+id/layoutKids"
+			            android:padding="5dp"
+			            android:background="@drawable/bg_ractangle_outline"
+			            android:gravity="center_vertical"
+			            android:layout_marginTop="20dp"
+			            app:layout_constraintTop_toBottomOf="@+id/layoutMen"
+			            app:layout_constraintStart_toStartOf="@id/layoutMen"
+			            app:layout_constraintEnd_toEndOf="@id/layoutMen">
+
+
+			             <RadioButton
+				             android:layout_width="wrap_content"
+				             android:layout_height="wrap_content"
+				             android:id="@+id/radioBtnKids"/>
+
+			            <androidx.appcompat.widget.AppCompatImageView
+				            android:layout_width="@dimen/iconHeight"
+				            android:layout_height="@dimen/iconHeight"
+				            android:layout_marginStart="4dp"
+				            android:padding="5dp"
+				            android:src="@drawable/ic_user"/>
+
+			            <androidx.appcompat.widget.AppCompatTextView
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/kids"
+				            android:textColor="@color/black"
+				            android:layout_marginStart="4dp"
+				            style="@style/Text.Medium.Regular"/>
+
+
+		            </LinearLayout>
+
+
+
+	            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+
+        <!--<Button
             android:id="@+id/btn_next"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -48,9 +355,8 @@
             android:text="Next"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />-->
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

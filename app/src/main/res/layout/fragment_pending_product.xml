@@ -60,6 +60,7 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/l_search"
                 android:layout_width="match_parent"
                 android:background="@drawable/border_accent_white"
                 android:layout_toLeftOf="@+id/l_filter"
@@ -71,12 +72,13 @@
                     android:layout_toLeftOf="@+id/btn_search"
                     android:background="@color/transparent"
                     android:hint="Search Product Name"
-                    android:drawableLeft="@drawable/ic_arrow"
-                    android:paddingLeft="@dimen/seperator"
+                    android:drawableLeft="@drawable/ic_search"
+                    android:paddingLeft="@dimen/normal_padding"
+                    android:drawablePadding="@dimen/normal_padding"
                     android:textSize="12sp"
                     android:paddingRight="@dimen/seperator"
                     android:layout_centerVertical="true"
-                    android:layout_height="@dimen/edittext_hieght"/>
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:id="@+id/btn_search"
@@ -87,7 +89,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:fontFamily="@font/normal"
                     android:textColor="@color/white"
-                    android:layout_height="@dimen/edittext_hieght"/>
+                    android:layout_height="wrap_content"/>
 
 
             </RelativeLayout>
@@ -98,14 +100,18 @@
                 android:padding="@dimen/seperator"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
+                android:layout_alignBottom="@+id/l_search"
+                android:layout_alignTop="@+id/l_search"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/border_accent_white"
-                android:layout_height="@dimen/edittext_hieght">
+                android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_sort"
                     android:layout_width="wrap_content"
                     android:text="Sort"
                     android:textSize="12sp"
+                    android:paddingLeft="@dimen/normal_padding"
+                    android:paddingRight="@dimen/normal_padding"
                     android:textColor="@color/primaryText"
                     android:fontFamily="@font/medium"
                     android:layout_height="wrap_content"/>
@@ -119,6 +125,8 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp"
                     android:fontFamily="@font/normal"
+                    android:paddingLeft="@dimen/normal_padding"
+                    android:paddingRight="@dimen/normal_padding"
                     android:drawablePadding="@dimen/seperator"
                     android:drawableRight="@drawable/ic_arrow"
                     android:layout_height="wrap_content"/>
@@ -152,9 +160,8 @@
                         android:id="@+id/tv_search_result"
                         android:layout_width="match_parent"
                         android:text="Filter"
-                        android:paddingLeft="@dimen/normal_padding"
-                        android:paddingRight="@dimen/normal_padding"
-                        android:textColor="@color/primaryText"
+                        android:padding="@dimen/normal_padding"
+                        android:textColor="@color/colorAccent"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/medium"
                         android:textSize="12sp"

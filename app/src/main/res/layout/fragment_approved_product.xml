@@ -48,12 +48,14 @@
                     android:layout_toLeftOf="@+id/btn_search"
                     android:background="@color/transparent"
                     android:hint="Search Product Name"
-                    android:drawableLeft="@drawable/ic_arrow"
-                    android:paddingLeft="@dimen/seperator"
+                    android:drawableLeft="@drawable/ic_search"
+                    android:paddingLeft="@dimen/normal_padding"
+                    android:fontFamily="@font/medium"
                     android:textSize="12sp"
+                    android:drawablePadding="@dimen/normal_padding"
                     android:paddingRight="@dimen/seperator"
                     android:layout_centerVertical="true"
-                    android:layout_height="@dimen/edittext_hieght"/>
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:id="@+id/btn_search"
@@ -61,10 +63,11 @@
                     android:background="@color/colorAccent"
                     android:layout_alignParentRight="true"
                     android:text="Search"
+                    android:fontFamily="@font/medium"
+                    android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:fontFamily="@font/normal"
                     android:textColor="@color/white"
-                    android:layout_height="@dimen/edittext_hieght"/>
+                    android:layout_height="wrap_content"/>
 
 
             </RelativeLayout>
@@ -89,14 +92,13 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/normal_padding"
+                    android:padding="@dimen/main_padding"
                     app:layout_scrollFlags="scroll|enterAlways">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_search_result"
                         android:layout_width="match_parent"
                         android:text="Filter"
-                        android:paddingLeft="@dimen/normal_padding"
                         android:paddingRight="@dimen/normal_padding"
                         android:textColor="@color/primaryText"
                         android:layout_centerVertical="true"
@@ -110,15 +112,18 @@
                         android:id="@+id/txt_filter"
                         android:layout_width="wrap_content"
                         android:text="Filter"
-                        android:paddingLeft="@dimen/seperator"
+                        android:paddingLeft="@dimen/normal_padding"
                         android:paddingRight="@dimen/normal_padding"
+                        android:paddingTop="@dimen/seperator"
+                        android:paddingBottom="@dimen/seperator"
                         android:gravity="center"
                         android:textColor="@color/colorAccent"
                         android:textAllCaps="true"
                         android:fontFamily="@font/medium"
                         android:layout_alignParentRight="true"
+                        android:elevation="3dp"
                         android:drawablePadding="@dimen/seperator"
-                        android:drawableLeft="@drawable/ic_arrow"
+                        android:drawableLeft="@drawable/ic_filter"
                         android:background="@drawable/border_accent_white"
                         android:layout_height="wrap_content"/>
 

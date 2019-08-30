@@ -4,9 +4,11 @@ package com.bigtime.ui
  * Email : shijilkadambath@gmail.com
  */
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bigtime.R
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
@@ -18,4 +20,9 @@ open class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
+
+    fun showSnackBar(message: String, duration: Int = Snackbar.LENGTH_LONG) {
+        Snackbar.make(findViewById(android.R.id.content), message, duration).show()
+    }
+
 }

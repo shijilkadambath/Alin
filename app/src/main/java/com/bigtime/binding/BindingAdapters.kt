@@ -17,7 +17,9 @@
 package com.bigtime.binding;
 
 import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.bigtime.R
 
 /**
  * Created by Shijil Kadambath on 03/08/2018
@@ -33,4 +35,41 @@ object BindingAdapters {
     fun showHide(view: View, show: Boolean) {
         view.visibility = if (show) View.VISIBLE else View.GONE
     }
+
+
+    /*@JvmStatic
+    @BindingAdapter("app:addIconChange")
+    fun addIconChange(view: ImageView, value: String) {
+        when(value) {
+            "frag1" -> {
+                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
+            }
+
+            "frag2" -> {
+                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
+            }
+
+            "frag3" -> {
+                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:addColorChange")
+    fun addColorChange(view: View, value: String) {
+        when(value) {
+            "frag1" -> {
+                view.setBackgroundColor(R.color.colorAccent)
+            }
+
+            "frag2" -> {
+                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
+            }
+
+            "frag3" -> {
+                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
+            }
+        }
+    }*/
 }
