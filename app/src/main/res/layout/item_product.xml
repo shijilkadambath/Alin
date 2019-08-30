@@ -13,43 +13,80 @@
         android:layout_margin="@dimen/seperator"
         android:layout_height="wrap_content">
 
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_language"
-            style="@style/Text.Medium.Medium.AppActiveTextBlue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/main_padding"
-            android:text="@{order.brandName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:paddingLeft="@dimen/main_padding"
+            android:paddingTop="@dimen/main_padding"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/primaryText"
+            android:text="@{order.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_sub"
+            android:textColor="@color/activeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:paddingLeft="@dimen/main_padding"
+            android:fontFamily="@font/normal"
+            android:layout_marginBottom="@dimen/normal_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_language" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_price"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/main_padding"
+            android:layout_marginTop="@dimen/main_padding"
+            android:fontFamily="@font/bold"
+            android:layout_marginBottom="@dimen/main_padding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sub" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_mrp"
+            android:textColor="@color/activeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_padding"
+            android:paddingRight="@dimen/normal_padding"
+            android:paddingLeft="@dimen/normal_padding"
+            android:fontFamily="@font/normal"
+            android:background="@drawable/curverd_accent_light2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+            app:layout_constraintStart_toEndOf="@+id/tv_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_price" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/main_padding"
+            android:paddingTop="@dimen/main_padding"
             android:paddingLeft="@dimen/normal_padding"
             android:paddingRight="@dimen/normal_padding"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_language"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mrp"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_product" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:text="Edit Product"
-            android:background="@drawable/border_accent"
-            style="@style/Text.Medium.Regular.AppGreen"
-            android:padding="@dimen/normal_padding"
-            android:textAllCaps="true"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/recycler"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_height="wrap_content" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

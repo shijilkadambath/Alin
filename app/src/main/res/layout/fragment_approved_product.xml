@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_search"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@+id/btn_search"
                     android:background="@color/transparent"
@@ -51,9 +52,11 @@
                     android:drawableLeft="@drawable/ic_search"
                     android:paddingLeft="@dimen/normal_padding"
                     android:fontFamily="@font/medium"
+                    android:singleLine="true"
                     android:textSize="12sp"
                     android:drawablePadding="@dimen/normal_padding"
                     android:paddingRight="@dimen/seperator"
+                    android:imeOptions="actionSearch"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"/>
 
@@ -76,7 +79,7 @@
         </FrameLayout>
 
         <include
-            layout="@layout/widget_light_progress_bar"
+            layout="@layout/widget_progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/l_top"

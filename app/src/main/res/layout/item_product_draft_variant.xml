@@ -7,15 +7,13 @@
             name="order"
             type="com.bigtime.data.model.ProductVariant"/>
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="@dimen/main_padding"
-        android:layout_marginRight="@dimen/main_padding"
-        android:layout_height="wrap_content">
+
 
         <FrameLayout
             android:id="@+id/l_image"
             android:layout_width="150dp"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginRight="@dimen/normal_padding"
             android:background="@drawable/border_gray"
             app:layout_constraintStart_toStartOf="parent"
             android:padding="2dp"
@@ -38,32 +36,4 @@
 
         </FrameLayout>
 
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_language"
-            style="@style/Text.Medium.Medium.AppActiveTextBlue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/normal"
-            android:paddingTop="@dimen/normal_padding"
-            android:paddingBottom="@dimen/normal_padding"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="@+id/l_image"
-            app:layout_constraintStart_toStartOf="@+id/l_image"
-            app:layout_constraintTop_toBottomOf="@+id/l_image"/>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_active"
-            android:layout_width="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/l_image"
-            app:layout_constraintStart_toStartOf="@+id/l_image"
-            app:layout_constraintTop_toBottomOf="@+id/tv_language"
-            android:layout_height="wrap_content"/>
-
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

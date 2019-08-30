@@ -15,7 +15,9 @@
             name="resultCount"
             type="int" />
 
-
+        <variable
+            name="isLoading"
+            type="boolean" />
         <variable
             name="searchResource"
             type="Resource" />
@@ -68,14 +70,17 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_search"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@+id/btn_search"
                     android:background="@color/transparent"
                     android:hint="Search Product Name"
                     android:drawableLeft="@drawable/ic_search"
                     android:paddingLeft="@dimen/normal_padding"
+                    android:singleLine="true"
                     android:drawablePadding="@dimen/normal_padding"
                     android:textSize="12sp"
+                    android:imeOptions="actionSearch"
                     android:paddingRight="@dimen/seperator"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"/>
@@ -135,6 +140,13 @@
 
 
         </RelativeLayout>
+
+        <include
+            layout="@layout/widget_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/l_top"
+            app:showLoading="@{isLoading}" />
 
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

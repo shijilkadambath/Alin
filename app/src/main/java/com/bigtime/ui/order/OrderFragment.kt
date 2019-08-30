@@ -120,7 +120,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
 
 
-                    showSnackBar(response.data.message)
+                  //  showSnackBar(response.data.message)
                 }
 
                 else -> {

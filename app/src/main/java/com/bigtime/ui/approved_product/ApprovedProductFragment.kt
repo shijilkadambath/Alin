@@ -4,8 +4,10 @@ package com.bigtime.ui.approved_product
  * Created by Shijil Kadambath on 03/08/2018
  *Email : shijilkadambath@gmail.com
  */
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -26,6 +28,11 @@ import com.bigtime.ui.BaseFragment
 import com.bigtime.ui.RetryCallback
 import com.bigtime.utils.SessionUtils
 import javax.inject.Inject
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
+import android.view.KeyEvent
+
 
 private const val TAG: String = "LoginFragment"
 
@@ -103,9 +110,32 @@ class ApprovedProductFragment : BaseFragment<FragmentApprovedProductBinding>() {
 
 
 
+        loadData()
+
+        mBinding.btnSearch.setOnClickListener(View.OnClickListener {
+
+            dismissKeyboard(mBinding.edtSearch.windowToken)
+            loadData()
+
+        })
+
+        mBinding.edtSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    dismissKeyboard(mBinding.edtSearch.windowToken)
+                    loadData()
+                    return true
+                }
+                return false
+            }
+        })
+
+    }
+
+    fun loadData(){
         mBinding.isLoading = true
         val data = HashMap<String, String>()
-        data["searchKey"] = ""
+        data["searchKey"] = mBinding.edtSearch.text.toString()
         data["start"] = "0"
         data["count"] = "25"
 
@@ -139,8 +169,13 @@ class ApprovedProductFragment : BaseFragment<FragmentApprovedProductBinding>() {
         }
 
         override fun onBindViewHolder(holder: ListAdapter.DataBindViewHolder, position: Int) {
-            holder.binding.order = getItem(position)
+
+            val product =getItem(position);
+            holder.binding.order = product
             holder.adapter.submitList(getItem(position).variants)
+            holder.binding.tvSub.text =product.mainCategory+" > "+product.subCategory
+            holder.binding.tvPrice.text ="₹"+product.skPrice
+            holder.binding.tvMrp.text ="MRP ₹"+product.skPrice
             holder.binding.executePendingBindings()
         }
 
@@ -197,6 +232,12 @@ class ApprovedProductFragment : BaseFragment<FragmentApprovedProductBinding>() {
         override fun bind(binding: ItemProductVariantBinding, item: ProductVariant) {
             binding.order = item
 
+            binding.sdvUserPic.setImageURI(
+            Uri.parse(item.defImage));
+
+
+            binding.tvLanguage.text ="Code: "+item.variantID
+            binding.switchActive.isChecked = item.isActive ==1
             //binding.tvLanguage.setText(item.brandName)
         }
     }
