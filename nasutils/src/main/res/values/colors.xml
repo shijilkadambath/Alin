@@ -18,6 +18,7 @@
 
     <color name="gray_dark">#FFD7D7D7</color>
     <color name="gray_light">#FFF5F5F5</color>
+    <color name="gray_light2">#FFF6F7FB</color>
     <color name="colorSeparator">#DADADA</color>
 
     <color name="orange">#F24D58</color>

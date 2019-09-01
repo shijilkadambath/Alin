@@ -106,6 +106,7 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
         }
 
         mBinding.recyclerViewBrands.adapter = adapter
+        mBinding.showLoading = true
 
         val params = HashMap<String, String>()
 

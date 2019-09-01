@@ -34,104 +34,149 @@
 	            <androidx.constraintlayout.widget.ConstraintLayout
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
+					android:padding="@dimen/main_padding"
 		            android:background="@color/white">
 
-		            <androidx.constraintlayout.widget.Guideline
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:id="@+id/top"
-			            android:orientation="horizontal"
-			            app:layout_constraintGuide_percent="0.05"/>
 
-		            <androidx.constraintlayout.widget.Guideline
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:id="@+id/left"
-			            android:orientation="vertical"
-			            app:layout_constraintGuide_percent="0.04"/>
-
-		            <androidx.constraintlayout.widget.Guideline
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:id="@+id/right"
-			            android:orientation="vertical"
-			            app:layout_constraintGuide_percent="0.95"/>
 
 		            <androidx.appcompat.widget.AppCompatTextView
 			            android:layout_width="0dp"
 			            android:layout_height="wrap_content"
 			            android:id="@+id/textLotSize"
 			            android:text="@string/ChooseLotSize"
-			            style="@style/Text.SecondTitle.Medium"
-			            android:textColor="@color/black"
-			            app:layout_constraintEnd_toStartOf="@+id/lotDecrement"
-			            app:layout_constraintStart_toStartOf="@id/left"
-			            app:layout_constraintTop_toTopOf="@id/lotDecrement"
-			            app:layout_constraintBottom_toBottomOf="@id/lotDecrement"
+						android:fontFamily="@font/medium"
+						android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+			            android:textColor="@color/activeText"
+						app:layout_constraintStart_toStartOf="parent"
+			            app:layout_constraintEnd_toStartOf="@+id/l_size"
+			            app:layout_constraintTop_toTopOf="@id/l_size"
+			            app:layout_constraintBottom_toBottomOf="@id/l_size"
 			            />
 
+					<LinearLayout
+						android:id="@+id/l_size"
+						android:layout_width="wrap_content"
+						android:orientation="horizontal"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						android:background="@drawable/border_graylight_graylight2"
+						android:layout_height="@dimen/iconHeight">
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="@dimen/iconHeight"
+							android:layout_height="match_parent"
+							android:id="@+id/lotDecrement"
+							android:text="@string/minus"
+							android:gravity="center"
+							style="@style/Text.Title.Medium"
+							android:textColor="@color/red"/>
+						<com.google.android.material.textfield.TextInputEditText
+							android:layout_width="80dp"
+							android:layout_height="match_parent"
+							android:inputType="number"
+							android:id="@+id/lotValue"
+							style="@style/Text.Medium.Medium"
+							tools:text="8"
+							android:maxLength="2"
+							android:textColor="@color/colorAccent"
+							android:gravity="center"
+							android:background="@drawable/border_gray_white"/>
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="@dimen/iconHeight"
+							android:layout_height="match_parent"
+							android:id="@+id/lotIncrement"
+							android:text="@string/plus"
+							android:gravity="center"
+							style="@style/Text.Title.Medium"
+							android:textColor="@color/colorAccent"/>
+
+
+
+
+
+
+					</LinearLayout>
+
 
 		            <androidx.appcompat.widget.AppCompatTextView
-			            android:layout_width="@dimen/iconHeight"
-			            android:layout_height="@dimen/iconHeight"
-			            android:id="@+id/lotIncrement"
-			            android:text="@string/plus"
-			            android:gravity="center"
-			            android:background="@drawable/bg_ractangle_light_accent"
-			            app:layout_constraintTop_toTopOf="@+id/top"
-			            style="@style/Text.Title.Medium"
-			            android:textColor="@color/colorAccent"
-			            app:layout_constraintEnd_toEndOf="@id/right"/>
-
-
-		            <com.google.android.material.textfield.TextInputEditText
-			            android:layout_width="80dp"
-			            android:layout_height="@dimen/iconHeight"
-			            android:inputType="number"
-			            android:id="@+id/lotValue"
-			            style="@style/Text.Medium.Medium"
-			            tools:text="8"
-			            android:maxLength="2"
-			            android:textColor="@color/colorAccent"
-			            android:gravity="center"
-			            android:background="@drawable/bg_ractangle_white"
-			            app:layout_constraintEnd_toStartOf="@+id/lotIncrement"
-			            app:layout_constraintTop_toTopOf="@id/top"/>
-
-
-		            <androidx.appcompat.widget.AppCompatTextView
-			            android:layout_width="wrap_content"
+			            android:layout_width="0dp"
 			            android:layout_height="wrap_content"
 			            android:id="@+id/lotError"
 			            android:text="Invalid Size"
+						android:gravity="center"
 			            android:visibility="invisible"
-			            app:layout_constraintTop_toBottomOf="@+id/lotValue"
+			            app:layout_constraintTop_toBottomOf="@+id/l_size"
 			            android:textColor="@color/red"
-			            app:layout_constraintStart_toStartOf="@id/lotValue"/>
-
-
-		            <androidx.appcompat.widget.AppCompatTextView
-			            android:layout_width="@dimen/iconHeight"
-			            android:layout_height="@dimen/iconHeight"
-			            android:id="@+id/lotDecrement"
-			            android:text="@string/minus"
-			            android:gravity="center"
-			            android:background="@drawable/bg_ractangle_light_accent"
-			            app:layout_constraintTop_toTopOf="@+id/top"
-			            style="@style/Text.Title.Medium"
-			            android:textColor="@color/colorAccent"
-			            app:layout_constraintEnd_toStartOf="@+id/lotValue"/>
+						app:layout_constraintEnd_toEndOf="@+id/l_size"
+			            app:layout_constraintStart_toStartOf="@id/l_size"/>
 
 
 		            <View
 			            android:layout_width="0dp"
 			            android:layout_height="1dp"
 			            android:id="@+id/separator1"
-			            app:layout_constraintTop_toBottomOf="@+id/lotValue"
-			            app:layout_constraintStart_toStartOf="@id/left"
-			            app:layout_constraintEnd_toEndOf="@id/right"
-			            android:background="@color/gray_dark"
-			            android:layout_marginTop="20dp"/>
+			            app:layout_constraintTop_toBottomOf="@+id/l_size"
+			            app:layout_constraintStart_toStartOf="parent"
+			            app:layout_constraintEnd_toEndOf="parent"
+			            android:background="@color/gray_light"
+			            android:layout_marginTop="@dimen/main_padding"/>
+
+
+					<LinearLayout
+						android:id="@+id/l_moq"
+						android:layout_width="wrap_content"
+						android:orientation="horizontal"
+						android:layout_marginTop="@dimen/main_padding"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/separator1"
+						android:background="@drawable/border_graylight_graylight2"
+						android:layout_height="@dimen/iconHeight">
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="@dimen/iconHeight"
+							android:layout_height="match_parent"
+							android:id="@+id/moqDecrement"
+							android:text="@string/minus"
+							android:gravity="center"
+							style="@style/Text.Title.Medium"
+							android:textColor="@color/red"/>
+
+						<com.google.android.material.textfield.TextInputEditText
+							android:layout_width="80dp"
+							android:layout_height="match_parent"
+							android:id="@+id/moqValue"
+							style="@style/Text.Medium.Medium"
+							tools:text="8"
+							android:maxLength="4"
+							android:background="@drawable/border_gray_white"
+							android:inputType="number"
+							android:textColor="@color/colorAccent"
+							android:gravity="center"/>
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="@dimen/iconHeight"
+							android:layout_height="match_parent"
+							android:id="@+id/moqIncrement"
+							android:text="@string/plus"
+							android:gravity="center"
+							style="@style/Text.Title.Medium"
+							android:textColor="@color/colorAccent"/>
+					</LinearLayout>
+
+
+					<androidx.appcompat.widget.AppCompatTextView
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/textMOQ"
+			            android:text="@string/chooseMOQ"
+						android:fontFamily="@font/medium"
+			            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+			            android:textColor="@color/activeText"
+			            app:layout_constraintEnd_toStartOf="@+id/l_moq"
+			            app:layout_constraintStart_toStartOf="parent"
+			            app:layout_constraintTop_toTopOf="@id/l_moq"
+			            app:layout_constraintBottom_toBottomOf="@id/l_moq"
+			            />
+
 
 
 
@@ -139,77 +184,26 @@
 		            <androidx.appcompat.widget.AppCompatTextView
 			            android:layout_width="0dp"
 			            android:layout_height="wrap_content"
-			            android:id="@+id/textMOQ"
-			            android:text="@string/chooseMOQ"
-			            style="@style/Text.SecondTitle.Medium"
-			            android:textColor="@color/black"
-			            app:layout_constraintEnd_toStartOf="@+id/moqDecrement"
-			            app:layout_constraintStart_toStartOf="@id/left"
-			            app:layout_constraintTop_toTopOf="@id/moqDecrement"
-			            app:layout_constraintBottom_toBottomOf="@id/moqDecrement"
-			            />
-
-
-		            <androidx.appcompat.widget.AppCompatTextView
-			            android:layout_width="@dimen/iconHeight"
-			            android:layout_height="@dimen/iconHeight"
-			            android:id="@+id/moqIncrement"
-			            android:text="@string/plus"
-			            android:gravity="center"
-			            android:background="@drawable/bg_ractangle_light_accent"
-			            app:layout_constraintTop_toBottomOf="@+id/separator1"
-			            style="@style/Text.Title.Medium"
-			            android:layout_marginTop="20dp"
-			            android:textColor="@color/colorAccent"
-			            app:layout_constraintEnd_toEndOf="@id/right"/>
-
-
-		            <com.google.android.material.textfield.TextInputEditText
-			            android:layout_width="80dp"
-			            android:layout_height="@dimen/iconHeight"
-			            android:id="@+id/moqValue"
-			            style="@style/Text.Medium.Medium"
-			            tools:text="8"
-			            android:maxLength="4"
-			            android:inputType="number"
-			            android:textColor="@color/colorAccent"
-			            android:gravity="center"
-			            android:background="@drawable/bg_ractangle_white"
-			            app:layout_constraintEnd_toStartOf="@+id/moqIncrement"
-			            app:layout_constraintTop_toTopOf="@id/moqIncrement"/>
-
-		            <androidx.appcompat.widget.AppCompatTextView
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
 			            android:id="@+id/moqError"
 			            android:text="Invalid Moq"
 			            android:visibility="invisible"
-			            app:layout_constraintTop_toBottomOf="@+id/moqValue"
+			            app:layout_constraintTop_toBottomOf="@+id/l_moq"
 			            android:textColor="@color/red"
-			            app:layout_constraintStart_toStartOf="@id/moqValue"/>
+						app:layout_constraintEnd_toEndOf="@+id/l_moq"
+			            app:layout_constraintStart_toStartOf="@id/l_moq"/>
 
 
-		            <androidx.appcompat.widget.AppCompatTextView
-			            android:layout_width="@dimen/iconHeight"
-			            android:layout_height="@dimen/iconHeight"
-			            android:id="@+id/moqDecrement"
-			            android:text="@string/minus"
-			            android:gravity="center"
-			            android:background="@drawable/bg_ractangle_light_accent"
-			            app:layout_constraintTop_toTopOf="@+id/moqIncrement"
-			            style="@style/Text.Title.Medium"
-			            android:textColor="@color/colorAccent"
-			            app:layout_constraintEnd_toStartOf="@+id/moqValue"/>
+
 
 
 		            <View
 			            android:layout_width="0dp"
 			            android:layout_height="1dp"
 			            android:id="@+id/separator2"
-			            app:layout_constraintTop_toBottomOf="@+id/moqValue"
-			            app:layout_constraintStart_toStartOf="@id/left"
-			            app:layout_constraintEnd_toEndOf="@id/right"
-			            android:background="@color/gray_dark"
+			            app:layout_constraintTop_toBottomOf="@+id/l_moq"
+			            app:layout_constraintStart_toStartOf="parent"
+			            app:layout_constraintEnd_toEndOf="parent"
+			            android:background="@color/gray_light"
 			            android:layout_marginTop="20dp"/>
 
 
@@ -221,10 +215,11 @@
 			            android:layout_height="wrap_content"
 			            android:id="@+id/selectCategory"
 			            android:text="@string/selectCategory"
-			            style="@style/Text.SecondTitle.Medium"
-			            android:textColor="@color/black"
-			            app:layout_constraintStart_toStartOf="@id/left"
-			            android:layout_marginTop="20dp"
+			            android:fontFamily="@font/medium"
+						android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+			            android:textColor="@color/activeText"
+			            app:layout_constraintStart_toStartOf="parent"
+			            android:layout_marginTop="@dimen/main_padding"
 			            app:layout_constraintTop_toBottomOf="@+id/separator2"
 			            />
 
@@ -234,13 +229,16 @@
 			            android:layout_height="wrap_content"
 			            android:orientation="horizontal"
 			            android:id="@+id/layoutMen"
-			            android:padding="5dp"
-			            android:layout_marginTop="20dp"
-			            android:background="@drawable/bg_ractangle_outline"
+			            android:paddingLeft="@dimen/seperator"
+			            android:paddingRight="@dimen/seperator"
+			            android:paddingTop="@dimen/normal_padding"
+			            android:paddingBottom="@dimen/normal_padding"
+			            android:layout_marginTop="@dimen/main_padding"
+			            android:background="@drawable/border_graylight_graylight2"
 			            android:gravity="center_vertical"
 			            app:layout_constraintEnd_toStartOf="@id/layoutWomen"
 			            app:layout_constraintTop_toBottomOf="@+id/selectCategory"
-			            app:layout_constraintStart_toStartOf="@id/left">
+			            app:layout_constraintStart_toStartOf="parent">
 
 			            <RadioButton
 				            android:layout_width="wrap_content"
@@ -248,17 +246,18 @@
 				            android:id="@+id/radioBtnMen"/>
 
 			            <androidx.appcompat.widget.AppCompatImageView
-				            android:layout_width="@dimen/iconHeight"
-				            android:layout_height="@dimen/iconHeight"
-				            android:padding="5dp"
-				            android:src="@drawable/ic_user"/>
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+							android:padding="@dimen/seperator"
+				            android:src="@drawable/ic_men"/>
 
 			            <androidx.appcompat.widget.AppCompatTextView
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:text="@string/men"
-				            android:textColor="@color/black"
-				            style="@style/Text.Medium.Regular"/>
+							android:fontFamily="@font/medium"
+							android:padding="@dimen/seperator"
+							android:textColor="@color/activeText"/>
 
 		            </LinearLayout>
 
@@ -267,11 +266,14 @@
 			            android:layout_height="wrap_content"
 			            android:orientation="horizontal"
 			            android:id="@+id/layoutWomen"
-			            android:padding="5dp"
+						android:layout_marginLeft="@dimen/main_padding"
+						android:paddingLeft="@dimen/seperator"
+						android:paddingRight="@dimen/seperator"
+						android:paddingTop="@dimen/normal_padding"
+						android:paddingBottom="@dimen/normal_padding"
 			            android:gravity="center_vertical"
-			            android:layout_marginStart="20dp"
-			            android:background="@drawable/bg_ractangle_outline"
-			            app:layout_constraintEnd_toEndOf="@id/right"
+			            android:background="@drawable/border_graylight_graylight2"
+			            app:layout_constraintEnd_toEndOf="parent"
 			            app:layout_constraintTop_toTopOf="@id/layoutMen"
 			            app:layout_constraintTop_toBottomOf="@+id/selectCategory"
 			            app:layout_constraintStart_toEndOf="@+id/layoutMen">
@@ -283,19 +285,18 @@
 				            android:id="@+id/radioBtnWomen"/>
 
 			            <androidx.appcompat.widget.AppCompatImageView
-				            android:layout_width="@dimen/iconHeight"
-				            android:layout_height="@dimen/iconHeight"
-				            android:layout_marginStart="4dp"
-				            android:padding="5dp"
-				            android:src="@drawable/ic_user"/>
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:padding="@dimen/seperator"
+				            android:src="@drawable/ic_women"/>
 
 			            <androidx.appcompat.widget.AppCompatTextView
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:text="@string/women"
-				            android:textColor="@color/black"
-				            android:layout_marginStart="4dp"
-				            style="@style/Text.Medium.Regular"/>
+							android:fontFamily="@font/medium"
+							android:padding="@dimen/seperator"
+				            android:textColor="@color/activeText"/>
 
 		            </LinearLayout>
 
@@ -304,10 +305,13 @@
 			            android:layout_height="wrap_content"
 			            android:orientation="horizontal"
 			            android:id="@+id/layoutKids"
-			            android:padding="5dp"
-			            android:background="@drawable/bg_ractangle_outline"
+						android:layout_marginTop="@dimen/main_padding"
+						android:paddingLeft="@dimen/seperator"
+						android:paddingRight="@dimen/seperator"
+						android:paddingTop="@dimen/normal_padding"
+						android:paddingBottom="@dimen/normal_padding"
+			            android:background="@drawable/border_graylight_graylight2"
 			            android:gravity="center_vertical"
-			            android:layout_marginTop="20dp"
 			            app:layout_constraintTop_toBottomOf="@+id/layoutMen"
 			            app:layout_constraintStart_toStartOf="@id/layoutMen"
 			            app:layout_constraintEnd_toEndOf="@id/layoutMen">
@@ -319,19 +323,18 @@
 				             android:id="@+id/radioBtnKids"/>
 
 			            <androidx.appcompat.widget.AppCompatImageView
-				            android:layout_width="@dimen/iconHeight"
-				            android:layout_height="@dimen/iconHeight"
-				            android:layout_marginStart="4dp"
-				            android:padding="5dp"
-				            android:src="@drawable/ic_user"/>
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:padding="@dimen/seperator"
+				            android:src="@drawable/ic_kid"/>
 
 			            <androidx.appcompat.widget.AppCompatTextView
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:text="@string/kids"
-				            android:textColor="@color/black"
-				            android:layout_marginStart="4dp"
-				            style="@style/Text.Medium.Regular"/>
+							android:fontFamily="@font/medium"
+							android:padding="@dimen/seperator"
+							android:textColor="@color/activeText"/>
 
 
 		            </LinearLayout>

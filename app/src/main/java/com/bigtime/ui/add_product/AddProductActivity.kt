@@ -36,6 +36,7 @@ class AddProductActivity : BaseActivity() {
         setContentView(R.layout.activity_add_prodcut)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title="Add Product"
 
         viewModel = ViewModelProviders.of(this, mViewModelFactory).get(AddProductViewModel::class.java)
 
@@ -89,27 +90,39 @@ class AddProductActivity : BaseActivity() {
     private fun changeIcons(value: String) {
         when(value) {
             AddProductConstants.chooseFragment -> {
-                v1.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccentLight))
+                v1.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
                 v2.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
-                chooseIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // blue
-                detailIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // light
-                uploadIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // light
+                chooseIcon.setImageResource(R.drawable.ic_choose_product_title) // blue
+                detailIcon.setImageResource(R.drawable.ic_product_details_title) // light
+                uploadIcon.setImageResource(R.drawable.ic_product_upload_title) // light
+
+                choose.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+                details.setTextColor(ContextCompat.getColor(this, R.color.activeText))
+                upload.setTextColor(ContextCompat.getColor(this, R.color.activeText))
             }
 
             AddProductConstants.detailFragment -> {
-                v1.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccentLight))
+                v1.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
                 v2.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
-                chooseIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // blue
-                detailIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // blue
-                uploadIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // light
+                chooseIcon.setImageResource(R.drawable.ic_choose_product_title) // blue
+                detailIcon.setImageResource(R.drawable.ic_product_details_title_hover) // blue
+                uploadIcon.setImageResource(R.drawable.ic_product_upload_title) // light
+
+                choose.setTextColor(ContextCompat.getColor(this, R.color.activeText))
+                details.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+                upload.setTextColor(ContextCompat.getColor(this, R.color.activeText))
             }
 
             AddProductConstants.uploadFragment -> {
-                v1.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccentLight))
-                v2.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccentLight))
-                chooseIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // blue
-                detailIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // blue
-                uploadIcon.setImageResource(R.drawable.ic_file_upload_black_24dp) // blue
+                v1.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+                v2.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+                chooseIcon.setImageResource(R.drawable.ic_choose_product_title) // blue
+                detailIcon.setImageResource(R.drawable.ic_product_details_title_hover) // blue
+                uploadIcon.setImageResource(R.drawable.ic_product_upload_title_hover) // blue
+
+                choose.setTextColor(ContextCompat.getColor(this, R.color.activeText))
+                details.setTextColor(ContextCompat.getColor(this, R.color.activeText))
+                upload.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
             }
         }
 
