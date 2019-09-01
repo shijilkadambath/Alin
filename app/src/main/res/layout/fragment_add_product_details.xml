@@ -28,6 +28,8 @@
 	<androidx.core.widget.NestedScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
 		android:fillViewport="true"
 		>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,12 +37,6 @@
         android:layout_height="match_parent">
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/top"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.01"/>
 
 		            <androidx.constraintlayout.widget.Guideline
                         android:layout_width="wrap_content"
@@ -58,13 +54,13 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/detailIcon"
-	        android:src="@drawable/ic_user"
-	        android:padding="4dp"
+			android:layout_marginTop="@dimen/main_padding"
+	        android:src="@drawable/ic_prodct_detail"
             app:layout_constraintStart_toStartOf="@id/left"
-	        app:layout_constraintTop_toTopOf="@id/top"/>
+	        app:layout_constraintTop_toTopOf="parent"/>
 
 
 	    <androidx.appcompat.widget.AppCompatTextView
@@ -72,7 +68,8 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/detailHeading"
 		    android:text="@string/detailHeading"
-		    style="@style/Text.SecondTitle.Medium"
+			android:fontFamily="@font/bold"
+		    android:textAppearance="@style/TextAppearance.AppCompat.Large"
 		    app:layout_constraintTop_toTopOf="@id/detailIcon"
 		    app:layout_constraintBottom_toBottomOf="@id/detailIcon"
 		    android:layout_marginStart="6dp"
@@ -82,19 +79,20 @@
 	    <View
 		    android:layout_width="0dp"
 		    android:layout_height="1dp"
+			android:layout_marginTop="@dimen/main_padding"
 		    android:id="@+id/v1"
-		    android:background="@color/colorSeparator"
+		    android:background="@color/divider_light"
 		    app:layout_constraintTop_toBottomOf="@id/detailIcon"
 		    app:layout_constraintStart_toStartOf="@id/left"
-		    app:layout_constraintEnd_toEndOf="@id/right"
-		    android:layout_marginTop="15dp"/>
+		    app:layout_constraintEnd_toEndOf="@id/right"/>
 
 	     <androidx.appcompat.widget.AppCompatTextView
 		     android:layout_width="wrap_content"
 		     android:layout_height="wrap_content"
 		     android:id="@+id/headingPriceDetails"
 		     android:text="@string/headingPriceDetails"
-		     style="@style/Text.SecondTitle.Medium"
+			 android:fontFamily="@font/bold"
+		     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
 		     android:textColor="@color/colorAccent"
 		     app:layout_constraintTop_toBottomOf="@+id/v1"
 		     android:layout_marginTop="15dp"
@@ -105,9 +103,11 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/headingLotLevel"
 		    android:text="@string/headingLotLevel"
-		    style="@style/Text.SecondTitle.Medium"
+			android:fontFamily="@font/medium"
+		    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
 		    app:layout_constraintTop_toBottomOf="@+id/headingPriceDetails"
-		    android:layout_marginTop="15dp"
+		    android:layout_marginTop="@dimen/main_padding"
+			android:textColor="@color/activeText"
 		    app:layout_constraintStart_toStartOf="@id/left"/>
 
 
@@ -117,9 +117,10 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/titleSkPrice"
 		    android:text="Sk Price"
-		    style="@style/Text.SubTitle.Light"
-		    android:textColor="@color/black"
-		    app:layout_constraintBottom_toTopOf="@+id/skValue"
+		    android:textColor="@color/activeText"
+			android:layout_marginTop="@dimen/normal_padding"
+			android:fontFamily="@font/medium"
+			app:layout_constraintTop_toBottomOf="@+id/headingLotLevel"
 		    app:layout_constraintStart_toStartOf="@id/skValue"/>
 
 	    <com.google.android.material.textfield.TextInputEditText
@@ -134,10 +135,10 @@
 		    android:textColor="@color/colorAccent"
 		    android:gravity="center"
 		    app:layout_constraintEnd_toStartOf="@+id/mrpValue"
-		    android:layout_marginTop="40dp"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:layout_marginTop="@dimen/seperator"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    app:layout_constraintStart_toStartOf="@id/left"
-		    app:layout_constraintTop_toBottomOf="@+id/headingLotLevel"/>
+		    app:layout_constraintTop_toBottomOf="@+id/titleSkPrice"/>
 
 
 
@@ -146,9 +147,10 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/titleMrp"
 		    android:text="MRP"
-		    style="@style/Text.SubTitle.Light"
-		    android:textColor="@color/black"
-		    app:layout_constraintBottom_toTopOf="@+id/mrpValue"
+			android:textAppearance="@style/TextAppearance.AppCompat.Small"
+			android:textColor="@color/activeText"
+			android:fontFamily="@font/medium"
+			app:layout_constraintTop_toTopOf="@+id/titleSkPrice"
 		    app:layout_constraintStart_toStartOf="@id/mrpValue"/>
 
 	    <com.google.android.material.textfield.TextInputEditText
@@ -158,21 +160,25 @@
 		    android:id="@+id/mrpValue"
 		    style="@style/Text.Medium.Regular"
 		    android:maxLength="4"
+			app:layout_constraintTop_toTopOf="@+id/skValue"
 		    android:hint="Enter MRP"
 		    app:layout_constraintEnd_toStartOf="@+id/calcSkPrice"
 		    android:textColor="@color/colorAccent"
 		    android:gravity="center"
 		    android:layout_marginEnd="10dp"
-		    android:layout_marginTop="40dp"
-		    android:background="@drawable/bg_ractangle_white"
-		    app:layout_constraintStart_toEndOf="@+id/skValue"
-		    app:layout_constraintTop_toBottomOf="@+id/headingLotLevel"/>
+			android:background="@drawable/border_graylight_accentlight3"
+		    app:layout_constraintStart_toEndOf="@+id/skValue"/>
 
 
 	    <androidx.appcompat.widget.AppCompatImageView
-		    android:layout_width="60dp"
-		    android:layout_height="45dp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
 		    android:id="@+id/calcSkPrice"
+			android:paddingRight="@dimen/main_padding"
+			android:paddingLeft="@dimen/main_padding"
+			android:paddingTop="@dimen/normal_padding"
+			android:paddingBottom="@dimen/normal_padding"
+			android:src="@drawable/ic_calculator"
 		    android:background="@drawable/bg_calculator"
 		    app:layout_constraintEnd_toEndOf="@id/right"
 		    app:layout_constraintTop_toTopOf="@id/mrpValue"
@@ -184,11 +190,11 @@
 		    android:layout_width="0dp"
 		    android:layout_height="1dp"
 		    android:id="@+id/v2"
-		    android:background="@color/colorSeparator"
+		    android:background="@color/divider_light"
 		    app:layout_constraintTop_toBottomOf="@id/calcSkPrice"
 		    app:layout_constraintStart_toStartOf="@id/left"
 		    app:layout_constraintEnd_toEndOf="@id/right"
-		    android:layout_marginTop="15dp"/>
+		    android:layout_marginTop="@dimen/main_padding"/>
 
 
 	    <androidx.appcompat.widget.AppCompatTextView
@@ -196,7 +202,9 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/headingBulkPrice"
 		    android:text="@string/headingBulkPrice"
-		    style="@style/Text.SecondTitle.Medium"
+			android:textColor="@color/activeText"
+			android:fontFamily="@font/medium"
+			android:textAppearance="@style/TextAppearance.AppCompat.Medium"
 		    app:layout_constraintTop_toBottomOf="@+id/v2"
 		    android:layout_marginTop="15dp"
 		    app:layout_constraintStart_toStartOf="@id/left"/>
@@ -209,8 +217,8 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/titleMOQ"
 		    android:text="MOQ"
-		    style="@style/Text.SubTitle.Light"
-		    android:textColor="@color/black"
+			android:textColor="@color/activeText"
+			android:fontFamily="@font/medium"
 		    app:layout_constraintBottom_toTopOf="@+id/layoutBulkValue"
 		    app:layout_constraintStart_toStartOf="@id/layoutBulkValue"/>
 
@@ -220,7 +228,7 @@
 		    android:orientation="horizontal"
 		    android:layout_marginTop="40dp"
 		    android:layout_marginEnd="10dp"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    app:layout_constraintStart_toStartOf="@id/left"
 		    app:layout_constraintEnd_toStartOf="@+id/skValueBulk"
 		    app:layout_constraintTop_toBottomOf="@+id/headingBulkPrice"
@@ -239,12 +247,12 @@
 			    android:layout_toStartOf="@+id/dropDownMoq"
 			    android:textColor="@color/colorAccent"
 			    android:gravity="center"
-			    android:background="@drawable/bg_ractangle_white"
+			    android:background="@color/transparent"
 			    />
 
 	    <androidx.appcompat.widget.AppCompatImageView
 		    android:layout_width="wrap_content"
-		    android:background="@color/gray_dark"
+		    android:background="@color/divider_light"
 		    android:src="@drawable/ic_arrow"
 		    android:tint="@color/black"
 		    android:layout_alignParentEnd="true"
@@ -259,8 +267,8 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/titleSkPriceBulk"
 		    android:text="Sk Price"
-		    style="@style/Text.SubTitle.Light"
-		    android:textColor="@color/black"
+			android:textColor="@color/activeText"
+			android:fontFamily="@font/medium"
 		    app:layout_constraintBottom_toTopOf="@+id/skValueBulk"
 		    app:layout_constraintStart_toStartOf="@id/skValueBulk"/>
 
@@ -277,15 +285,20 @@
 		    android:gravity="center"
 		    android:layout_marginEnd="10dp"
 		    android:layout_marginTop="40dp"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    app:layout_constraintStart_toEndOf="@+id/layoutBulkValue"
 		    app:layout_constraintTop_toBottomOf="@+id/headingBulkPrice"/>
 
 
 	    <androidx.appcompat.widget.AppCompatImageView
-		    android:layout_width="60dp"
-		    android:layout_height="45dp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
 		    android:id="@+id/calcBulk"
+			android:src="@drawable/ic_calculator"
+			android:paddingRight="@dimen/main_padding"
+			android:paddingLeft="@dimen/main_padding"
+			android:paddingTop="@dimen/normal_padding"
+			android:paddingBottom="@dimen/normal_padding"
 		    android:background="@drawable/bg_calculator"
 		    app:layout_constraintEnd_toEndOf="@id/right"
 		    app:layout_constraintTop_toTopOf="@id/skValueBulk"
@@ -297,7 +310,7 @@
 		    android:layout_width="0dp"
 		    android:layout_height="1dp"
 		    android:id="@+id/v3"
-		    android:background="@color/colorSeparator"
+		    android:background="@color/divider_light"
 		    app:layout_constraintTop_toBottomOf="@id/calcBulk"
 		    app:layout_constraintStart_toStartOf="@id/left"
 		    app:layout_constraintEnd_toEndOf="@id/right"
@@ -309,8 +322,10 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/headingPackageType"
 		    android:text="@string/headingPackageType"
-		    style="@style/Text.SecondTitle.Medium"
-		    app:layout_constraintTop_toBottomOf="@+id/v3"
+			android:fontFamily="@font/medium"
+			android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+			android:textColor="@color/activeText"
+			app:layout_constraintTop_toBottomOf="@+id/v3"
 		    android:layout_marginTop="15dp"
 		    app:layout_constraintStart_toStartOf="@id/left"/>
 
@@ -323,18 +338,22 @@
 		    android:orientation="vertical"
 		    android:id="@+id/radioGroup1"
 		    app:layout_constraintTop_toBottomOf="@+id/headingPackageType"
-		    android:layout_marginTop="15dp">
+		    android:layout_marginTop="@dimen/main_padding">
 
 		    <RadioButton
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:text="Branded Box"
+				android:textColor="@color/activeText"
+				android:fontFamily="@font/medium"
 			    android:id="@+id/radioBtnBranded"/>
 
 		    <RadioButton
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:text="Loose Packaging"
+				android:textColor="@color/activeText"
+				android:fontFamily="@font/medium"
 			    android:id="@+id/radioBtnLoosePack"/>
 
 
@@ -347,12 +366,14 @@
 		    android:layout_height="wrap_content"
 		    app:layout_constraintStart_toEndOf="@+id/radioGroup1"
 		    app:layout_constraintTop_toBottomOf="@+id/headingPackageType"
-		    android:layout_marginTop="15dp"
+		    android:layout_marginTop="@dimen/main_padding"
 		    >
 		    <RadioButton
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:text="Non Branded Box"
+				android:textColor="@color/activeText"
+				android:fontFamily="@font/medium"
 			    android:id="@+id/radioBtnNonBranded"/>
 
 	    </RadioGroup>
@@ -361,7 +382,7 @@
 		    android:layout_width="0dp"
 		    android:layout_height="1dp"
 		    android:id="@+id/v4"
-		    android:background="@color/colorSeparator"
+		    android:background="@color/divider_light"
 		    app:layout_constraintTop_toBottomOf="@id/radioGroup1"
 		    app:layout_constraintStart_toStartOf="@id/left"
 		    app:layout_constraintEnd_toEndOf="@id/right"
@@ -373,8 +394,10 @@
 		    android:layout_height="wrap_content"
 		    android:id="@+id/headingProductDesc"
 		    android:text="@string/headingProductDesc"
-		    style="@style/Text.SecondTitle.Medium"
-		    app:layout_constraintTop_toBottomOf="@+id/v4"
+			android:fontFamily="@font/medium"
+			android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+			android:textColor="@color/activeText"
+			app:layout_constraintTop_toBottomOf="@+id/v4"
 		    android:layout_marginTop="15dp"
 		    app:layout_constraintStart_toStartOf="@id/left"/>
 
@@ -392,8 +415,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleSubCat"
 			    android:text="Sub Category"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+			    android:fontFamily="@font/medium"
+			    android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -409,7 +433,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownSubCat"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleSubCat"
 		    />
 
@@ -440,8 +464,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleStyle"
 			    android:text="Style"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -457,7 +482,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownStyle"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleStyle"
 		    />
 
@@ -488,8 +513,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleSole"
 			    android:text="Sole"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -504,7 +530,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownSole"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleSole"
 		    />
 
@@ -535,8 +561,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleType"
 			    android:text="Type"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -552,7 +579,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownType"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleType"
 		    />
 
@@ -583,8 +610,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleLining"
 			    android:text="Lining"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -600,7 +628,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownLining"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleLining"
 		    />
 
@@ -631,8 +659,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleUpperMaterial"
 			    android:text="Upper Material"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -648,7 +677,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownUpperMaterial"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleUpperMaterial"
 		    />
 
@@ -679,8 +708,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleInSock"
 			    android:text="Insock"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -696,7 +726,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownInSock"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleInSock"
 		    />
 
@@ -727,8 +757,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleHeel"
 			    android:text="Heel"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -744,7 +775,7 @@
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropDownHeel"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleHeel"
 		    />
 
@@ -775,8 +806,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleWtPair"
 			    android:text="Weight 1 Pair"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 
@@ -791,7 +823,7 @@
 		    android:textColor="@color/colorAccent"
 		    android:gravity="center"
 		    android:layout_alignParentStart="true"
-		    android:background="@drawable/bg_ractangle_white"
+		    android:background="@drawable/border_graylight_accentlight3"
 		    android:layout_below="@+id/titleWtPair"
 		    />
 	    </RelativeLayout>
@@ -821,8 +853,9 @@
 			    android:layout_height="wrap_content"
 			    android:id="@+id/titleSizeSet"
 			    android:text="Size Set"
-			    style="@style/Text.SubTitle.Light"
-			    android:textColor="@color/black"
+				android:padding="@dimen/seperator"
+				android:fontFamily="@font/medium"
+				android:textColor="@color/activeText"
 			    android:layout_alignParentTop="true"
 			    />
 

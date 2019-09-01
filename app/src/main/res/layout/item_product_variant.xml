@@ -53,9 +53,12 @@
             app:layout_constraintStart_toStartOf="@+id/l_image"
             app:layout_constraintTop_toBottomOf="@+id/l_image"/>
 
-        <androidx.appcompat.widget.SwitchCompat
+        <ToggleButton
             android:id="@+id/switch_active"
             android:layout_width="wrap_content"
+            android:textOn=""
+            android:textOff=""
+            android:background="@drawable/selector_active"
             app:layout_constraintEnd_toEndOf="@+id/l_image"
             app:layout_constraintStart_toStartOf="@+id/l_image"
             app:layout_constraintTop_toBottomOf="@+id/tv_language"

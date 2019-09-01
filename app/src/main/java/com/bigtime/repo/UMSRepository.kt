@@ -177,7 +177,7 @@ class UMSRepository @Inject constructor(
     }
 
     fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
-        AppConstants.HOST = AppConstants.HOST
+        AppConstants.HOST = AppConstants.HOST_DEV4
         AppConstants.PORT = 80
 
         return object : NetworkBoundResourceNoCache<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>(appExecutors) {
@@ -191,6 +191,9 @@ class UMSRepository @Inject constructor(
     }
 
     fun loadBrandDetails(data: HashMap<String, String>) : LiveData<Resource<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
+
+        AppConstants.HOST = AppConstants.HOST_DEV4
+        AppConstants.PORT = 80
         val header = HashMap<String, String>()
         header["sessionToken"] = "IlNLMTQ5MDI3MTA2NDE1NjYwNTUwNjUi:1hz0Se:SpzvNCcH2GsDdJSVukbZhZiJb3U"
         header["platform"] = "postman"
@@ -198,8 +201,7 @@ class UMSRepository @Inject constructor(
         header["isAuthRequired"] = "true"
         header["Content-Type"] = "application/json"
 
-        AppConstants.HOST = AppConstants.HOST
-        AppConstants.PORT = 80
+
 
         return object : NetworkBoundResourceNoCache<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>(appExecutors) {
             override fun createCall(): LiveData<ApiResponse<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
@@ -211,7 +213,8 @@ class UMSRepository @Inject constructor(
 
 
         fun loadOrderDetais(data: HashMap<String, String>): LiveData<Resource<BaseResponse<ArrayList<Order>>>> {
-
+            AppConstants.HOST = AppConstants.HOST_LOGIN
+            AppConstants.PORT = 4000
             val header = HashMap<String, String>()
             header["SOURCE"] = "cCX1G9EVpL"
             header["PLATFORM"] = "Android"
@@ -219,8 +222,7 @@ class UMSRepository @Inject constructor(
             header["SKAUTH-TOKEN"] = SessionUtils.getAuthTokens(true)!!
             header["Content-Type"] = "application/json"
 
-            AppConstants.HOST = AppConstants.HOST_LOGIN
-            AppConstants.PORT = 4000
+
             return object : NetworkBoundResourceNoCache<BaseResponse<ArrayList<Order>>>(appExecutors) {
 
                 override fun createCall(): LiveData<ApiResponse<BaseResponse<ArrayList<Order>>>> {
@@ -232,7 +234,8 @@ class UMSRepository @Inject constructor(
         }
 
     fun loadApprovedProducts(data: HashMap<String, String>): LiveData<Resource<BaseResponse<ArrayList<Product>>>> {
-
+        AppConstants.HOST = AppConstants.HOST_DEV4
+        AppConstants.PORT = 80
         val header = HashMap<String, String>()
         header["platform"] = "Android"
         header["isAuthRequired"] = "true"
@@ -240,8 +243,7 @@ class UMSRepository @Inject constructor(
         header["sessionToken"] = SessionUtils.getAuthTokens(true)!!
         header["Content-Type"] = "application/json"
 
-        AppConstants.HOST = AppConstants.HOST
-        AppConstants.PORT = 80
+
         return object : NetworkBoundResourceNoCache<BaseResponse<ArrayList<Product>>>(appExecutors) {
 
             override fun createCall(): LiveData<ApiResponse<BaseResponse<ArrayList<Product>>>> {

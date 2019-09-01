@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':nasutils')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibVersion

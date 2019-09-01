@@ -1,11 +1,14 @@
 package com.shijil.imagepicker;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.List;
 
@@ -51,11 +54,45 @@ public class RxImagePicker {
         return publishSubject;
     }*/
 
+    AlertDialog dialog;
    public void requestImage() {
 
         String[] item = {"Take Photo", "Photo Gallery"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Upload Image").setItems(item, new DialogInterface.OnClickListener() {
+
+       LayoutInflater factory = LayoutInflater.from(context);
+       final View deleteDialogView = factory.inflate(R.layout.view_image_picker, null);
+
+       deleteDialogView.findViewById(R.id.gallery).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startImagePickHiddenActivity(Sources.GALLERY.ordinal(), false);
+               dialog.dismiss();
+           }
+       });
+
+       deleteDialogView.findViewById(R.id.camera).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startImagePickHiddenActivity(Sources.CAMERA.ordinal(), false);
+               dialog.dismiss();
+           }
+       });
+
+       deleteDialogView.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               dialog.dismiss();
+           }
+       });
+
+
+       builder.setView(deleteDialogView);
+
+
+
+
+       /* builder.setTitle("Upload Image").setItems(item, new DialogInterface.OnClickListener() {
 
             @Override
 
@@ -74,8 +111,10 @@ public class RxImagePicker {
 
             }
 
-        });
-        builder.show();
+        });*/
+
+       dialog= builder.create();
+       dialog.show();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)

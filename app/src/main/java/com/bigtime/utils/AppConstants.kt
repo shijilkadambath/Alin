@@ -28,11 +28,12 @@ object AppConstants {
     const val APP_KEY = "Leaf"
 
 
-    var HOST_LOGIN = "devpyapi4.shoekonnect.com"
+    val HOST_LOGIN = "devpyapi4.shoekonnect.com"
+    val HOST_DEV4 = "dev4.shoekonnect.com"
 
      var SCHEME = "http"
      var PORT = 80
-     var HOST = "dev4.shoekonnect.com"
+     var HOST = HOST_DEV4
 
 
 

@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF2CACD1</color>
     <color name="colorAccentLight">#FFaadeed</color>
     <color name="colorAccentLight2">#FFddf1f7</color>
+    <color name="colorAccentLight3">#FFF8FBFF</color>
 
     <color name="white">@android:color/white</color>
     <color name="black">#FF2F2F4D</color>

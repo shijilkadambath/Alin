@@ -17,6 +17,11 @@ import com.bigtime.databinding.FragmentChooseProductBinding
 import com.bigtime.ui.BaseFragment
 import com.bigtime.utils.AddProductConstants
 import javax.inject.Inject
+import android.widget.RadioGroup
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
+import android.widget.CompoundButton
+import android.widget.RadioButton
+
 
 private const val TAG: String = "LoginFragment"
 
@@ -67,6 +72,9 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
         if (mViewModel.lotValue.isEmpty())
             mBinding.lotValue.setText("8")
 
+        if (mViewModel.moqValue.isEmpty())
+            mBinding.moqValue.setText("8")
+
         mBinding.lotIncrement.setOnClickListener {
             dismissKeyboard(mBinding.lotIncrement.windowToken)
             val lot = mBinding.lotValue.text.toString()
@@ -114,7 +122,7 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
         }
 
         mViewModel.getMoqValue().observe(this, Observer {
-            mBinding.moqValue.setText(it)
+            mBinding.moqValue.setText(if (it.isNullOrEmpty()) "8" else it)
         })
 
         mViewModel.isMoqValueValid().observe(this, Observer {
@@ -125,6 +133,32 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
                 View.VISIBLE
             }
         })
+
+        mBinding.radioBtnMen.setOnCheckedChangeListener { radio, checked->
+
+            onCategoryChanged(radio, checked)
+        }
+
+        mBinding.radioBtnWomen.setOnCheckedChangeListener { radio, checked->
+
+            onCategoryChanged(radio, checked)
+        }
+
+        mBinding.radioBtnKids.setOnCheckedChangeListener { radio, checked->
+
+            onCategoryChanged(radio, checked)
+        }
+
+    }
+    public fun onCategoryChanged(radioGroup: CompoundButton, checked: Boolean) {
+
+        if (checked){
+            mBinding.radioBtnMen.isChecked = false
+            mBinding.radioBtnWomen.isChecked = false
+            mBinding.radioBtnKids.isChecked = false
+
+            radioGroup.isChecked = true
+        }
 
     }
 
