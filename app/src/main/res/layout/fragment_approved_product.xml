@@ -35,7 +35,7 @@
             android:paddingLeft="@dimen/main_padding"
             android:paddingRight="@dimen/main_padding"
             android:paddingTop="@dimen/main_padding"
-            android:paddingBottom="@dimen/normal_padding"
+            android:paddingBottom="@dimen/main_padding"
             android:layout_height="wrap_content">
 
             <RelativeLayout
