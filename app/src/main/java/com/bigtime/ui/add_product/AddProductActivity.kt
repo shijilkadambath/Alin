@@ -55,6 +55,7 @@ class AddProductActivity : BaseActivity() {
     private fun onNextClick() {
 
         when(viewModel.whichFragment) {
+
             AddProductConstants.chooseFragment -> {
 
                 findNavController(R.id.container).navigate(R.id.AddProductDetailFragment)
