@@ -1,4 +1,4 @@
-package com.smb.smbapplication.utils.cryptoutils
+package com.bigtime.utils.cryptoutils
 
 import com.bigtime.utils.AppConstants
 import javax.crypto.*

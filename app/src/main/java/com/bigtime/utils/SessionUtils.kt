@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Base64
 import android.util.Log
+import com.bigtime.utils.cryptoutils.Decryptor
+import com.bigtime.utils.cryptoutils.Encryptor
 import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.smb.smbapplication.utils.cryptoutils.Decryptor
-import com.smb.smbapplication.utils.cryptoutils.Encryptor
 import java.security.KeyStore
 import javax.inject.Singleton
 

@@ -18,7 +18,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
 
-class SmbApplication : Application(), HasActivityInjector {
+class SheokonectionApplication : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
@@ -26,6 +26,7 @@ class SmbApplication : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+
 
         AppInjector.init(this)
         Log.setLogNode(LogWrapper()) // Initialise logging

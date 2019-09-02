@@ -1,4 +1,4 @@
-package com.smb.smbapplication.utils.cryptoutils
+package com.bigtime.utils.cryptoutils
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties

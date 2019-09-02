@@ -18,7 +18,7 @@ package com.bigtime.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.bigtime.common.SmbViewModelFactory
+import com.bigtime.common.ViewModelFactory
 import com.bigtime.ui.add_product.AddProductViewModel
 import com.bigtime.ui.add_product.ChooseBrandViewModel
 import com.bigtime.ui.approved_product.ApprovedProductViewModel
@@ -42,7 +42,7 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
 
     @Binds
-    abstract fun bindViewModelFactory(factory: SmbViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
     @Binds
    @IntoMap

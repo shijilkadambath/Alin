@@ -10,7 +10,7 @@ import com.bigtime.utils.logger.Log
  *Email : shijilkadambath@gmail.com
  */
 
-object SmbTypeConverters {
+object DbTypeConverters {
     @TypeConverter
     @JvmStatic
     fun stringToIntList(data: String?): List<Int>? {

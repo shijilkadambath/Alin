@@ -22,7 +22,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.bigtime.SmbApplication
+import com.bigtime.SheokonectionApplication
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
@@ -35,10 +35,10 @@ import dagger.android.support.HasSupportFragmentInjector
  * Helper class to automatically inject fragments if they implement [Injectable].
  */
 object AppInjector {
-    fun init(smbApp: SmbApplication) {
-        DaggerAppComponent.builder().application(smbApp)
-            .build().inject(smbApp)
-        smbApp
+    fun init(app: SheokonectionApplication) {
+        DaggerAppComponent.builder().application(app)
+            .build().inject(app)
+        app
             .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                     handleActivity(activity)

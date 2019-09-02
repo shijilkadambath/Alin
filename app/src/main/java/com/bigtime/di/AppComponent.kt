@@ -17,7 +17,7 @@
 package com.bigtime.di
 
 import android.app.Application
-import com.bigtime.SmbApplication
+import com.bigtime.SheokonectionApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -43,5 +43,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(smbApp: SmbApplication)
+    fun inject(app: SheokonectionApplication)
 }

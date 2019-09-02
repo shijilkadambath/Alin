@@ -30,8 +30,8 @@ import com.bigtime.databinding.InflateSoleItemBinding
 
 /**
  * Created by Shijil Kadambath on 03/08/2018
- * for NewAgeSMB
- * Email : shijil@newagesmb.com
+ * for
+ * Email : shijilkadambath@gmail.com
  */
 /**
  * A generic RecyclerView adapter that uses Data Binding & DiffUtil.
