@@ -13,7 +13,6 @@ import com.bigtime.utils.logger.Log
 import com.bigtime.utils.logger.LogWrapper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
-import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
@@ -38,12 +37,12 @@ class SheokonectionApplication : Application(), HasActivityInjector {
 
 
 
-        if (!LeakCanary.isInAnalyzerProcess(this)) {
+       /* if (!LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             // return;
             LeakCanary.install(this)
-        }
+        }*/
 
     }
 
