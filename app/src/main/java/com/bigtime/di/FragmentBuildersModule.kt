@@ -17,10 +17,7 @@
 package com.bigtime.di
 
 
-import com.bigtime.ui.add_product.AddProductDetailFragment
-import com.bigtime.ui.add_product.AddProductUploadFragment
-import com.bigtime.ui.add_product.ChooseBrandDialogFragment
-import com.bigtime.ui.add_product.ChooseFragment
+import com.bigtime.ui.add_product.*
 import com.bigtime.ui.approved_product.ApprovedProductFragment
 import com.bigtime.ui.home.HomeFragment
 import com.bigtime.ui.login.*
@@ -75,4 +72,8 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeChooseBrandFragment(): ChooseBrandDialogFragment
+
+
+    @ContributesAndroidInjector
+    abstract fun contributeConfirmFragment(): ConfirmFragment
 }
