@@ -23,6 +23,24 @@ class UploadedImageAdapter : RecyclerView.Adapter<UploadedImageAdapter.ViewHolde
         notifyDataSetChanged()
     }
 
+    fun setImageLinkWRTPosition(position: Int, imagePath: String) {
+        images[position].apply {
+            this.imagePath = imagePath
+        }
+        notifyItemChanged(position)
+    }
+
+    fun notifyData() {
+        notifyDataSetChanged()
+    }
+
+    private var listener : ItemclickListener? = null
+
+
+    fun setListener(listener: ItemclickListener) {
+        this.listener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderUpload {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.inflate_image_upload, parent, false)
         return ViewHolderUpload(view)
@@ -33,13 +51,50 @@ class UploadedImageAdapter : RecyclerView.Adapter<UploadedImageAdapter.ViewHolde
     }
 
     override fun onBindViewHolder(holder: ViewHolderUpload, position: Int) {
-        FrescoUtils.setImageToFrescoDraweeView(holder.imageView, images[position].imagePath)
+
+        when(images[position].imagePath) {
+            "uploading" -> {
+                holder.porgressbar.visibility = View.VISIBLE
+            }
+            "" -> {
+                holder.porgressbar.visibility = View.GONE
+            }
+            else -> {
+                holder.porgressbar.visibility = View.GONE
+                holder.remove.visibility = View.VISIBLE
+                FrescoUtils.setImageToFrescoDraweeView(holder.imageView, images[position].imagePath)
+            }
+        }
+
+        holder.spinnerColor.adapter = holder.colorAdapter
+        images[position].let {
+            holder.colorAdapter.setData(it.colorList)
+        }
+
+        holder.imageView.setOnClickListener {
+            listener?.loadNewImage(position)
+        }
+
+        holder.remove.setOnClickListener {
+            listener?.removeImage(position)
+        }
+
     }
 
 
     inner class ViewHolderUpload(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView = itemView.image
-        val spinnerColor = itemView.spinnerColor
-        val spinnerArticle = itemView.spinnerArticle
+        val colorAdapter = ColorAdapter()
+        var spinnerColor = itemView.spinnerColor
+        val articleText = itemView.articleText
+        val porgressbar = itemView.progressBar
+        val remove = itemView.btnRemove
+
+    }
+
+    interface ItemclickListener {
+        fun loadNewImage(position: Int)
+
+        fun removeImage(position: Int)
     }
 }

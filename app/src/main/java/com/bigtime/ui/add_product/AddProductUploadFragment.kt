@@ -35,7 +35,16 @@ private const val TAG: String = "AddProductUploadFragment"
  * A simple [Fragment] subclass.
  *
  */
-class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>() {
+class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>(), UploadedImageAdapter.ItemclickListener {
+
+    override fun loadNewImage(position: Int) {
+        uploadImagePosition = position
+        RxImagePicker.with(activity).requestImage()
+    }
+
+    override fun removeImage(position: Int) {
+        mViewModel.removeImage(position)
+    }
 
 
     @Inject
@@ -43,6 +52,8 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
     lateinit var mViewModel: AddProductViewModel
 
     private var adapterImages by autoCleared<UploadedImageAdapter>()
+
+    private var uploadImagePosition: Int = -1
 
 
     override fun getLayoutId(): Int {
@@ -67,19 +78,23 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
     }
 
     private fun initUi() {
-
-        mBinding.txtAdd.setOnClickListener{
-            RxImagePicker.with(activity).requestImage()
-        }
-
         adapterImages = UploadedImageAdapter()
+        adapterImages.setListener(this)
 
         mBinding.imageList.adapter = adapterImages
+
+        mBinding.txtAdd.setOnClickListener{
+            mViewModel.addImage()
+        }
     }
 
     private fun observeDatas() {
         mViewModel.loadColors().observe(this, Observer {
-            it.data?.colorList?.let { it1 -> mViewModel.setColors(it1) }
+            it.data?.colorList?.let { it1 ->
+                mViewModel.setColors(it1)
+                if (mViewModel.isImageListEmpty())
+                mViewModel.addImage()
+            }
         })
 
         mViewModel.getImages().observe(this, Observer {
@@ -97,12 +112,19 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
             val result = CropImage.getActivityResult(data)
             val path = result.uri ?: return
 
-            path.path?.let { mViewModel.uploadImageToS3(it).observe(this, Observer { it1 ->
+            path.path?.let {
+                disableAddBtn()
+                adapterImages.setImageLinkWRTPosition(uploadImagePosition, "uploading")
+                mViewModel.uploadImageToS3(it).observe(this, Observer { it1 ->
 
                 if (it1.data?.status == 1) {
-                    it1.data.payload?.imageURL?.let { it1 -> mViewModel.addImage(it1) }
+                    it1.data.payload?.imageURL?.let { it1 ->
+                        enableAddBtn()
+                        adapterImages.setImageLinkWRTPosition(uploadImagePosition, it1)
+                    }
+                }else if (it1.data?.status == 0) {
+                    enableAddBtn()
                 }
-
             }) }
 
 
@@ -112,6 +134,16 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
 
 
         }
+    }
+
+    private fun enableAddBtn() {
+        mBinding.txtAdd.isEnabled = true
+        mBinding.txtAdd.alpha = 1f
+    }
+
+    private fun disableAddBtn() {
+        mBinding.txtAdd.isEnabled = false
+        mBinding.txtAdd.alpha = 0.5f
     }
 
 

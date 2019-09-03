@@ -131,12 +131,9 @@ class AddProductViewModel
                         && mMrp.isNotEmpty()
                         && checkBulk()
                         && mPackageType.isNotEmpty()
-                        && mStyle.isNotEmpty()
-                        && mStyle != getDefaultStyle()
-                        && mSole.isNotEmpty()
-                        && mSole != getDefaultSole()
-                        && mType.isNotEmpty()
-                        && mType != getDefaultType()
+                        && mStyle != getDefaultValue()
+                        && mSole != getDefaultValue()
+                        && mType != getDefaultValue()
             }
         }
 
@@ -205,6 +202,10 @@ class AddProductViewModel
 
     private fun getDefaultType() : String {
         return "Choose Type"
+    }
+
+    private fun getDefaultValue() : String {
+        return "-1"
     }
 
     fun processFootWearData(footWears: ArrayList<FootwearTypeItem>) {
@@ -486,7 +487,7 @@ class AddProductViewModel
      * upload image
      */
 
-    var colorList = ArrayList<ColorListItem?>()
+    private var colorList = ArrayList<ColorListItem?>()
 
     var imageList = ArrayList<DataImage>()
     val observeImageAdded = MutableLiveData<ArrayList<DataImage>>()
@@ -516,13 +517,22 @@ class AddProductViewModel
        return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
-    fun addImage(imageUrl: String) {
-        imageList.add(DataImage(imageUrl))
+    fun addImage() {
+        imageList.add(DataImage("", colorList))
         observeImageAdded.value = imageList
+    }
+
+    fun isImageListEmpty(): Boolean {
+        return imageList.isEmpty()
     }
 
     fun getImages() : LiveData<ArrayList<DataImage>> {
         return observeImageAdded
+    }
+
+    fun removeImage(position: Int) {
+        imageList.removeAt(position)
+        observeImageAdded.value = imageList
     }
 
 }

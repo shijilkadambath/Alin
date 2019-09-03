@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
 
 
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="4dp">
+		android:layout_margin="4dp"
+		android:background="@drawable/bg_image_upload">
+
 
 		<RelativeLayout
 			android:id="@+id/layoutColor"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="10dp"
+			android:layout_marginEnd="8dp"
 			app:layout_constraintBottom_toTopOf="@+id/layoutArticle"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toEndOf="@+id/image"
 			app:layout_constraintTop_toTopOf="@+id/image">
 
 		    <androidx.appcompat.widget.AppCompatImageView
-		    android:id="@+id/dropDownStyle"
-		    android:layout_width="wrap_content"
-		    android:layout_height="@dimen/iconHeight"
-		    android:layout_below="@+id/titleColor"
-		    android:layout_alignParentEnd="true"
-		    android:background="@color/gray_dark"
-		    android:padding="6dp"
-		    android:src="@drawable/ic_arrow"
-		    android:tint="@color/black" />
+			    android:id="@+id/dropDownStyle"
+			    android:layout_width="wrap_content"
+			    android:layout_height="@dimen/iconHeight"
+			    android:layout_below="@+id/titleColor"
+			    android:layout_alignParentEnd="true"
+			    android:background="@color/gray_dark"
+			    android:padding="6dp"
+			    android:src="@drawable/ic_arrow"
+			    android:tint="@color/black" />
 
 	    <androidx.appcompat.widget.AppCompatSpinner
 		    android:id="@+id/spinnerColor"
@@ -46,14 +50,14 @@
 		    android:textColor="@color/colorAccent" />
 
 	    <androidx.appcompat.widget.AppCompatTextView
-			    android:id="@+id/titleColor"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_alignParentTop="true"
-			    android:fontFamily="@font/medium"
-			    android:padding="@dimen/seperator"
-			    android:text="Color"
-			    android:textColor="@color/activeText" />
+		    android:id="@+id/titleColor"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:fontFamily="@font/medium"
+		    android:padding="@dimen/seperator"
+		    android:text="Color"
+		    android:textColor="@color/activeText" />
 
 	    </RelativeLayout>
 
@@ -62,56 +66,99 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="10dp"
+			android:layout_marginEnd="8dp"
 			app:layout_constraintBottom_toBottomOf="@+id/image"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toEndOf="@+id/image"
 			app:layout_constraintTop_toBottomOf="@+id/layoutColor">
 
 		    <androidx.appcompat.widget.AppCompatImageView
-		    android:id="@+id/dropdown"
-		    android:layout_width="wrap_content"
-		    android:layout_height="@dimen/iconHeight"
-		    android:layout_below="@+id/titleArticle"
-		    android:layout_alignParentEnd="true"
-		    android:background="@color/gray_dark"
-		    android:padding="6dp"
-		    android:src="@drawable/ic_arrow"
-		    android:tint="@color/black" />
+			    android:id="@+id/dropdown"
+			    android:layout_width="wrap_content"
+			    android:layout_height="@dimen/iconHeight"
+			    android:visibility="gone"
+			    android:layout_below="@+id/titleArticle"
+			    android:layout_alignParentEnd="true"
+			    android:background="@color/gray_dark"
+			    android:padding="6dp"
+			    android:src="@drawable/ic_arrow"
+			    android:tint="@color/black" />
 
-	    <androidx.appcompat.widget.AppCompatSpinner
-		    android:id="@+id/spinnerArticle"
+	    <androidx.appcompat.widget.AppCompatTextView
+		    android:id="@+id/articleText"
 		    style="@style/Text.Medium.Regular"
-		    android:layout_width="wrap_content"
+		    android:layout_width="match_parent"
 		    android:layout_height="@dimen/iconHeight"
 		    android:layout_below="@+id/titleArticle"
 		    android:layout_alignParentStart="true"
 		    android:layout_toStartOf="@+id/dropdown"
 		    android:background="@drawable/border_graylight_accentlight3"
 		    android:gravity="center"
-		    android:hint="Choose Style"
-		    android:inputType="number"
+		    android:hint="Article No"
+		    android:inputType="text"
 		    android:maxLength="4"
 		    android:textColor="@color/colorAccent" />
 
 	    <androidx.appcompat.widget.AppCompatTextView
-			    android:id="@+id/titleArticle"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_alignParentTop="true"
-			    android:fontFamily="@font/medium"
-			    android:padding="@dimen/seperator"
-			    android:text="Article No"
-			    android:textColor="@color/activeText" />
+		    android:id="@+id/titleArticle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:fontFamily="@font/medium"
+		    android:padding="@dimen/seperator"
+		    android:text="Article No"
+		    android:textColor="@color/activeText" />
 
 	    </RelativeLayout>
-
 		<com.facebook.drawee.view.SimpleDraweeView
 			android:id="@+id/image"
 			android:layout_width="130dp"
 			android:layout_height="180dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="8dp"
 			android:background="@drawable/bg_ractangle_light_accent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
+
+		<ProgressBar
+			android:id="@+id/progressBar"
+			style="?android:attr/progressBarStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			app:layout_constraintBottom_toBottomOf="@id/image"
+			app:layout_constraintEnd_toEndOf="@id/image"
+			app:layout_constraintStart_toStartOf="@id/image"
+			android:indeterminateTint="@color/red"
+			app:layout_constraintTop_toTopOf="@id/image" />
+
+		<LinearLayout
+			android:id="@+id/btnRemove"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_marginTop="10dp"
+			android:background="@drawable/bg_btn_remove"
+			android:gravity="center"
+			android:orientation="horizontal"
+			android:visibility="gone"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/image">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="4dp"
+				android:src="@drawable/ic_delete_red_24dp" />
+			<TextView
+				style="@style/Text.Medium.Regular"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Remove"
+				android:textAllCaps="true"
+				android:textColor="@color/red" />
+
+		</LinearLayout>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

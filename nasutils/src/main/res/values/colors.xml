@@ -23,6 +23,7 @@
     <color name="colorSeparator">#DADADA</color>
 
     <color name="orange">#F24D58</color>
+    <color name="colorLightORange">#FFE6E6</color>
 
     <color name="whiteAlpha">#72FFFFFF</color>
     <color name="greenLight">#D1E2C5</color>
