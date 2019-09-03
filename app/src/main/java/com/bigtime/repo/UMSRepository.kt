@@ -26,6 +26,7 @@ import com.bigtime.data.db.UMSDao
 import com.bigtime.data.model.*
 import com.bigtime.data.model.product_details.CategoryItem
 import com.bigtime.data.model.product_details.FootwearTypeItem
+import com.bigtime.data.model.product_details.ProductPreview
 import com.bigtime.data.model.product_details.SolesItem
 import com.bigtime.utils.AppConstants
 import com.bigtime.utils.SessionUtils
@@ -53,39 +54,7 @@ class UMSRepository @Inject constructor(
 ) {
     //ApiResponse<BaseResponse<List<User>>>
 
-    fun loadUsers(): LiveData<Resource<BaseResponse<List<User>>>> {
 
-
-        return object : NetworkBoundResource<BaseResponse<List<User>>, BaseResponse<List<User>>>(appExecutors) {
-            override fun saveCallResult(item: BaseResponse<List<User>>) {
-
-                if (item.isSuccess() && item.data != null) {
-                    umsoDao.insertUsers(item.data)
-                }
-            }
-
-            override fun shouldFetch(data: BaseResponse<List<User>>?): Boolean {
-                // return data == null || !data.isSuccess() ||data.data ==null|| data.data.isEmpty()
-                return true
-            }
-
-            override fun loadFromDb(): LiveData<BaseResponse<List<User>>> {
-
-                val result = MediatorLiveData<BaseResponse<List<User>>>()
-
-
-                result.addSource(umsoDao.loadUsers(), Observer { list ->
-
-                    result.setValue(BaseResponse("", 1, "", StatusCode.OK, "", list))
-                })
-
-                return result
-            }
-
-            override fun createCall() = webService.loadUsers()
-
-        }.asLiveData()
-    }
 
 
     fun login(data: Map<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
@@ -169,9 +138,7 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun getProfile(): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
 
     fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>> {
         AppConstants.HOST = AppConstants.HOST_DEV4
@@ -205,6 +172,26 @@ class UMSRepository @Inject constructor(
                 return webService.loadBrandDetails(header, data)
             }
 
+        }.asLiveData()
+    }
+    fun loadProductPreview(productID: String): LiveData<Resource<BaseResponse<ProductPreview>>> {
+        AppConstants.HOST = AppConstants.HOST_DEV4
+        AppConstants.PORT = 80
+
+        val header = HashMap<String, String>()
+        header["platform"] = "Android"
+        header["isAuthRequired"] = "true"
+        header["packageName"] = "com.bizcrum.shoekonnect"
+        header["sessionToken"] = SessionUtils.getAuthTokens(true)!!
+        header["Content-Type"] = "application/json"
+
+        return object : NetworkBoundResourceNoCache<BaseResponse<ProductPreview>>(appExecutors) {
+
+            override fun createCall(): LiveData<ApiResponse<BaseResponse<ProductPreview>>> {
+                return webService.productPreview(header, JsonObject().apply {
+                    addProperty("productID", productID)
+                })
+            }
         }.asLiveData()
     }
 

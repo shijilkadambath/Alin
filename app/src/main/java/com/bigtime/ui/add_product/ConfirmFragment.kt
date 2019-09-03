@@ -46,9 +46,6 @@ class ConfirmFragment : BaseFragment<FragmentConfirmBinding>() {
     @Inject
     lateinit var appExecutors: AppExecutors
     lateinit var mViewModel: AddProductViewModel
-
-    lateinit var adapter: ListAdapter
-
     override fun getLayoutId(): Int {
         return R.layout.fragment_confirm;
     }
@@ -59,11 +56,38 @@ class ConfirmFragment : BaseFragment<FragmentConfirmBinding>() {
 
         mViewModel = getViewModel(AddProductViewModel::class.java)
 
-        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        mBinding.toolbar.setNavigationOnClickListener {
-            activity!!.onBackPressed()
-        }
-        mBinding.toolbar.title ="Confirm"
+
+
+        mViewModel.productPreviewResponseLiveData.removeObservers(this)
+        mViewModel.productPreviewResponseLiveData.observe(this, Observer { response ->
+
+            if (response == null || response.status == Status.LOADING) {
+                return@Observer
+            }
+
+            mBinding.isLoading = false
+
+            when {
+                response.data == null -> {
+                    showSnackBar(response.message!!)
+                }
+
+
+                response.data.status == 1 -> {
+                    //showSnackBar(response.data.message)
+                }
+
+                else -> {
+                    showSnackBar(response.data.message)
+                }
+            }
+
+            mViewModel.loadProductPreview(null)
+
+        })
+
+        mViewModel.loadProductPreview("1075326")
+
     }
 
 

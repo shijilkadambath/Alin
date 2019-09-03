@@ -67,25 +67,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), ChooseBrandDialogFragm
                      HomeFragmentDirections.showRegistration()
              )*/
         }
-        mViewModel.repositories.observe(this, Observer { result ->
+       /* mViewModel.repositories.observe(this, Observer { result ->
 
             mBinding.searchResource = result
 
             mBinding.resultCount = result?.data?.data?.size ?: 0
             adapter.submitList(result?.data?.data)
-        })
+        })*/
 
         mBinding.listUser.adapter = adapter
         //adapter = rvAdapter
 
         //mBinding.image = "https://cdn.freebiesupply.com/logos/large/2x/android-logo-png-transparent.png"
 
-        mBinding.callback = object : RetryCallback {
+       /* mBinding.callback = object : RetryCallback {
             override fun retry() {
                 mViewModel.retry()
 
             }
-        }
+        }*/
 
         mBinding.lAddProduct.setOnClickListener {
             val fragment = ChooseBrandDialogFragment.newInstance("", "")

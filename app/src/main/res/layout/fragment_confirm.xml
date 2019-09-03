@@ -4,6 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="@dimen/main_padding">
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
     <data>
 
 
@@ -18,6 +39,7 @@
         <variable
             name="isLoading"
             type="boolean" />
+
         <variable
             name="searchResource"
             type="Resource" />
@@ -26,49 +48,4 @@
             name="callback"
             type="com.bigtime.ui.RetryCallback" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/l_top"
-            android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/colorAccentLight2"
-            app:layout_constraintTop_toBottomOf="@+id/appbar"
-            android:paddingLeft="@dimen/main_padding"
-            android:paddingRight="@dimen/main_padding"
-            android:paddingTop="@dimen/main_padding"
-            android:paddingBottom="@dimen/normal_padding"
-            android:layout_height="wrap_content">
-
-
-
-
-
-
-
-
-        </RelativeLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

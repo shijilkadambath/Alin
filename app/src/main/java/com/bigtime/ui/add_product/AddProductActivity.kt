@@ -66,7 +66,7 @@ class AddProductActivity : BaseActivity() {
             }
 
             AddProductConstants.uploadFragment -> {
-                findNavController(R.id.container).navigate(R.id.AddProductConfirmFragment)
+                findNavController(R.id.container).navigate(R.id.addProductConfirmFragment)
             }
         }
     }
