@@ -30,6 +30,20 @@
         android:padding="@dimen/main_padding"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/left"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03"/>
+
+		            <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/right"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.96"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_title"
             android:layout_width="wrap_content"
@@ -37,7 +51,7 @@
             android:paddingLeft="@dimen/main_padding"
             android:paddingRight="@dimen/normal_padding"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/left"
             android:paddingTop="@dimen/normal_padding"
             android:paddingBottom="@dimen/normal_padding"
             android:layout_height="wrap_content"/>
@@ -46,8 +60,8 @@
             android:id="@+id/sep_title"
             android:layout_width="0dp"
             app:layout_constraintTop_toBottomOf="@+id/iv_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/left"
+            app:layout_constraintEnd_toEndOf="@id/right"
             android:background="@color/divider_light"
             android:layout_height="1dp"/>
 
@@ -66,14 +80,28 @@
             android:layout_height="wrap_content" />
 
 
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imageList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/txt_add"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@+id/left"
+            app:layout_constraintEnd_toEndOf="@id/right"
+            app:layout_constraintTop_toBottomOf="@+id/iv_title"/>
+
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_add"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sep_title"
+            app:layout_constraintLeft_toLeftOf="@id/left"
+            app:layout_constraintRight_toRightOf="@id/right"
+            app:layout_constraintTop_toBottomOf="@+id/imageList"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:paddingTop="@dimen/normal_padding"
             android:gravity="center"
-
             android:layout_marginTop="@dimen/edittext_hieght"
             android:fontFamily="@font/bold"
             android:textColor="@color/colorAccent"
@@ -82,8 +110,6 @@
             android:background="@drawable/curverd_accent_light2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
-
-
 
 
 

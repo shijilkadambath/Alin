@@ -9,4 +9,8 @@ object AddProductConstants {
     const val chooseFragment: String = "frag1"
     const val detailFragment: String = "frag2"
     const val uploadFragment: String = "frag3"
+
+    const val categoryMen = "Men"
+    const val categoryWomen = "Women"
+    const val categoryKids = "Kids"
 }

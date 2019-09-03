@@ -35,6 +35,7 @@
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:background="@color/gray_light2"
 			app:layout_scrollFlags="scroll|enterAlways">
 
 			<androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +46,7 @@
 				android:paddingTop="@dimen/main_padding"
 				android:id="@+id/headerView"
 				android:paddingBottom="@dimen/main_padding"
-				android:background="@color/gray_light2"
+
 				android:layout_height="wrap_content">
 
 				<androidx.appcompat.widget.AppCompatImageView

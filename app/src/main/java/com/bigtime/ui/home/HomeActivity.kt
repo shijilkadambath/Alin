@@ -60,12 +60,12 @@ class HomeActivity : BaseActivity() ,View.OnClickListener, ChooseBrandDialogFrag
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        if (!SessionUtils.hasSession() || !SessionUtils.isLoggedIn!!) {
+        /*if (!SessionUtils.hasSession() || !SessionUtils.isLoggedIn!!) {
              startActivity(intentFor<LoginActivity>())
              super.onCreate(savedInstanceState)
              finishAffinity()
              return
-         }
+         }*/
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -226,8 +226,7 @@ class HomeActivity : BaseActivity() ,View.OnClickListener, ChooseBrandDialogFrag
 
         SessionUtils.loginSession?.let {
             it.companyLogo.let {
-                FrescoUtils.setImageToFrescoDraweeView(
-                        navigationView.findViewById<SimpleDraweeView>(R.id.sdv_user_pic), it)
+                FrescoUtils.setImageToFrescoDraweeView(navigationView.findViewById<SimpleDraweeView>(R.id.sdv_user_pic), it)
             }
         }
 

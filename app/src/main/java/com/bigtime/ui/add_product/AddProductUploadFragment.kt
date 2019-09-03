@@ -20,6 +20,7 @@ import com.bigtime.databinding.FragmentChooseProductBinding
 import com.bigtime.databinding.FragmentLoginBinding
 import com.bigtime.ui.BaseFragment
 import com.bigtime.ui.RetryCallback
+import com.bigtime.utils.AddProductConstants
 import com.bigtime.utils.FileUtils
 import com.shijil.imagepicker.RxImageConverters
 import com.shijil.imagepicker.RxImagePicker
@@ -41,11 +42,12 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
     lateinit var appExecutors: AppExecutors
     lateinit var mViewModel: AddProductViewModel
 
+    private var adapterImages by autoCleared<UploadedImageAdapter>()
+
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_add_product_upload;
+        return R.layout.fragment_add_product_upload
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -53,16 +55,38 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
         activity?.let {
             mViewModel = getViewModelShared(it, AddProductViewModel::class.java)
         }
-        mViewModel.setIconChange("frag3")
+        mViewModel.setIconChange(AddProductConstants.uploadFragment)
 
-        mBinding.txtAdd.setOnClickListener{
-            RxImagePicker.with(activity).requestImage()
-        }
+        initUi()
+
+        observeDatas()
 
         RxImagePicker.with(activity).requestImageLiveData().observe(this@AddProductUploadFragment,
                 Observer { this@AddProductUploadFragment.onImagePicked(it!!) })
 
     }
+
+    private fun initUi() {
+
+        mBinding.txtAdd.setOnClickListener{
+            RxImagePicker.with(activity).requestImage()
+        }
+
+        adapterImages = UploadedImageAdapter()
+
+        mBinding.imageList.adapter = adapterImages
+    }
+
+    private fun observeDatas() {
+        mViewModel.loadColors().observe(this, Observer {
+            it.data?.colorList?.let { it1 -> mViewModel.setColors(it1) }
+        })
+
+        mViewModel.getImages().observe(this, Observer {
+            adapterImages.setData(it)
+        })
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != Activity.RESULT_OK) {
@@ -73,6 +97,14 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
             val result = CropImage.getActivityResult(data)
             val path = result.uri ?: return
 
+            path.path?.let { mViewModel.uploadImageToS3(it).observe(this, Observer { it1 ->
+
+                if (it1.data?.status == 1) {
+                    it1.data.payload?.imageURL?.let { it1 -> mViewModel.addImage(it1) }
+                }
+
+            }) }
+
 
             /*val profileImage = createImageFile(activity!!, Document.PROFILE_PIC)
 
@@ -82,7 +114,9 @@ class AddProductUploadFragment : BaseFragment<FragmentAddProductUploadBinding>()
         }
     }
 
+
     fun navController() = findNavController()
+
     private fun onImagePicked(result: Uri) {
         RxImageConverters.uriToFile(activity, result, FileUtils.createTempImageFile(activity!!))
                 .observe(this, object : Observer<File> {

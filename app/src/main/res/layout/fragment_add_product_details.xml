@@ -408,6 +408,7 @@
 		    app:layout_constraintEnd_toEndOf="@id/right"
 		    android:layout_marginTop="15dp"
 		    android:id="@+id/layoutSubCat"
+		    android:visibility="gone"
 		    app:layout_constraintTop_toBottomOf="@+id/headingProductDesc">
 
 		    <androidx.appcompat.widget.AppCompatTextView

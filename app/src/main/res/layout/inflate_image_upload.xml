@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="4dp">
+
+		<RelativeLayout
+			android:id="@+id/layoutColor"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="10dp"
+			app:layout_constraintBottom_toTopOf="@+id/layoutArticle"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/image"
+			app:layout_constraintTop_toTopOf="@+id/image">
+
+		    <androidx.appcompat.widget.AppCompatImageView
+		    android:id="@+id/dropDownStyle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:layout_below="@+id/titleColor"
+		    android:layout_alignParentEnd="true"
+		    android:background="@color/gray_dark"
+		    android:padding="6dp"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black" />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:id="@+id/spinnerColor"
+		    style="@style/Text.Medium.Regular"
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:layout_below="@+id/titleColor"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropDownStyle"
+		    android:background="@drawable/border_graylight_accentlight3"
+		    android:gravity="center"
+		    android:hint="Choose Style"
+		    android:inputType="number"
+		    android:maxLength="4"
+		    android:textColor="@color/colorAccent" />
+
+	    <androidx.appcompat.widget.AppCompatTextView
+			    android:id="@+id/titleColor"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_alignParentTop="true"
+			    android:fontFamily="@font/medium"
+			    android:padding="@dimen/seperator"
+			    android:text="Color"
+			    android:textColor="@color/activeText" />
+
+	    </RelativeLayout>
+
+		<RelativeLayout
+			android:id="@+id/layoutArticle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="10dp"
+			app:layout_constraintBottom_toBottomOf="@+id/image"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/image"
+			app:layout_constraintTop_toBottomOf="@+id/layoutColor">
+
+		    <androidx.appcompat.widget.AppCompatImageView
+		    android:id="@+id/dropdown"
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:layout_below="@+id/titleArticle"
+		    android:layout_alignParentEnd="true"
+		    android:background="@color/gray_dark"
+		    android:padding="6dp"
+		    android:src="@drawable/ic_arrow"
+		    android:tint="@color/black" />
+
+	    <androidx.appcompat.widget.AppCompatSpinner
+		    android:id="@+id/spinnerArticle"
+		    style="@style/Text.Medium.Regular"
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/iconHeight"
+		    android:layout_below="@+id/titleArticle"
+		    android:layout_alignParentStart="true"
+		    android:layout_toStartOf="@+id/dropdown"
+		    android:background="@drawable/border_graylight_accentlight3"
+		    android:gravity="center"
+		    android:hint="Choose Style"
+		    android:inputType="number"
+		    android:maxLength="4"
+		    android:textColor="@color/colorAccent" />
+
+	    <androidx.appcompat.widget.AppCompatTextView
+			    android:id="@+id/titleArticle"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_alignParentTop="true"
+			    android:fontFamily="@font/medium"
+			    android:padding="@dimen/seperator"
+			    android:text="Article No"
+			    android:textColor="@color/activeText" />
+
+	    </RelativeLayout>
+
+		<com.facebook.drawee.view.SimpleDraweeView
+			android:id="@+id/image"
+			android:layout_width="130dp"
+			android:layout_height="180dp"
+			android:background="@drawable/bg_ractangle_light_accent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

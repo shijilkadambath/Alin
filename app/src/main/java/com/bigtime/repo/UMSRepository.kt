@@ -34,6 +34,7 @@ import org.json.JSONObject
 import java.util.HashMap
 import javax.inject.Inject
 import javax.inject.Singleton
+
 /**
  * Created by Shijil Kadambath on 03/08/2018
 Email : shijilkadambath@gmail.com
@@ -58,13 +59,13 @@ class UMSRepository @Inject constructor(
         return object : NetworkBoundResource<BaseResponse<List<User>>, BaseResponse<List<User>>>(appExecutors) {
             override fun saveCallResult(item: BaseResponse<List<User>>) {
 
-                if (item.isSuccess() && item.data!=null) {
+                if (item.isSuccess() && item.data != null) {
                     umsoDao.insertUsers(item.data)
                 }
             }
 
-            override fun shouldFetch(data: BaseResponse<List<User>> ?): Boolean {
-               // return data == null || !data.isSuccess() ||data.data ==null|| data.data.isEmpty()
+            override fun shouldFetch(data: BaseResponse<List<User>>?): Boolean {
+                // return data == null || !data.isSuccess() ||data.data ==null|| data.data.isEmpty()
                 return true
             }
 
@@ -73,13 +74,12 @@ class UMSRepository @Inject constructor(
                 val result = MediatorLiveData<BaseResponse<List<User>>>()
 
 
-               result.addSource(umsoDao.loadUsers(), Observer {
-                        list->
+                result.addSource(umsoDao.loadUsers(), Observer { list ->
 
-                        result.setValue(BaseResponse("",1,"",StatusCode.OK,"",list))
+                    result.setValue(BaseResponse("", 1, "", StatusCode.OK, "", list))
                 })
 
-                return  result
+                return result
             }
 
             override fun createCall() = webService.loadUsers()
@@ -108,6 +108,7 @@ class UMSRepository @Inject constructor(
 
 
     }
+
     fun forgotPassword(data: HashMap<String, String>): LiveData<Resource<BaseResponse<String>>> {
         val header = HashMap<String, String>()
         header["SOURCE"] = "cCX1G9EVpL"
@@ -146,7 +147,6 @@ class UMSRepository @Inject constructor(
     }
 
 
-
     fun resetPassword(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -154,8 +154,6 @@ class UMSRepository @Inject constructor(
     fun forgotPasswordValidateOTP(data: HashMap<String, String>): LiveData<Resource<BaseResponse<SessionUtils.LoginSession>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-
 
 
     fun verifyPhone(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
@@ -167,7 +165,6 @@ class UMSRepository @Inject constructor(
     }
 
 
-
     fun sentOtp(data: HashMap<String, String>): LiveData<Resource<BaseResponse<Any>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -176,13 +173,13 @@ class UMSRepository @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
+    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>> {
         AppConstants.HOST = AppConstants.HOST_DEV4
         AppConstants.PORT = 80
 
         return object : NetworkBoundResourceNoCache<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>(appExecutors) {
 
-            override fun createCall(): LiveData<ApiResponse<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>> {
+            override fun createCall(): LiveData<ApiResponse<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>> {
                 return webService.loadBrands(data, JsonObject().apply {
                     addProperty("a", "b")
                 })
@@ -190,7 +187,7 @@ class UMSRepository @Inject constructor(
         }.asLiveData()
     }
 
-    fun loadBrandDetails(data: HashMap<String, String>) : LiveData<Resource<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
+    fun loadBrandDetails(data: HashMap<String, String>): LiveData<Resource<BaseResponseThree<ArrayList<CategoryItem>, ArrayList<SolesItem>, ArrayList<FootwearTypeItem>>>> {
 
         AppConstants.HOST = AppConstants.HOST_DEV4
         AppConstants.PORT = 80
@@ -211,27 +208,26 @@ class UMSRepository @Inject constructor(
         }.asLiveData()
     }
 
+    fun loadOrderDetais(data: HashMap<String, String>): LiveData<Resource<BaseResponse<ArrayList<Order>>>> {
+        AppConstants.HOST = AppConstants.HOST_LOGIN
+        AppConstants.PORT = 4000
+        val header = HashMap<String, String>()
+        header["SOURCE"] = "cCX1G9EVpL"
+        header["PLATFORM"] = "Android"
+        header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
+        header["SKAUTH-TOKEN"] = SessionUtils.getAuthTokens(true)!!
+        header["Content-Type"] = "application/json"
 
-        fun loadOrderDetais(data: HashMap<String, String>): LiveData<Resource<BaseResponse<ArrayList<Order>>>> {
-            AppConstants.HOST = AppConstants.HOST_LOGIN
-            AppConstants.PORT = 4000
-            val header = HashMap<String, String>()
-            header["SOURCE"] = "cCX1G9EVpL"
-            header["PLATFORM"] = "Android"
-            header["PACKAGE-NAME"] = "com.bizcrum.shoekonnect"
-            header["SKAUTH-TOKEN"] = SessionUtils.getAuthTokens(true)!!
-            header["Content-Type"] = "application/json"
 
+        return object : NetworkBoundResourceNoCache<BaseResponse<ArrayList<Order>>>(appExecutors) {
 
-            return object : NetworkBoundResourceNoCache<BaseResponse<ArrayList<Order>>>(appExecutors) {
-
-                override fun createCall(): LiveData<ApiResponse<BaseResponse<ArrayList<Order>>>> {
-                    return webService.loadOrderDetails(header, JsonObject().apply {
-                        addProperty("userID", data["userID"]!!)
-                    })
-                }
-            }.asLiveData()
-        }
+            override fun createCall(): LiveData<ApiResponse<BaseResponse<ArrayList<Order>>>> {
+                return webService.loadOrderDetails(header, JsonObject().apply {
+                    addProperty("userID", data["userID"]!!)
+                })
+            }
+        }.asLiveData()
+    }
 
     fun loadApprovedProducts(data: HashMap<String, String>): LiveData<Resource<BaseResponse<ArrayList<Product>>>> {
         AppConstants.HOST = AppConstants.HOST_DEV4
@@ -250,10 +246,53 @@ class UMSRepository @Inject constructor(
                 return webService.loadApprovedProducts(header, JsonObject().apply {
                     addProperty("searchKey", data["searchKey"]!!)
                     addProperty("count", data["count"]!!)
-                    addProperty("start",data["start"]!!)
+                    addProperty("start", data["start"]!!)
                 })
             }
         }.asLiveData()
+    }
+
+    fun loadColors() : LiveData<Resource<ColorData>> {
+        AppConstants.HOST = AppConstants.HOST_DEV4
+        AppConstants.PORT = 80
+        val header = HashMap<String, String>()
+        header["sessionToken"] = "IlNLMTQ5MDI3MTA2NDE1NjYwNTUwNjUi:1hz0Se:SpzvNCcH2GsDdJSVukbZhZiJb3U"
+        header["platform"] = "postman"
+        header["packageName"] = "com.bizcrum.shoekonnect"
+        header["isAuthRequired"] = "true"
+        header["Content-Type"] = "application/json"
+
+        val params = HashMap<String, String>()
+        params[""] = ""
+
+        return object : NetworkBoundResourceNoCache<ColorData>(appExecutors) {
+            override fun createCall(): LiveData<ApiResponse<ColorData>> {
+                return webService.loadColors(header, params)
+            }
+
+        }.asLiveData()
+
+    }
+
+    fun uploadImageToS3(data: HashMap<String, String>) : LiveData<Resource<DataImageUpload>> {
+
+        AppConstants.HOST = AppConstants.HOST_DEV4
+        AppConstants.PORT = 80
+        val header = HashMap<String, String>()
+        header["sessionToken"] = "0"
+        header["platform"] = "android"
+        header["packageName"] = "com.bizcrum.shoekonnect"
+        header["isAuthRequired"] = "false"
+        header["Content-Type"] = "application/x-www-form-urlencoded"
+        header["deviceId"] = "ef2e3581-466b-48b4-93cb-6a6f9f2b0848"
+
+        return object : NetworkBoundResourceNoCache<DataImageUpload>(appExecutors) {
+            override fun createCall(): LiveData<ApiResponse<DataImageUpload>> {
+                return webService.uploadImage(header, data)
+            }
+
+        }.asLiveData()
+
     }
 }
 

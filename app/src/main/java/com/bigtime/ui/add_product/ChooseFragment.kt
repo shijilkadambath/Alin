@@ -41,7 +41,6 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
         return R.layout.fragment_choose_product
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -63,7 +62,6 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
         }*/
     }
 
-
     private fun initUi() {
 
         mBinding.lotValue.addTextChangedListener(MyTextWatcher(mBinding.lotValue))
@@ -72,8 +70,8 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
         if (mViewModel.lotValue.isEmpty())
             mBinding.lotValue.setText("8")
 
-        if (mViewModel.moqValue.isEmpty())
-            mBinding.moqValue.setText("8")
+        /*if (mViewModel.moqValue.isEmpty())
+            mBinding.moqValue.setText("8")*/
 
         mBinding.lotIncrement.setOnClickListener {
             dismissKeyboard(mBinding.lotIncrement.windowToken)
@@ -95,8 +93,10 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
                 return@setOnClickListener
 
             val subValue = (lot.toInt() - 1)
-            if (subValue >= 0)
-            mBinding.lotValue.setText(subValue.toString())
+            if (subValue >= 0) {
+                mBinding.lotValue.setText(subValue.toString())
+            }
+
 
         }
 
@@ -122,11 +122,12 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
         }
 
         mViewModel.getMoqValue().observe(this, Observer {
-            mBinding.moqValue.setText(if (it.isNullOrEmpty()) "8" else it)
+//            mBinding.moqValue.setText(if (it.isNullOrEmpty()) "8" else it)
+            mBinding.moqValue.setText(it)
         })
 
         mViewModel.isMoqValueValid().observe(this, Observer {
-            mViewModel.enableNextButton(it)
+            mViewModel.enableNextButton(AddProductConstants.chooseFragment)
             mBinding.moqError.visibility = if (it) {
                 View.INVISIBLE
             }else{
@@ -150,13 +151,29 @@ class ChooseFragment : BaseFragment<FragmentChooseProductBinding>() {
         }
 
     }
-    public fun onCategoryChanged(radioGroup: CompoundButton, checked: Boolean) {
+
+    private fun onCategoryChanged(radioGroup: CompoundButton, checked: Boolean) {
 
         if (checked){
+
+            when(radioGroup) {
+                mBinding.radioBtnMen -> {
+                    mViewModel.setCategory(AddProductConstants.categoryMen)
+                }
+
+                mBinding.radioBtnWomen -> {
+                    mViewModel.setCategory(AddProductConstants.categoryWomen)
+                }
+
+                mBinding.radioBtnKids -> {
+                    mViewModel.setCategory(AddProductConstants.categoryKids)
+                }
+            }
+            mViewModel.enableNextButton(AddProductConstants.chooseFragment)
+
             mBinding.radioBtnMen.isChecked = false
             mBinding.radioBtnWomen.isChecked = false
             mBinding.radioBtnKids.isChecked = false
-
             radioGroup.isChecked = true
         }
 

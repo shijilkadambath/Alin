@@ -1,7 +1,7 @@
 package com.bigtime.data.model.product_details
 
 data class SubCategoryItem(
-	val category: String? = null,
-	val styles: List<StylesItem?>? = null,
-	val iD: Int? = null
+	val Category: String? = null,
+	val styles: ArrayList<StylesItem?>? = null,
+	val ID: Int? = null
 )

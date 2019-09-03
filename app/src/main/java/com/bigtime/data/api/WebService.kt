@@ -69,5 +69,12 @@ interface WebService {
     @POST("api/sellerApp/data/approvedProducts/")
     fun loadApprovedProducts(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<ArrayList<Product>>>>
 
+    @POST("api/sellerApp/data/getColorList/")
+    fun loadColors(@HeaderMap params: Map<String, String>, @Body body: Map<String, String>): LiveData<ApiResponse<ColorData>>
+
+    @FormUrlEncoded
+    @POST("api/user/general/uploadImage/")
+    fun uploadImage(@HeaderMap params: Map<String, String>, @FieldMap body: Map<String, String>): LiveData<ApiResponse<DataImageUpload>>
+
 
 }
