@@ -37,39 +37,5 @@ object BindingAdapters {
     }
 
 
-    /*@JvmStatic
-    @BindingAdapter("app:addIconChange")
-    fun addIconChange(view: ImageView, value: String) {
-        when(value) {
-            "frag1" -> {
-                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
-            }
 
-            "frag2" -> {
-                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
-            }
-
-            "frag3" -> {
-                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
-            }
-        }
-    }
-
-    @JvmStatic
-    @BindingAdapter("app:addColorChange")
-    fun addColorChange(view: View, value: String) {
-        when(value) {
-            "frag1" -> {
-                view.setBackgroundColor(R.color.colorAccent)
-            }
-
-            "frag2" -> {
-                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
-            }
-
-            "frag3" -> {
-                view.setImageResource(R.drawable.ic_file_upload_black_24dp)
-            }
-        }
-    }*/
 }

@@ -17,6 +17,7 @@ import com.bigtime.common.autoCleared
 import com.bigtime.data.api.Status
 import com.bigtime.data.model.Brand
 import com.bigtime.databinding.FragmentChooseBrandDialogBinding
+import com.bigtime.databinding.FragmentPriceBreakupDialogBinding
 import com.bigtime.di.AppModule
 import com.bigtime.ui.BaseDialogFragment
 import com.bigtime.utils.AppConstants
@@ -34,7 +35,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBinding>() {
+class PriceBreakDialogFragment : BaseDialogFragment<FragmentPriceBreakupDialogBinding>() {
 
     private lateinit var viewModel: ChooseBrandViewModel
 
@@ -84,7 +85,7 @@ class ChooseBrandDialogFragment : BaseDialogFragment<FragmentChooseBrandDialogBi
         super.onActivityCreated(savedInstanceState)
 
         viewModel = getViewModel(ChooseBrandViewModel::class.java)
-        mBinding.layoutBinder = this
+
         mBinding.recyclerViewBrands.layoutManager = LinearLayoutManager(context)
 
         mBinding.closeButton.setOnClickListener {

@@ -101,9 +101,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:'+rootProject.archLifecycleVersion
     implementation 'androidx.lifecycle:lifecycle-common-java8:'+rootProject.archLifecycleVersion
     kapt 'androidx.lifecycle:lifecycle-compiler:'+rootProject.archLifecycleVersion
-    // Room
-    implementation 'androidx.room:room-runtime:'+rootProject.archRoomVersion
-    kapt 'androidx.room:room-compiler:'+rootProject.archRoomVersion
+  
+
     //Paging
     implementation 'androidx.paging:paging-runtime:'+rootProject.archPaggingVersion
     //Navigation

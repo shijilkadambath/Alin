@@ -8,6 +8,7 @@ import com.bigtime.R
 import com.bigtime.ui.BaseActivity
 import android.view.MenuItem
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.bigtime.data.model.Brand
 import com.bigtime.utils.AddProductConstants
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_add_prodcut.*
 import org.jetbrains.anko.intentFor
 import javax.inject.Inject
@@ -29,6 +31,8 @@ class AddProductActivity : BaseActivity() {
     lateinit var mViewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: AddProductViewModel
+
+    lateinit var mBottomSheetRequest: BottomSheetBehavior<View>;
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -43,6 +47,10 @@ class AddProductActivity : BaseActivity() {
         if (intent.hasExtra("brand")) {
             viewModel.setBrandItem(intent.getParcelableExtra("brand"))
         }
+
+        mBottomSheetRequest = BottomSheetBehavior.from(l_size_list);
+
+        mBottomSheetRequest.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         observeDatas()
 

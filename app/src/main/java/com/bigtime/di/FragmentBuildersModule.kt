@@ -73,6 +73,9 @@ abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeChooseBrandFragment(): ChooseBrandDialogFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributePriceBreakDialogFragment(): PriceBreakDialogFragment
+
 
     @ContributesAndroidInjector
     abstract fun contributeConfirmFragment(): ConfirmFragment

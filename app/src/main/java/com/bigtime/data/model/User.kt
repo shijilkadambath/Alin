@@ -4,10 +4,8 @@ package com.bigtime.data.model
  * Email : shijilkadambath@gmail.com
  */
 import androidx.annotation.NonNull
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-@Entity(primaryKeys = ["id"])
 data class User(
         @field:SerializedName("speciality")
         val name:String,

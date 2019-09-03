@@ -17,11 +17,8 @@
 package com.bigtime.di
 
 import android.app.Application
-import androidx.room.Room
 import com.bigtime.common.LiveDataCallAdapterFactory
 import com.bigtime.data.api.WebService
-import com.bigtime.data.db.AppDb
-import com.bigtime.data.db.UMSDao
 import com.bigtime.utils.AppConstants
 import dagger.Module
 import dagger.Provides
@@ -117,19 +114,7 @@ class  AppModule {
                 .create(WebService::class.java)
     }
 
-    @Singleton @Provides
-    fun provideDb(app: Application): AppDb {
-        return Room
-                .databaseBuilder(app, AppDb::class.java, AppConstants.DATABASE)
-                .fallbackToDestructiveMigration()
-                .build()
-    }
 
-
-    @Singleton @Provides
-    fun provideUMSDao(db: AppDb): UMSDao {
-        return db.umsDao()
-    }
 
     @Singleton @Provides
     fun getBaseUrl(): String {

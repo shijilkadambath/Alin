@@ -21,8 +21,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import com.bigtime.AppExecutors
 import com.bigtime.data.api.*
-import com.bigtime.data.db.AppDb
-import com.bigtime.data.db.UMSDao
 import com.bigtime.data.model.*
 import com.bigtime.data.model.product_details.CategoryItem
 import com.bigtime.data.model.product_details.FootwearTypeItem
@@ -48,8 +46,6 @@ Email : shijilkadambath@gmail.com
 @Singleton
 class UMSRepository @Inject constructor(
         private val appExecutors: AppExecutors,
-        private val db: AppDb,
-        private val umsoDao: UMSDao,
         private val webService: WebService
 ) {
     //ApiResponse<BaseResponse<List<User>>>
@@ -140,14 +136,24 @@ class UMSRepository @Inject constructor(
 
 
 
-    fun loadBrands(data: HashMap<String, String>): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>> {
+    fun loadBrands(): LiveData<Resource<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>> {
         AppConstants.HOST = AppConstants.HOST_DEV4
         AppConstants.PORT = 80
+
+        val params = HashMap<String, String>()
+        //params["sessionToken"] = SessionUtils.getAuthTokens(true)!!
+        params["sessionToken"] = "IlNLMTQ5MDI3MTA2NDE1NjYwNTUwNjUi:1hz0Se:SpzvNCcH2GsDdJSVukbZhZiJb3U"
+
+        params["platform"] = "postman"
+        params["packageName"] = "com.bizcrum.shoekonnect"
+        params["isAuthRequired"] = "true"
+        params["Content-Type"] = "application/json"
+
 
         return object : NetworkBoundResourceNoCache<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>(appExecutors) {
 
             override fun createCall(): LiveData<ApiResponse<BaseResponseTwo<ArrayList<Brand>, ArrayList<MainCategory>>>> {
-                return webService.loadBrands(data, JsonObject().apply {
+                return webService.loadBrands(params, JsonObject().apply {
                     addProperty("a", "b")
                 })
             }
@@ -159,6 +165,7 @@ class UMSRepository @Inject constructor(
         AppConstants.HOST = AppConstants.HOST_DEV4
         AppConstants.PORT = 80
         val header = HashMap<String, String>()
+        //header["sessionToken"] = SessionUtils.getAuthTokens(true)!!
         header["sessionToken"] = "IlNLMTQ5MDI3MTA2NDE1NjYwNTUwNjUi:1hz0Se:SpzvNCcH2GsDdJSVukbZhZiJb3U"
         header["platform"] = "postman"
         header["packageName"] = "com.bizcrum.shoekonnect"
@@ -243,7 +250,7 @@ class UMSRepository @Inject constructor(
         AppConstants.HOST = AppConstants.HOST_DEV4
         AppConstants.PORT = 80
         val header = HashMap<String, String>()
-        header["sessionToken"] = "IlNLMTQ5MDI3MTA2NDE1NjYwNTUwNjUi:1hz0Se:SpzvNCcH2GsDdJSVukbZhZiJb3U"
+        header["sessionToken"] = SessionUtils.getAuthTokens(true)!!
         header["platform"] = "postman"
         header["packageName"] = "com.bizcrum.shoekonnect"
         header["isAuthRequired"] = "true"

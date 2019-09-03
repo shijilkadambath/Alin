@@ -521,6 +521,10 @@ class AddProductViewModel
     }
 
     fun addImage() {
+        if (!imageList.isEmpty() && imageList[imageList.size-1].imagePath.isEmpty()){
+            return
+        }
+
         imageList.add(DataImage("", colorList))
         observeImageAdded.value = imageList
     }

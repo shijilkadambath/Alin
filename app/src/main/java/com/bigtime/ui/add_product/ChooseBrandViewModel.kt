@@ -21,12 +21,12 @@ class ChooseBrandViewModel
 @Inject constructor(repo: UMSRepository) : ViewModel(){
 
 
-    private val apiParams = MutableLiveData<HashMap<String, String>>()
+    private val apiParams = MutableLiveData<String>()
 
     private var selectedBrand: Brand? = null
 
-    fun loadBrands(map: HashMap<String, String>) {
-        apiParams.value = map
+    fun loadBrands() {
+        apiParams.value = "test"
 //        val jsonObject = JsonObject()
 //        val gson = Gson()
 //        val text: String = gson.toJson(jsonObject)
@@ -38,7 +38,7 @@ class ChooseBrandViewModel
                 if (data == null){
                     AbsentLiveData.create()
                 }else{
-                    repo.loadBrands(data)
+                    repo.loadBrands()
                 }
             }
 
