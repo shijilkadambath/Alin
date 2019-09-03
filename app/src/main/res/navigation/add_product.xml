@@ -49,8 +49,23 @@
         android:name="com.bigtime.ui.add_product.AddProductUploadFragment"
         android:label="AddProductUploadFragment"
         tools:layout="@layout/fragment_add_product_upload">
+        <action
+            android:id="@+id/action_confirm"
+            app:destination="@id/addProductConfirmFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
 
 
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/addProductConfirmFragment"
+        android:name="com.bigtime.ui.add_product.ConfirmFragment"
+        android:label="AddProductConfirmFragment"
+        tools:layout="@layout/fragment_confirm">
 
     </fragment>
 

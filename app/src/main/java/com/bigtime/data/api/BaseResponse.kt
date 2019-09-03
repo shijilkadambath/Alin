@@ -28,7 +28,7 @@ data class BaseResponse<T>(
         @SerializedName(value="skAuth_Token", alternate=(arrayOf("accessToken")))
         val token: String,
 
-        @field:SerializedName(value="data", alternate=(arrayOf("otp")))
+        @field:SerializedName(value="data", alternate=(arrayOf("otp","payload")))
         val data: T?
 
 ) {

@@ -22,7 +22,7 @@ class HomeViewModel
 @Inject constructor(repoRepository: UMSRepository) : ViewModel() {
 
 
-    private val _login = MutableLiveData<String>()
+   /* private val _login = MutableLiveData<String>()
 
     val login: LiveData<String>
         get() = _login
@@ -47,6 +47,6 @@ class HomeViewModel
         //if (_login.value != login) {
         _login.value = "test"
         //}
-    }
+    }*/
 
 }

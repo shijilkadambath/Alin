@@ -20,6 +20,7 @@ import androidx.lifecycle.LiveData
 import com.bigtime.data.model.*
 import com.bigtime.data.model.product_details.CategoryItem
 import com.bigtime.data.model.product_details.FootwearTypeItem
+import com.bigtime.data.model.product_details.ProductPreview
 import com.bigtime.data.model.product_details.SolesItem
 import com.bigtime.utils.SessionUtils
 import com.google.gson.JsonObject
@@ -46,6 +47,12 @@ interface WebService {
 
     @POST("api/sellerApp/data/getBrandData/")
     fun loadBrands(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponseTwo<ArrayList<Brand>,ArrayList<MainCategory>>>>
+
+
+    @POST("api/sellerApp/data/productPreview/")
+    fun productPreview(@HeaderMap params: Map<String, String>, @Body body: JsonObject): LiveData<ApiResponse<BaseResponse<ProductPreview>>>
+
+
 
 
     @POST("userservice/sellerLogin/")

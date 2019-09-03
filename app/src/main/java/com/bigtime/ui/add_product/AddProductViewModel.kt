@@ -17,6 +17,9 @@ import android.graphics.BitmapFactory
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.R
 import android.util.Base64
+import androidx.lifecycle.Transformations
+import com.bigtime.common.AbsentLiveData
+import com.bigtime.data.api.BaseResponse
 import com.bigtime.data.model.*
 import java.io.ByteArrayOutputStream
 
@@ -535,5 +538,21 @@ class AddProductViewModel
         observeImageAdded.value = imageList
     }
 
+
+    // Load Product Preview
+    private val productPreviewLiveData = MutableLiveData< String?>()
+
+    fun loadProductPreview(data: String?) {
+        productPreviewLiveData.value = data
+    }
+
+    val productPreviewResponseLiveData: LiveData<Resource<BaseResponse<ProductPreview>>> =
+            Transformations.switchMap(productPreviewLiveData) { data ->
+                if (data == null) {
+                    AbsentLiveData.create()
+                } else {
+                    repoRepository.loadProductPreview(data)
+                }
+            }
 }
 
